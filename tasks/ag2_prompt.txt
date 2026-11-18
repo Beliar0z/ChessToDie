@@ -1,0 +1,19 @@
+Bạn là Ag2 (Game Developer) của dự án Chess to Die.
+Nhiệm vụ của bạn được giao trong tasks/code_spec.md và quy tắc trong src/GEMINI.md.
+Hãy đọc kỹ tasks/code_spec.md, design/GDD_Core.md và src/GEMINI.md.
+
+Chỉ được tạo và sửa file bên trong thư mục src/.
+Bạn phải triển khai TOÀN BỘ hệ thống Core Logic cờ vua và 51 lá bài bằng GDScript chuẩn typed (Godot 4), tách rời giao diện:
+1. `src/core/piece_data.gd`: Kế thừa RefCounted. Định nghĩa PieceType enum (PAWN, KNIGHT, BISHOP, ROOK, QUEEN, KING, SUPER_PAWN, SUPER_KNIGHT, SUPER_BISHOP, SUPER_ROOK, SUPER_QUEEN, SCARECROW, HEAL_POINT), Team enum (WHITE, BLACK), điểm số (1, 3, 3, 5, 9, 10, siêu quân: 3, 7, 7, 11, 20), buffs, debuffs, status (locked, cursed, immortal, stealth, banned), các phương thức khởi tạo và clone.
+2. `src/core/board_state.gd`: Kế thừa RefCounted. Quản lý lưới ô cờ 8x8, vị trí quân, mảng grave_white, grave_black, danh sách ô cấm (forbidden cells), dòng sông ranh giới (river barrier giữa hàng 4 và 5), hố đen (gravity vortex), dải lửa chéo (fire diagonal).
+3. `src/core/move_validator.gd`: Kế thừa RefCounted. Tính toán nước đi hợp lệ chuẩn cờ vua (FIDE) cho từng loại quân, cộng thêm các hiệu ứng biến thể thẻ bài (Mã đi thẳng, Xe đi chéo, Tượng đi như Mã, Siêu Tốt đi tiến/lùi/chéo 1 ô, Siêu Mã nhảy thêm 1 ô, Siêu Tượng đổi màu ô, Siêu Xe ngang dọc + chéo 1 ô, Siêu Hậu như Hậu + Mã). Kiểm tra thế chiếu (in_check) và thế chiếu hết (is_checkmate).
+4. `src/core/turn_manager.gd`: Kế thừa RefCounted. Máy trạng thái 4 pha: DrawPhase -> MainPhase -> MovePhase -> EndPhase. Quản lý lượt đi, trừ số turn của các bùa chú/nguyền rủa (curse countdown)/khóa quân/bất tử/tàng hình, trừ điểm kết giới đốt điểm/vòng lửa, và gọi hook kiểm tra kết thúc.
+5. `src/resources/card_resource.gd`: Kế thừa Resource. Định nghĩa class CardResource (id, title, type: ACTIVE/PASSIVE, cost, description, icon_path).
+6. `src/core/card_database.gd`: Kế thừa RefCounted. Khởi tạo danh mục đầy đủ 51 thẻ bài (ACTIVE_01 đến ACTIVE_31 và PASSIVE_01 đến PASSIVE_20) với đầy đủ thông số và effect callback/tag tương ứng.
+7. `src/core/card_engine.gd`: Kế thừa RefCounted. Quản lý bộ bài người chơi (27 lá), rút 6 lá ban đầu, cơ chế đếm 2 nước đi của bản thân thì rút 1 lá, giới hạn tay bài tối đa 10 lá, kiểm tra giới hạn chỉ dùng 1 Active + úp 1 Passive mỗi turn.
+8. `src/core/passive_manager.gd`: Kế thừa RefCounted. Quản lý tối đa 4 ô úp bài Passive trên sân. Lắng nghe event hooks (OnCheckmate, OnPieceCaptured, OnEnemyPawnDiagonal, OnEnemyQueenMoved, ...). Triển khai Checkmate Interception Hook: Khi bị chiếu hết, nếu úp cả PASSIVE_15 và PASSIVE_16 thì CHỈ KÍCH HOẠT DUY NHẤT 1 LÁ (ưu tiên lá úp trước), hoãn Game Over và cấp cho người chơi 2 nước đi giải chiếu.
+9. `src/core/death_ring_system.gd`: Kế thừa RefCounted. Quản lý Vòng lửa sinh tử khi Stalemate (đưa quân về vị trí ban đầu, thiêu đốt điểm mỗi hiệp, spawn điểm hồi phục, tăng 1 ô đi; nếu điểm về 0 mà chưa chiếu hết thì BÊN CÓ ĐIỂM BAN ĐẦU LỚN HƠN THUA theo Decision B). Quản lý Thánh chiến (Holy War) khi chỉ còn 2 Vua: mỗi lượt chọn 1 kiểu đi của quân khác, bị trừ điểm, và PHÁ LUẬT FIDE: cho phép 2 Vua áp sát ăn nhau trực tiếp theo Decision A.
+10. `src/scenes/board_view.gd` và `src/scenes/card_hand_view.gd`: Kế thừa Node2D/Control, kết nối core engine với UI, có fallback vẽ màu cơ bản nếu asset chưa tồn tại.
+11. `src/core/test_runner.gd`: Kế thừa SceneTree (hoặc MainLoop). Viết bộ kiểm thử tự động toàn diện bao quát 7 ca kiểm thử then chốt: test_standard_fide_moves, test_card_draw_engine, test_turn_restrictions, test_checkmate_hook_survival, test_death_ring_stalemate_resolution, test_holy_war_kings_combat, test_curse_countdown. In rõ [PASS] cho từng test case và in ALL TESTS PASSED! rồi quit(0). Nếu có lỗi thì in [FAIL] và quit(1).
+
+Hãy tạo đầy đủ các file trên với code hoàn chỉnh, không dùng placeholder, tuân thủ GDScript typed chuẩn Godot 4.
