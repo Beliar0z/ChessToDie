@@ -27,22 +27,28 @@ var highlighted_moves: Array[Vector2i] = []
 var tile_controls: Array[Control] = []
 
 func _ready() -> void:
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	custom_minimum_size = Vector2(768.0, 768.0)
 	_ensure_grid_and_tiles()
 
 func setup(p_turn_manager: TurnManager, p_grid: GridContainer = null) -> void:
 	turn_manager = p_turn_manager
 	if p_grid != null:
+		var internal_grid: Node = get_node_or_null("TilesGrid")
+		if internal_grid != null and internal_grid != p_grid:
+			internal_grid.free()
 		tiles_grid = p_grid
 	_ensure_grid_and_tiles()
 	update_board_visuals()
 
 func _ensure_grid_and_tiles() -> void:
 	if tiles_grid == null:
-		tiles_grid = find_child("TilesGrid", true, false) as GridContainer
+		if get_parent() != null:
+			tiles_grid = get_parent().find_child("TilesGrid", false, false) as GridContainer
+		if tiles_grid == null:
+			tiles_grid = find_child("TilesGrid", true, false) as GridContainer
 
 	if tiles_grid == null:
-		# Search parent for Chessboard/TilesGrid or create internal
 		var parent_grid: GridContainer = get_node_or_null("TilesGrid") as GridContainer
 		if parent_grid != null:
 			tiles_grid = parent_grid
