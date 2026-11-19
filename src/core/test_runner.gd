@@ -8,69 +8,109 @@ func _init() -> void:
 	print("==================================================")
 
 	var tests_passed: int = 0
-	var total_tests: int = 8
+	var total_tests: int = 13
 
 	if test_standard_fide_moves():
 		tests_passed += 1
-		print("[PASS] 1/8: test_standard_fide_moves")
+		print("[PASS] 1/13: test_standard_fide_moves")
 	else:
-		print("[FAIL] 1/8: test_standard_fide_moves")
+		print("[FAIL] 1/13: test_standard_fide_moves")
 		quit(1)
 		return
 
 	if test_card_draw_engine():
 		tests_passed += 1
-		print("[PASS] 2/8: test_card_draw_engine")
+		print("[PASS] 2/13: test_card_draw_engine")
 	else:
-		print("[FAIL] 2/8: test_card_draw_engine")
+		print("[FAIL] 2/13: test_card_draw_engine")
 		quit(1)
 		return
 
 	if test_turn_restrictions():
 		tests_passed += 1
-		print("[PASS] 3/8: test_turn_restrictions")
+		print("[PASS] 3/13: test_turn_restrictions")
 	else:
-		print("[FAIL] 3/8: test_turn_restrictions")
+		print("[FAIL] 3/13: test_turn_restrictions")
 		quit(1)
 		return
 
 	if test_checkmate_hook_survival():
 		tests_passed += 1
-		print("[PASS] 4/8: test_checkmate_hook_survival")
+		print("[PASS] 4/13: test_checkmate_hook_survival")
 	else:
-		print("[FAIL] 4/8: test_checkmate_hook_survival")
+		print("[FAIL] 4/13: test_checkmate_hook_survival")
 		quit(1)
 		return
 
 	if test_death_ring_stalemate_resolution():
 		tests_passed += 1
-		print("[PASS] 5/8: test_death_ring_stalemate_resolution")
+		print("[PASS] 5/13: test_death_ring_stalemate_resolution")
 	else:
-		print("[FAIL] 5/8: test_death_ring_stalemate_resolution")
+		print("[FAIL] 5/13: test_death_ring_stalemate_resolution")
 		quit(1)
 		return
 
 	if test_holy_war_kings_combat():
 		tests_passed += 1
-		print("[PASS] 6/8: test_holy_war_kings_combat")
+		print("[PASS] 6/13: test_holy_war_kings_combat")
 	else:
-		print("[FAIL] 6/8: test_holy_war_kings_combat")
+		print("[FAIL] 6/13: test_holy_war_kings_combat")
 		quit(1)
 		return
 
 	if test_curse_countdown():
 		tests_passed += 1
-		print("[PASS] 7/8: test_curse_countdown")
+		print("[PASS] 7/13: test_curse_countdown")
 	else:
-		print("[FAIL] 7/8: test_curse_countdown")
+		print("[FAIL] 7/13: test_curse_countdown")
 		quit(1)
 		return
 
 	if test_ui_scene_integration():
 		tests_passed += 1
-		print("[PASS] 8/8: test_ui_scene_integration")
+		print("[PASS] 8/13: test_ui_scene_integration")
 	else:
-		print("[FAIL] 8/8: test_ui_scene_integration")
+		print("[FAIL] 8/13: test_ui_scene_integration")
+		quit(1)
+		return
+
+	if test_fan_arc_hand_layout():
+		tests_passed += 1
+		print("[PASS] 9/13: test_fan_arc_hand_layout")
+	else:
+		print("[FAIL] 9/13: test_fan_arc_hand_layout")
+		quit(1)
+		return
+
+	if test_piece_position_history_and_queen_tether():
+		tests_passed += 1
+		print("[PASS] 10/13: test_piece_position_history_and_queen_tether")
+	else:
+		print("[FAIL] 10/13: test_piece_position_history_and_queen_tether")
+		quit(1)
+		return
+
+	if test_passive_glow_to_click_and_triggers():
+		tests_passed += 1
+		print("[PASS] 11/13: test_passive_glow_to_click_and_triggers")
+	else:
+		print("[FAIL] 11/13: test_passive_glow_to_click_and_triggers")
+		quit(1)
+		return
+
+	if test_active_one_per_turn_warning_and_slot_render():
+		tests_passed += 1
+		print("[PASS] 12/13: test_active_one_per_turn_warning_and_slot_render")
+	else:
+		print("[FAIL] 12/13: test_active_one_per_turn_warning_and_slot_render")
+		quit(1)
+		return
+
+	if test_multi_target_sequencing():
+		tests_passed += 1
+		print("[PASS] 13/13: test_multi_target_sequencing")
+	else:
+		print("[FAIL] 13/13: test_multi_target_sequencing")
 		quit(1)
 		return
 
@@ -555,4 +595,230 @@ func test_ui_scene_integration() -> bool:
 		return false
 
 	controller.free()
+	return true
+
+# 9. Fan Arc Hand Layout test
+func test_fan_arc_hand_layout() -> bool:
+	var tm: TurnManager = TurnManager.new()
+	tm.start_game()
+
+	var hand_view: CardHandView = CardHandView.new()
+	hand_view.setup(tm, PieceData.Team.WHITE)
+
+	if hand_view.cards_container == null or hand_view.cards_container is HBoxContainer:
+		print("Hand view cards_container is null or still an HBoxContainer.")
+		hand_view.free()
+		return false
+
+	var child_count: int = hand_view.cards_container.get_child_count()
+	if child_count == 0:
+		print("No card holders in hand view.")
+		hand_view.free()
+		return false
+
+	var first_holder: CardHandView.DraggableCardSlot = hand_view.cards_container.get_child(0) as CardHandView.DraggableCardSlot
+	var last_holder: CardHandView.DraggableCardSlot = hand_view.cards_container.get_child(child_count - 1) as CardHandView.DraggableCardSlot
+
+	# First card should rotate negative angle, last card should rotate positive angle
+	if first_holder.rotation_degrees >= 0.0 or last_holder.rotation_degrees <= 0.0:
+		print("Fan arc angles invalid: first=%f, last=%f" % [first_holder.rotation_degrees, last_holder.rotation_degrees])
+		hand_view.free()
+		return false
+
+	# Test hover effect: mouse_entered
+	hand_view._on_card_mouse_entered(first_holder)
+	if first_holder.rotation_degrees != 0.0 or first_holder.scale != Vector2(1.28, 1.28) or first_holder.z_index != 50:
+		print("Hover state failed: rot=%f, scale=%s, z=%d" % [first_holder.rotation_degrees, str(first_holder.scale), first_holder.z_index])
+		hand_view.free()
+		return false
+
+	# Test mouse_exited restores base state
+	hand_view._on_card_mouse_exited(first_holder)
+	if first_holder.scale != Vector2.ONE or first_holder.z_index != int(first_holder.get_meta("base_z")):
+		print("Exit hover state restore failed: scale=%s, z=%d" % [str(first_holder.scale), first_holder.z_index])
+		hand_view.free()
+		return false
+
+	hand_view.free()
+	return true
+
+# 10. Position History and Queen Tether test
+func test_piece_position_history_and_queen_tether() -> bool:
+	var board: BoardState = BoardState.new()
+	board.setup_initial_board()
+
+	var white_queen: PieceData = board.get_piece(Vector2i(3, 0))
+	if white_queen == null or white_queen.type != PieceData.PieceType.QUEEN:
+		print("White queen not at (3, 0).")
+		return false
+
+	if white_queen.position_history.is_empty() or white_queen.position_history[0] != Vector2i(3, 0):
+		print("Initial position history not recorded on queen: %s" % str(white_queen.position_history))
+		return false
+
+	# Move Queen 1: (3, 0) -> (3, 4)
+	board.set_piece(Vector2i(3, 1), null)
+	board.move_piece(Vector2i(3, 0), Vector2i(3, 4))
+	if white_queen.position_history.size() != 2 or white_queen.position_history.back() != Vector2i(3, 4):
+		print("Position history after move 1 failed: %s" % str(white_queen.position_history))
+		return false
+
+	# Move Queen 2: (3, 4) -> (7, 4)
+	board.move_piece(Vector2i(3, 4), Vector2i(7, 4))
+	if white_queen.position_history.size() != 3 or white_queen.position_history.back() != Vector2i(7, 4):
+		print("Position history after move 2 failed: %s" % str(white_queen.position_history))
+		return false
+
+	var pos_2_moves_ago: Vector2i = white_queen.get_position_two_moves_ago()
+	if pos_2_moves_ago != Vector2i(3, 0):
+		print("get_position_two_moves_ago returned %s, expected (3, 0)" % str(pos_2_moves_ago))
+		return false
+
+	# Execute Queen tether (PASSIVE_06)
+	var tethered: Array[Dictionary] = board.execute_queen_tether()
+	if tethered.is_empty():
+		print("execute_queen_tether returned empty array.")
+		return false
+
+	if board.get_piece(Vector2i(3, 0)) != white_queen or not white_queen.is_locked or white_queen.locked_turns != 2:
+		print("Queen was not returned to (3, 0) and locked.")
+		return false
+
+	return true
+
+# 11. Passive Glow-to-Click & Triggers test
+func test_passive_glow_to_click_and_triggers() -> bool:
+	var tm: TurnManager = TurnManager.new()
+	tm.start_game()
+
+	var card_p06: CardResource = CardDatabase.get_card("PASSIVE_06")
+	tm.white_engine.hand.append(card_p06)
+	var placed: bool = tm.place_passive_card(card_p06)
+	if not placed:
+		print("Placing PASSIVE_06 failed.")
+		return false
+
+	var slot: Dictionary = tm.passive_manager.get_slot(PieceData.Team.WHITE, 0)
+	if slot.get("is_ready_to_trigger", false) != false:
+		print("Passive slot prematurely marked ready to trigger.")
+		return false
+
+	# Simulate Boss moves Queen
+	var b_queen: PieceData = tm.board.get_piece(Vector2i(3, 7))
+	var triggered: Array[Dictionary] = tm.passive_manager.evaluate_triggers("queen_moved", {
+		"active_team": PieceData.Team.BLACK,
+		"moved_piece": b_queen,
+		"from": Vector2i(3, 7),
+		"to": Vector2i(3, 5),
+		"board": tm.board
+	})
+
+	if triggered.is_empty():
+		print("evaluate_triggers did not trigger PASSIVE_06 on enemy queen move.")
+		return false
+
+	var updated_slot: Dictionary = tm.passive_manager.get_slot(PieceData.Team.WHITE, 0)
+	if not updated_slot.get("is_ready_to_trigger", false):
+		print("Slot is_ready_to_trigger not set to true.")
+		return false
+
+	# Execute trigger (simulating click on glowing slot)
+	var exec_res: Dictionary = tm.execute_passive_trigger(PieceData.Team.WHITE, 0)
+	if not exec_res.get("success", false):
+		print("execute_passive_trigger failed.")
+		return false
+
+	# Verify slot was consumed
+	if not tm.passive_manager.get_slots(PieceData.Team.WHITE).is_empty():
+		print("Triggered passive slot was not consumed.")
+		return false
+
+	return true
+
+# 12. Active 1/Turn Warning & Slot Render test
+func test_active_one_per_turn_warning_and_slot_render() -> bool:
+	var scene_path: String = "res://assets/ui/game_scene.tscn"
+	var controller: GameController = null
+	if ResourceLoader.exists(scene_path):
+		var scene: PackedScene = load(scene_path) as PackedScene
+		controller = scene.instantiate() as GameController
+	else:
+		controller = GameController.new()
+
+	controller.setup_game()
+
+	var card_act1: CardResource = CardDatabase.get_card("ACTIVE_04") # Khiên Vua
+	var card_act2: CardResource = CardDatabase.get_card("ACTIVE_18") # Sông
+
+	controller.turn_manager.white_engine.hand.append(card_act1)
+	controller.turn_manager.white_engine.hand.append(card_act2)
+
+	# Play 1st active card
+	controller._try_cast_active_card(card_act1)
+	if controller.turn_manager.white_engine.actives_used_this_turn != 1:
+		print("Actives used this turn count not incremented to 1.")
+		controller.free()
+		return false
+
+	# Check active slot rendering
+	var slot_container: Control = controller.player_active_slot.find_child("CardContainer", true, false) as Control
+	if slot_container == null or slot_container.get_child_count() == 0:
+		print("Active slot CardContainer was not populated with card UI.")
+		controller.free()
+		return false
+
+	# Attempt to play 2nd active card in the same turn
+	controller._try_cast_active_card(card_act2)
+
+	if controller.message_banner.text != "MỖI LƯỢT CHỈ ĐƯỢC DÙNG 1 LÁ ACTIVE!":
+		print("Banner message mismatch for 2nd active limit: '%s'" % controller.message_banner.text)
+		controller.free()
+		return false
+
+	if controller.turn_manager.white_engine.actives_used_this_turn != 1:
+		print("2nd active card was played despite 1/turn limit.")
+		controller.free()
+		return false
+
+	controller.free()
+	return true
+
+# 13. Multi-Target Sequencing test
+func test_multi_target_sequencing() -> bool:
+	var tm: TurnManager = TurnManager.new()
+	tm.start_game()
+
+	# Test ACTIVE_03 (Hoán Đổi 2 quân đồng minh): Rook at (0, 0) and Knight at (1, 0)
+	var card_swap: CardResource = CardDatabase.get_card("ACTIVE_03")
+	tm.white_engine.hand.append(card_swap)
+
+	var p_rook: PieceData = tm.board.get_piece(Vector2i(0, 0))
+	var p_knight: PieceData = tm.board.get_piece(Vector2i(1, 0))
+
+	var swapped: bool = tm.play_active_card(card_swap, Vector2i(-1, -1), Vector2i(-1, -1), [Vector2i(0, 0), Vector2i(1, 0)])
+	if not swapped:
+		print("Playing ACTIVE_03 with 2 targets failed.")
+		return false
+
+	if tm.board.get_piece(Vector2i(0, 0)) != p_knight or tm.board.get_piece(Vector2i(1, 0)) != p_rook:
+		print("Pieces at (0, 0) and (1, 0) were not swapped.")
+		return false
+
+	# Test ACTIVE_05 (5 Ô Cấm):
+	var tm2: TurnManager = TurnManager.new()
+	tm2.start_game()
+	var card_ban5: CardResource = CardDatabase.get_card("ACTIVE_05")
+	tm2.white_engine.hand.append(card_ban5)
+
+	var five_cells: Array[Vector2i] = [Vector2i(2, 3), Vector2i(3, 3), Vector2i(4, 3), Vector2i(5, 3), Vector2i(6, 3)]
+	var banned: bool = tm2.play_active_card(card_ban5, Vector2i(-1, -1), Vector2i(-1, -1), five_cells)
+	if not banned:
+		print("Playing ACTIVE_05 with 5 targets failed.")
+		return false
+
+	for c in five_cells:
+		if not tm2.board.is_cell_forbidden(c):
+			print("Cell %s was not marked forbidden by ACTIVE_05." % str(c))
+			return false
+
 	return true

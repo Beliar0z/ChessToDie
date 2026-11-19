@@ -81,28 +81,49 @@ func get_opponent_team() -> PieceData.Team:
 	return PieceData.Team.BLACK if current_turn_team == PieceData.Team.WHITE else PieceData.Team.WHITE
 
 # Phase 2: Main Phase actions
-func play_active_card(card: CardResource, target_pos: Vector2i = Vector2i(-1, -1), extra_pos: Vector2i = Vector2i(-1, -1)) -> bool:
+func play_active_card(card: CardResource, target_pos: Vector2i = Vector2i(-1, -1), extra_pos: Vector2i = Vector2i(-1, -1), targets: Array = []) -> bool:
 	if current_phase != Phase.MAIN_PHASE:
 		return false
 	var engine: CardEngine = get_current_engine()
 	if not engine.can_play_active(card):
 		return false
 
+	var all_targets: Array = targets.duplicate()
+	if all_targets.is_empty():
+		if target_pos != Vector2i(-1, -1):
+			all_targets.append(target_pos)
+		if extra_pos != Vector2i(-1, -1):
+			all_targets.append(extra_pos)
+
 	# Check opponent passive counter (PASSIVE_04 COUNTER_ACTIVE)
 	var opp_team: PieceData.Team = get_opponent_team()
 	var opp_slots: Array[Dictionary] = passive_manager.get_slots(opp_team)
 	for i in range(opp_slots.size()):
 		var slot: Dictionary = opp_slots[i]
-		var p_card: CardResource = slot.get("card", null)
+		var p_card: CardResource = slot.get("card", null) as CardResource
 		if p_card != null and p_card.id == "PASSIVE_04" and not passive_manager.is_muted(opp_team):
 			passive_manager.remove_passive_at(opp_team, i)
 			engine.play_active(card) # Consume card
+			passive_manager.evaluate_triggers("active_card_played", {
+				"active_team": current_turn_team,
+				"active_card": card,
+				"board": board,
+				"countered": true
+			})
 			return false # Countered!
 
 	if not engine.play_active(card):
 		return false
 
-	_execute_active_effect(card, target_pos, extra_pos)
+	_execute_active_effect(card, all_targets)
+
+	passive_manager.evaluate_triggers("active_card_played", {
+		"active_team": current_turn_team,
+		"active_card": card,
+		"board": board,
+		"countered": false
+	})
+
 	return true
 
 func place_passive_card(card: CardResource) -> bool:
@@ -145,6 +166,34 @@ func execute_move(from_pos: Vector2i, to_pos: Vector2i) -> bool:
 
 	var captured: PieceData = board.move_piece(from_pos, to_pos)
 	total_moves_played += 1
+
+	if piece.type == PieceData.PieceType.QUEEN or piece.type == PieceData.PieceType.SUPER_QUEEN:
+		passive_manager.evaluate_triggers("queen_moved", {
+			"active_team": current_turn_team,
+			"moved_piece": piece,
+			"from": from_pos,
+			"to": to_pos,
+			"captured_piece": captured,
+			"board": board
+		})
+
+	if captured != null:
+		passive_manager.evaluate_triggers("piece_captured", {
+			"active_team": current_turn_team,
+			"moved_piece": piece,
+			"from": from_pos,
+			"to": to_pos,
+			"captured_piece": captured,
+			"board": board
+		})
+	else:
+		passive_manager.evaluate_triggers("piece_moved", {
+			"active_team": current_turn_team,
+			"moved_piece": piece,
+			"from": from_pos,
+			"to": to_pos,
+			"board": board
+		})
 
 	# King slain condition (Holy War or PASSIVE_15 counter-kill)
 	if captured != null and captured.type == PieceData.PieceType.KING:
@@ -304,7 +353,10 @@ func _process_board_hazards() -> void:
 		if board.river_barrier_turns <= 0:
 			board.river_barrier_active = false
 
-func _execute_active_effect(card: CardResource, target_pos: Vector2i, extra_pos: Vector2i) -> void:
+func _execute_active_effect(card: CardResource, targets: Array) -> void:
+	var target_pos: Vector2i = targets[0] if targets.size() > 0 and targets[0] is Vector2i else Vector2i(-1, -1)
+	var extra_pos: Vector2i = targets[1] if targets.size() > 1 and targets[1] is Vector2i else Vector2i(-1, -1)
+
 	match card.id:
 		"ACTIVE_01": # DOUBLE_MOVE
 			var p: PieceData = board.get_piece(target_pos)
@@ -329,9 +381,14 @@ func _execute_active_effect(card: CardResource, target_pos: Vector2i, extra_pos:
 				k.has_shield = true
 				k.shield_turns = 3
 		"ACTIVE_05": # FORBIDDEN_CELLS
-			for i in range(5):
-				var cell: Vector2i = Vector2i((target_pos.x + i) % BoardState.BOARD_SIZE, target_pos.y)
-				board.forbidden_cells[cell] = 2
+			if targets.size() >= 5:
+				for pos in targets:
+					if pos is Vector2i and board.is_valid_cell(pos):
+						board.forbidden_cells[pos] = 2
+			else:
+				for i in range(5):
+					var cell: Vector2i = Vector2i((target_pos.x + i) % BoardState.BOARD_SIZE, target_pos.y)
+					board.forbidden_cells[cell] = 2
 		"ACTIVE_06": # KNIGHT_LINEAR
 			var p: PieceData = board.get_piece(target_pos)
 			if p != null and p.type == PieceData.PieceType.KNIGHT:
@@ -345,15 +402,42 @@ func _execute_active_effect(card: CardResource, target_pos: Vector2i, extra_pos:
 			if p != null and p.type == PieceData.PieceType.BISHOP:
 				p.custom_move_mode = "KNIGHT_STEP"
 		"ACTIVE_09": # FUSION_PAWN
-			_fuse_pieces(PieceData.PieceType.PAWN, 3, PieceData.PieceType.SUPER_PAWN)
+			if targets.size() >= 4 and targets[3] is Vector2i:
+				_fuse_pieces_at_dest(PieceData.PieceType.PAWN, 3, PieceData.PieceType.SUPER_PAWN, targets[3] as Vector2i, targets)
+			else:
+				_fuse_pieces(PieceData.PieceType.PAWN, 3, PieceData.PieceType.SUPER_PAWN)
 		"ACTIVE_10": # FUSION_KNIGHT
-			_fuse_pieces(PieceData.PieceType.KNIGHT, 2, PieceData.PieceType.SUPER_KNIGHT)
+			if targets.size() >= 3 and targets[2] is Vector2i:
+				_fuse_pieces_at_dest(PieceData.PieceType.KNIGHT, 2, PieceData.PieceType.SUPER_KNIGHT, targets[2] as Vector2i, targets)
+			else:
+				_fuse_pieces(PieceData.PieceType.KNIGHT, 2, PieceData.PieceType.SUPER_KNIGHT)
 		"ACTIVE_11": # FUSION_ROOK
-			_fuse_pieces(PieceData.PieceType.ROOK, 2, PieceData.PieceType.SUPER_ROOK)
+			if targets.size() >= 3 and targets[2] is Vector2i:
+				_fuse_pieces_at_dest(PieceData.PieceType.ROOK, 2, PieceData.PieceType.SUPER_ROOK, targets[2] as Vector2i, targets)
+			else:
+				_fuse_pieces(PieceData.PieceType.ROOK, 2, PieceData.PieceType.SUPER_ROOK)
 		"ACTIVE_12": # FUSION_BISHOP
-			_fuse_pieces(PieceData.PieceType.BISHOP, 2, PieceData.PieceType.SUPER_BISHOP)
+			if targets.size() >= 3 and targets[2] is Vector2i:
+				_fuse_pieces_at_dest(PieceData.PieceType.BISHOP, 2, PieceData.PieceType.SUPER_BISHOP, targets[2] as Vector2i, targets)
+			else:
+				_fuse_pieces(PieceData.PieceType.BISHOP, 2, PieceData.PieceType.SUPER_BISHOP)
 		"ACTIVE_13": # FUSION_QUEEN
-			_fuse_pieces(PieceData.PieceType.QUEEN, 2, PieceData.PieceType.SUPER_QUEEN)
+			if targets.size() >= 3 and targets[2] is Vector2i:
+				_fuse_pieces_at_dest(PieceData.PieceType.QUEEN, 2, PieceData.PieceType.SUPER_QUEEN, targets[2] as Vector2i, targets)
+			else:
+				_fuse_pieces(PieceData.PieceType.QUEEN, 2, PieceData.PieceType.SUPER_QUEEN)
+		"ACTIVE_14": # GRAVE_SUMMON
+			var grave: Array[PieceData] = board.grave_white if current_turn_team == PieceData.Team.WHITE else board.grave_black
+			if not grave.is_empty() and board.is_valid_cell(target_pos) and board.get_piece(target_pos) == null:
+				var revived: PieceData = grave.pop_back()
+				revived.team = current_turn_team
+				board.set_piece(target_pos, revived)
+		"ACTIVE_15": # SACRIFICE_ROOK (8pts)
+			_process_sacrifice_summon(targets, 8, PieceData.PieceType.ROOK)
+		"ACTIVE_16": # SACRIFICE_MINOR (7pts)
+			_process_sacrifice_summon(targets, 7, PieceData.PieceType.KNIGHT)
+		"ACTIVE_17": # SACRIFICE_QUEEN (17pts)
+			_process_sacrifice_summon(targets, 17, PieceData.PieceType.QUEEN)
 		"ACTIVE_18": # RIVER_BARRIER
 			board.river_barrier_active = true
 			board.river_barrier_turns = 2
@@ -362,11 +446,35 @@ func _execute_active_effect(card: CardResource, target_pos: Vector2i, extra_pos:
 			if p != null and p.team != current_turn_team:
 				p.is_locked = true
 				p.locked_turns = 2
+		"ACTIVE_23": # LOCK_THREE
+			for pos in targets:
+				if pos is Vector2i:
+					var p: PieceData = board.get_piece(pos)
+					if p != null and p.team != current_turn_team and p.type != PieceData.PieceType.KING:
+						p.is_locked = true
+						p.locked_turns = 1
 		"ACTIVE_24": # MUTE_PASSIVES
 			if current_turn_team == PieceData.Team.WHITE:
 				passive_manager.black_passives_muted_turns = 2
 			else:
 				passive_manager.white_passives_muted_turns = 2
+		"ACTIVE_25": # PAWN_EXPLOSION
+			var p: PieceData = board.get_piece(target_pos)
+			if p != null and (p.type == PieceData.PieceType.PAWN or p.type == PieceData.PieceType.SUPER_PAWN) and p.team == current_turn_team:
+				board.remove_piece(target_pos)
+				if p.team == PieceData.Team.WHITE:
+					board.grave_white.append(p)
+				else:
+					board.grave_black.append(p)
+				var cross_offsets: Array[Vector2i] = [Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0)]
+				for off in cross_offsets:
+					var adj: Vector2i = target_pos + off
+					var adj_p: PieceData = board.remove_piece(adj)
+					if adj_p != null:
+						if adj_p.team == PieceData.Team.WHITE:
+							board.grave_white.append(adj_p)
+						else:
+							board.grave_black.append(adj_p)
 		"ACTIVE_26": # IMMORTAL_PIECE
 			var p: PieceData = board.get_piece(target_pos)
 			if p != null and p.team == current_turn_team:
@@ -377,16 +485,199 @@ func _execute_active_effect(card: CardResource, target_pos: Vector2i, extra_pos:
 				var crow: PieceData = PieceData.new(PieceData.PieceType.SCARECROW, current_turn_team)
 				board.set_piece(target_pos, crow)
 		"ACTIVE_28": # STEALTH_TROOPS
-			var p: PieceData = board.get_piece(target_pos)
-			if p != null and p.type != PieceData.PieceType.QUEEN and p.team == current_turn_team:
-				p.is_stealth = true
-				p.stealth_turns = 2
+			for pos in targets:
+				if pos is Vector2i:
+					var p: PieceData = board.get_piece(pos)
+					if p != null and p.type != PieceData.PieceType.QUEEN and p.team == current_turn_team:
+						p.is_stealth = true
+						p.stealth_turns = 2
+		"ACTIVE_29": # CLONE_WAR
+			var src_p: PieceData = board.get_piece(target_pos)
+			if src_p != null and src_p.team == current_turn_team:
+				for i in range(1, targets.size()):
+					var cpos = targets[i]
+					if cpos is Vector2i and board.is_valid_cell(cpos) and board.get_piece(cpos) == null:
+						var clone_p: PieceData = src_p.clone()
+						clone_p.is_clone = true
+						clone_p.clone_source_type = src_p.type
+						board.set_piece(cpos, clone_p)
+		"ACTIVE_30": # GRAVITY_VORTEX
+			if board.is_valid_cell(target_pos):
+				board.gravity_vortex = {"center": target_pos, "turns": 2}
 		"ACTIVE_31": # DEATH_CURSE
 			var p: PieceData = board.get_piece(target_pos)
 			if p != null and p.team != current_turn_team:
 				p.is_cursed = true
 				p.curse_turns = p.points
 				p.curse_moved = false
+
+func _process_sacrifice_summon(targets: Array, required_points: int, spawn_type: PieceData.PieceType) -> void:
+	var total_pts: int = 0
+	var sacrificed: Array[Vector2i] = []
+	for pos in targets:
+		if pos is Vector2i:
+			var p: PieceData = board.get_piece(pos)
+			if p != null and p.team == current_turn_team and p.type != PieceData.PieceType.KING:
+				total_pts += p.points
+				sacrificed.append(pos)
+				if total_pts >= required_points:
+					break
+
+	if total_pts >= required_points:
+		for spos in sacrificed:
+			var p: PieceData = board.remove_piece(spos)
+			if p != null:
+				if current_turn_team == PieceData.Team.WHITE:
+					board.grave_white.append(p)
+				else:
+					board.grave_black.append(p)
+
+		var corner1: Vector2i = Vector2i(0, 0) if current_turn_team == PieceData.Team.WHITE else Vector2i(0, 7)
+		var corner2: Vector2i = Vector2i(7, 0) if current_turn_team == PieceData.Team.WHITE else Vector2i(7, 7)
+		var spawn_pos: Vector2i = corner1
+		if board.get_piece(spawn_pos) != null:
+			spawn_pos = corner2
+		if board.get_piece(spawn_pos) != null:
+			spawn_pos = board.find_nearest_empty_cell(corner1)
+
+		if spawn_pos != Vector2i(-1, -1):
+			board.set_piece(spawn_pos, PieceData.new(spawn_type, current_turn_team))
+
+func _fuse_pieces_at_dest(source_type: PieceData.PieceType, needed_count: int, result_type: PieceData.PieceType, dest_pos: Vector2i, targets: Array) -> void:
+	var consumed: int = 0
+	for i in range(mini(needed_count, targets.size())):
+		var pos = targets[i]
+		if pos is Vector2i:
+			var p: PieceData = board.get_piece(pos)
+			if p != null and p.team == current_turn_team and p.type == source_type:
+				board.remove_piece(pos)
+				consumed += 1
+
+	if consumed == needed_count and board.is_valid_cell(dest_pos) and board.get_piece(dest_pos) == null:
+		board.set_piece(dest_pos, PieceData.new(result_type, current_turn_team))
+	elif consumed == needed_count:
+		var fallback_pos: Vector2i = board.find_nearest_empty_cell(dest_pos)
+		if fallback_pos != Vector2i(-1, -1):
+			board.set_piece(fallback_pos, PieceData.new(result_type, current_turn_team))
+
+func execute_passive_trigger(team: PieceData.Team, slot_index: int, targets: Array = []) -> Dictionary:
+	var card: CardResource = passive_manager.trigger_slot(team, slot_index)
+	if card == null:
+		return {"success": false, "reason": "NO_CARD"}
+
+	var target_pos: Vector2i = targets[0] if targets.size() > 0 and targets[0] is Vector2i else Vector2i(-1, -1)
+	var opp_team: PieceData.Team = PieceData.Team.BLACK if team == PieceData.Team.WHITE else PieceData.Team.WHITE
+
+	match card.id:
+		"PASSIVE_01": # BOUNTY_10PTS: destroy enemy piece < 3pts
+			if board.is_valid_cell(target_pos):
+				var p: PieceData = board.get_piece(target_pos)
+				if p != null and p.team == opp_team and p.points < 3:
+					board.remove_piece(target_pos)
+					if opp_team == PieceData.Team.WHITE:
+						board.grave_white.append(p)
+					else:
+						board.grave_black.append(p)
+
+		"PASSIVE_02": # RESURRECT_50PCT: revive piece < 5pts at target empty cell
+			var grave: Array[PieceData] = board.grave_white if team == PieceData.Team.WHITE else board.grave_black
+			var found_idx: int = -1
+			for i in range(grave.size() - 1, -1, -1):
+				if grave[i].points < 5:
+					found_idx = i
+					break
+			if found_idx != -1 and board.is_valid_cell(target_pos) and board.get_piece(target_pos) == null:
+				var revived: PieceData = grave[found_idx]
+				grave.remove_at(found_idx)
+				revived.team = team
+				board.set_piece(target_pos, revived)
+
+		"PASSIVE_03": # CLEANSE_DEBUFFS
+			for y in range(BoardState.BOARD_SIZE):
+				for x in range(BoardState.BOARD_SIZE):
+					var p: PieceData = board.grid[y][x] as PieceData
+					if p != null and p.team == team:
+						p.is_locked = false
+						p.is_cursed = false
+						p.is_banned = false
+
+		"PASSIVE_04": # COUNTER_ACTIVE
+			pass
+
+		"PASSIVE_05": # BARRIER_BURN
+			if board.is_valid_cell(target_pos):
+				var offsets: Array[Vector2i] = [Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0), Vector2i(1, 1), Vector2i(-1, -1)]
+				for off in offsets:
+					var c: Vector2i = target_pos + off
+					if board.is_valid_cell(c):
+						board.barrier_burn_zones[c] = {"turns": 2, "origin_team": team}
+
+		"PASSIVE_06": # QUEEN_TETHER
+			board.execute_queen_tether()
+
+		"PASSIVE_07": # STEAL_PAWNS
+			var opp_pawns: Array[Vector2i] = []
+			for y in range(BoardState.BOARD_SIZE):
+				for x in range(BoardState.BOARD_SIZE):
+					var p: PieceData = board.grid[y][x] as PieceData
+					if p != null and p.team == opp_team and (p.type == PieceData.PieceType.PAWN or p.type == PieceData.PieceType.SUPER_PAWN):
+						opp_pawns.append(Vector2i(x, y))
+			var steal_count: int = int(floor(float(opp_pawns.size()) * 0.3))
+			for i in range(mini(steal_count, opp_pawns.size())):
+				var pos: Vector2i = opp_pawns[i]
+				var p: PieceData = board.get_piece(pos)
+				if p != null:
+					p.team = team
+
+		"PASSIVE_08": # REWIND_CHECK
+			if not board.move_history.is_empty():
+				var last_move: Dictionary = board.move_history.back()
+				var from_c: Vector2i = last_move.get("from", Vector2i(-1, -1))
+				var to_c: Vector2i = last_move.get("to", Vector2i(-1, -1))
+				var p: PieceData = board.get_piece(to_c)
+				if p != null and board.is_valid_cell(from_c) and board.get_piece(from_c) == null:
+					board.remove_piece(to_c)
+					board.set_piece(from_c, p)
+
+		"PASSIVE_09": # TRAP_DISARM
+			var opp_slots: Array[Dictionary] = passive_manager.get_slots(opp_team)
+			opp_slots.clear()
+
+		"PASSIVE_10": # DELAYED_REVIVE
+			var grave: Array[PieceData] = board.grave_white if team == PieceData.Team.WHITE else board.grave_black
+			var pts_left: int = 4
+			for i in range(grave.size() - 1, -1, -1):
+				if pts_left <= 0:
+					break
+				if grave[i].points <= pts_left:
+					pts_left -= grave[i].points
+					var p: PieceData = grave[i]
+					grave.remove_at(i)
+					var spawn_pos: Vector2i = board.find_nearest_empty_cell(Vector2i(3, 0) if team == PieceData.Team.WHITE else Vector2i(3, 7))
+					if spawn_pos != Vector2i(-1, -1):
+						p.team = team
+						board.set_piece(spawn_pos, p)
+
+		"PASSIVE_14": # CASTLE_ESCAPE
+			var kpos: Vector2i = board.find_king(team)
+			if kpos != Vector2i(-1, -1) and board.is_valid_cell(target_pos) and board.get_piece(target_pos) == null:
+				var k: PieceData = board.remove_piece(kpos)
+				board.set_piece(target_pos, k)
+
+		"PASSIVE_15", "PASSIVE_16":
+			interception_extra_moves = 2
+			interception_scope = "KING" if card.id == "PASSIVE_15" else "ALL"
+
+		"PASSIVE_20": # RETALIATION_BAN
+			if not board.move_history.is_empty():
+				var last_move: Dictionary = board.move_history.back()
+				var to_c: Vector2i = last_move.get("to", Vector2i(-1, -1))
+				var p: PieceData = board.get_piece(to_c)
+				if p != null:
+					p.is_banned = true
+					p.banned_turns = 2
+
+	return {"success": true, "card": card}
 
 func _fuse_pieces(source_type: PieceData.PieceType, needed_count: int, result_type: PieceData.PieceType) -> void:
 	var matches: Array[Vector2i] = []

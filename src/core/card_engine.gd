@@ -1,5 +1,3 @@
-# res://src/core/card_engine.gd
-# GDScript / card_engine.gd / Godot 4.7 / Core Engine
 class_name CardEngine
 extends RefCounted
 
@@ -35,12 +33,33 @@ func setup_default_deck() -> void:
 	passives_placed_this_turn = 0
 
 	var all_ids: Array = CardDatabase.get_all_card_ids()
-	# Take first 27 cards deterministically or wrap around
-	for i in range(DECK_SIZE):
-		var id: String = all_ids[i % all_ids.size()]
+	var active_pool: Array[CardResource] = []
+	var passive_pool: Array[CardResource] = []
+
+	for id in all_ids:
 		var card: CardResource = CardDatabase.get_card(id)
 		if card != null:
-			deck.append(card)
+			if card.is_active():
+				active_pool.append(card)
+			else:
+				passive_pool.append(card)
+
+	active_pool.shuffle()
+	passive_pool.shuffle()
+
+	# Cân bằng bộ bài 27 lá: ~16 Active + ~11 Passive
+	var target_actives: int = mini(16, active_pool.size())
+	for i in range(target_actives):
+		deck.append(active_pool[i])
+
+	var remaining: int = DECK_SIZE - deck.size()
+	for i in range(remaining):
+		if not passive_pool.is_empty():
+			deck.append(passive_pool[i % passive_pool.size()])
+		elif not active_pool.is_empty():
+			deck.append(active_pool[i % active_pool.size()])
+
+	deck.shuffle()
 
 func set_custom_deck(cards: Array[CardResource]) -> void:
 	deck.clear()
@@ -61,7 +80,6 @@ func draw_card() -> CardResource:
 	if deck.is_empty():
 		return null
 	if hand.size() >= MAX_HAND_SIZE:
-		# Hand full limit: skip draw or discard as per GDD
 		return null
 	var card: CardResource = deck.pop_front()
 	hand.append(card)

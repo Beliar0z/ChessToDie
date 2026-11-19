@@ -94,6 +94,8 @@ func set_piece(pos: Vector2i, piece: PieceData) -> void:
 	if not is_valid_cell(pos):
 		return
 	grid[pos.y][pos.x] = piece
+	if piece != null and piece.position_history.is_empty():
+		piece.record_position(pos)
 
 func remove_piece(pos: Vector2i) -> PieceData:
 	if not is_valid_cell(pos):
@@ -120,6 +122,7 @@ func move_piece(from_pos: Vector2i, to_pos: Vector2i) -> PieceData:
 	set_piece(from_pos, null)
 	piece.move_count += 1
 	piece.curse_moved = true
+	piece.record_position(to_pos)
 
 	# Pawn promotion to Queen on back rank
 	if piece.type == PieceData.PieceType.PAWN:
@@ -135,6 +138,49 @@ func move_piece(from_pos: Vector2i, to_pos: Vector2i) -> PieceData:
 	})
 
 	return captured_piece
+
+func find_nearest_empty_cell(target_pos: Vector2i) -> Vector2i:
+	if is_valid_cell(target_pos) and get_piece(target_pos) == null and not is_cell_forbidden(target_pos):
+		return target_pos
+	for dist in range(1, BOARD_SIZE):
+		for dy in range(-dist, dist + 1):
+			for dx in range(-dist, dist + 1):
+				if maxi(absi(dx), absi(dy)) == dist:
+					var cand: Vector2i = target_pos + Vector2i(dx, dy)
+					if is_valid_cell(cand) and get_piece(cand) == null and not is_cell_forbidden(cand):
+						return cand
+	return Vector2i(-1, -1)
+
+func execute_queen_tether() -> Array[Dictionary]:
+	var results: Array[Dictionary] = []
+	var queens: Array[Dictionary] = []
+	for y in range(BOARD_SIZE):
+		for x in range(BOARD_SIZE):
+			var p: PieceData = grid[y][x] as PieceData
+			if p != null and (p.type == PieceData.PieceType.QUEEN or p.type == PieceData.PieceType.SUPER_QUEEN):
+				queens.append({"pos": Vector2i(x, y), "piece": p})
+
+	for q_entry in queens:
+		var q_pos: Vector2i = q_entry["pos"]
+		var q: PieceData = q_entry["piece"]
+		var target_pos: Vector2i = q.get_position_two_moves_ago()
+		var final_pos: Vector2i = q_pos
+
+		if target_pos != Vector2i(-1, -1) and target_pos != q_pos:
+			var dest_pos: Vector2i = target_pos
+			if get_piece(dest_pos) != null and get_piece(dest_pos) != q:
+				dest_pos = find_nearest_empty_cell(target_pos)
+			if dest_pos != Vector2i(-1, -1) and dest_pos != q_pos:
+				set_piece(q_pos, null)
+				set_piece(dest_pos, q)
+				q.record_position(dest_pos)
+				final_pos = dest_pos
+
+		q.is_locked = true
+		q.locked_turns = 2
+		results.append({"piece": q, "from": q_pos, "to": final_pos})
+
+	return results
 
 func find_king(team: PieceData.Team) -> Vector2i:
 	for y in range(BOARD_SIZE):

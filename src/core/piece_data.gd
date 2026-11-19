@@ -30,6 +30,7 @@ var points: int = 1
 var hp: float = 1.0
 var move_count: int = 0
 var check_count: int = 0
+var position_history: Array[Vector2i] = []
 
 # Status Buffs / Debuffs
 var is_locked: bool = false
@@ -66,6 +67,17 @@ func _init(p_type: PieceType = PieceType.PAWN, p_team: Team = Team.WHITE) -> voi
 	hp = 1.0
 	move_count = 0
 	check_count = 0
+	position_history = []
+
+func record_position(new_pos: Vector2i) -> void:
+	position_history.append(new_pos)
+
+func get_position_two_moves_ago() -> Vector2i:
+	if position_history.is_empty():
+		return Vector2i(-1, -1)
+	if position_history.size() >= 3:
+		return position_history[position_history.size() - 3]
+	return position_history[0]
 
 static func get_default_points(p_type: PieceType) -> int:
 	match p_type:
@@ -136,6 +148,7 @@ func clone() -> PieceData:
 	copy.double_move_active = double_move_active
 	copy.custom_move_mode = custom_move_mode
 	copy.square_color_swap = square_color_swap
+	copy.position_history = position_history.duplicate()
 	return copy
 
 func get_type_name() -> String:

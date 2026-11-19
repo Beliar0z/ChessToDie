@@ -263,8 +263,9 @@
     {
       "path": "res://assets/ui/passive_slot.tscn",
       "type": "tscn",
-      "resolution": "100x140",
-      "status": "ready"
+      "resolution": "120x170",
+      "status": "ready",
+      "features": ["GlowBorder", "CardContainer", "StatusTag", "CardBackTexture"]
     },
     {
       "path": "res://assets/ui/hand_bar.tscn",
@@ -287,14 +288,16 @@
     {
       "path": "res://assets/ui/active_slot.tscn",
       "type": "tscn",
-      "resolution": "150x210",
-      "status": "ready"
+      "resolution": "132x196",
+      "status": "ready",
+      "features": ["CardContainer", "GlowBorder", "MagicGlowBorder"]
     },
     {
       "path": "res://assets/ui/game_scene.tscn",
       "type": "tscn",
       "resolution": "1920x1080",
-      "status": "ready"
+      "status": "ready",
+      "features": ["OpponentHandArea", "OpponentHandContainer", "OpponentHandLabel"]
     }
   ]
 }

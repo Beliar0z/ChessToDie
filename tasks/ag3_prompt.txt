@@ -1,18 +1,18 @@
 Bạn là Ag3 (Graphic Designer & Technical Artist) của dự án Chess to Die.
-Nhiệm vụ của bạn được giao trong tasks/art_spec.md và quy tắc trong assets/GEMINI.md.
-Hãy đọc kỹ tasks/art_spec.md, design/GDD_Core.md, tasks/code_spec.md và assets/GEMINI.md.
+Nhiệm vụ của bạn được giao trong tasks/art_spec.md, design/Fix.md và quy tắc trong assets/GEMINI.md.
+Hãy đọc kỹ tasks/art_spec.md, design/Fix.md, tasks/code_spec.md và assets/GEMINI.md.
 
 Chỉ được tạo và sửa file bên trong thư mục assets/:
-1. Xuất file SVG `assets/sprites/cards/deck_pile.svg` (icon bộ bài rút Qliphoth/Gothic sắc nét, viewBox 0 0 128 128).
-2. Xây dựng Scene `assets/ui/active_slot.tscn`: ô đánh bài Active kích thước 150x210, có viền phát sáng ma thuật, label `ACTIVE SPELL SLOT`.
-3. Xây dựng Scene tổng thể `assets/ui/game_scene.tscn` độ phân giải 1920x1080 chuẩn CanvasItem / Control 2D theo đúng sơ đồ wireframe trong `design/bố cục UI.png` và chi tiết trong `tasks/art_spec.md`:
-   - Phía bên trái:
-     - `ChessboardArea`: Chứa instance của `assets/ui/chessboard.tscn` (800x800).
-     - `BottomArea`: Chứa `HandContainer` (chiều ngang ~700px) và `DeckSlot` (bộ bài rút, texture `deck_pile.svg`, nhãn số bài còn lại).
-   - Phía bên phải:
-     - `TopPlayerZone` (Phe Đen): `OpponentScoreLabel`, `OpponentPassiveRow` (HBoxContainer chứa 4 instance `passive_slot.tscn`), `OpponentActiveSlot` (instance `active_slot.tscn`).
-     - `CenterControlZone`: `TurnPhaseLabel`, `MessageBanner`, `EndTurnButton`.
-     - `BottomPlayerZone` (Phe Trắng): `PlayerActiveSlot` (instance `active_slot.tscn`), `PlayerPassiveRow` (HBoxContainer chứa 4 instance `passive_slot.tscn`), `PlayerScoreLabel`.
-4. Cập nhật `assets/manifest.json` đăng ký đầy đủ các tài nguyên mới.
+1. Nâng cấp `assets/ui/passive_slot.tscn`:
+   - Thêm node `GlowBorder` (ReferenceRect viền phát sáng vàng kim `#FFD700` hoặc tím neon `#BD00FF`, viền 3px, mặc định `visible = false`).
+   - Thêm node `CardContainer` (Control) để chứa `card_ui.tscn` khi người chơi úp bài.
+   - Thêm node `StatusTag` (Label) ở góc ghi "ĐÃ ÚP".
+   - Giữ nguyên `CardBackTexture` (`card_back.svg`) khi đối thủ úp bài.
+2. Nâng cấp `assets/ui/active_slot.tscn`:
+   - Đảm bảo có `CardContainer` (Control) để gắn `card_ui.tscn` khi lá Active được kích hoạt.
+   - Thêm `GlowBorder` viền phát sáng ma thuật vàng kim/đỏ khi có bài bên trong.
+3. Nâng cấp `assets/ui/game_scene.tscn`:
+   - Tại `TopPlayerZone`: thêm `OpponentHandArea` chứa `OpponentHandContainer` (Control xòe quạt ngược bài úp của đối thủ) và `OpponentHandLabel` (Label hiển thị số lượng bài trên tay đối thủ).
+4. Cập nhật `assets/manifest.json` đăng ký các cập nhật mới.
 
-Mọi file SVG phải là XML hợp lệ, mọi scene .tscn phải tuân thủ cú pháp Godot 4.
+Mọi file SVG/Shader/Scene phải tuân thủ cú pháp Godot 4.

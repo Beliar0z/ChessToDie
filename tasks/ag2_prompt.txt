@@ -1,16 +1,23 @@
 Bạn là Ag2 (Game Developer) của dự án Chess to Die.
-Nhiệm vụ của bạn được giao trong tasks/code_spec.md và quy tắc trong src/GEMINI.md.
-Hãy đọc kỹ tasks/code_spec.md, design/GDD_Core.md, tasks/art_spec.md và src/GEMINI.md.
+Nhiệm vụ của bạn được giao trong tasks/code_spec.md, design/Fix.md và quy tắc trong src/GEMINI.md.
+Hãy đọc kỹ tasks/code_spec.md, design/Fix.md, design/GDD_Core.md và src/GEMINI.md.
 
 Chỉ được tạo và sửa file bên trong thư mục src/ và file project.godot:
-1. Triển khai controller chính `src/scenes/game_controller.gd` kế thừa Control để gắn vào root của `res://assets/ui/game_scene.tscn`:
-   - Kết nối toàn bộ Core Logic (TurnManager, BoardState, MoveValidator, CardEngine, PassiveManager, DeathRingSystem).
-   - Tương tác bàn cờ 8x8: Lắng nghe click ô cờ, highlight nước đi hợp lệ, di chuyển quân, cập nhật hình ảnh quân cờ bằng SVG Sprite từ `assets/sprites/pieces/`, xử lý ăn quân và phong cấp tốt.
-   - Tương tác thẻ bài: Hiển thị bộ bài trên tay tương ứng với lượt đi của phe trong chế độ Hotseat Local PvP. Xử lý click lá bài, kích hoạt bài Active vào PlayerActiveSlot/OpponentActiveSlot, úp bài Passive vào 4 ô PlayerPassiveRow/OpponentPassiveRow, và rút bài từ DeckSlot.
-   - Tương tác HUD: Nút EndTurnButton kết thúc lượt, cập nhật TurnPhaseLabel và điểm số PlayerScoreLabel, OpponentScoreLabel. Hiển thị MessageBanner khi có sự kiện (chiếu tướng, checkmate hook, vòng lửa, thánh chiến).
-   - Tích hợp Shaders: Gán shader death_ring, river_barrier, barrier_burn, holy_war, stealth khi các trạng thái tương ứng kích hoạt.
-2. Cập nhật `src/scenes/board_view.gd` và `src/scenes/card_hand_view.gd` để đồng bộ hỗ trợ tối đa cho controller và các Scene UI.
-3. Cập nhật `project.godot` đặt `application/run/main_scene="res://assets/ui/game_scene.tscn"`.
-4. Bổ sung test case `test_ui_scene_integration` vào `src/core/test_runner.gd` kiểm tra nạp `game_scene.tscn`, kiểm tra controller và mô phỏng 1 lượt tương tác không lỗi. Chạy thử kiểm tra đảm bảo toàn bộ bộ test headless đều PASS.
+1. Nâng cấp `src/scenes/card_hand_view.gd` theo thiết kế Xòe Bài Hình Quạt (Fan Arc):
+   - Bỏ HBoxContainer phẳng; xếp các lá bài theo vòm cung quạt (xoay từ -14° đến +14°, nhô cao ở giữa).
+   - Khi hover chuột (`mouse_entered`): dựng thẳng 0°, scale 1.28x, nhô cao hẳn lên trên (`z_index = 50`) để đọc rõ khung và chữ. Rời chuột (`mouse_exited`): hoàn trả về vị trí, góc xoay và z-index ban đầu.
+2. Nâng cấp `src/scenes/game_controller.gd`:
+   - Thêm cụm bài đối thủ xòe quạt ngược (úp mặt lưng `card_back.svg`) tại `OpponentHandContainer` kèm nhãn đếm số lượng bài.
+   - Hiện mặt bài Passive của người chơi khi đã úp: gắn `card_ui.tscn` vào `CardContainer` của ô Passive phe Trắng kèm nhãn "ĐÃ ÚP". Phe Đen vẫn úp `card_back.svg`.
+   - Cơ chế Viền Sáng Passive (Glow-to-Click): Bật viền sáng `GlowBorder` khi `is_ready_to_trigger == true`. Click vào ô bẫy phát sáng để kích hoạt ngay (không dùng popup Có/Không). Cửa sổ phản ứng 2.0s trong lượt Boss khi Boss kích hoạt điều kiện bẫy của người chơi.
+   - Active Slot: Render trực tiếp `card_ui.tscn` vào `CardContainer` khi kích hoạt hoặc kéo thả Active vào.
+   - Cảnh báo giới hạn: Chặn dùng lá Active thứ 2 trong lượt và hiện thông báo trên MessageBanner: "MỖI LƯỢT CHỈ ĐƯỢC DÙNG 1 LÁ ACTIVE!".
+   - Hệ thống Targeting (`targeting_steps`): Hỗ trợ chọn tuần tự nhiều mục tiêu (Hoán đổi 2 quân, 5 ô cấm, Hợp thể, Phân thân, Khóa 3 quân, Hiến tế triệu hồi tại A1/H1 hoặc A8/H8...). Tô sáng ô hợp lệ, ESC hoặc chuột phải để hủy.
+3. Cập nhật `src/core/piece_data.gd` và `src/core/board_state.gd`:
+   - Thêm `position_history: Array[Vector2i]` lưu lại lịch sử tọa độ qua các nước đi.
+   - Xử lý lá Passive kéo Hậu quay về vị trí cách đó 2 nước đi của từng con.
+4. Cập nhật `src/core/passive_manager.gd`:
+   - Quét và đánh giá điều kiện kích hoạt `is_ready_to_trigger` cho các lá Passive đã úp.
+5. Cập nhật `src/core/test_runner.gd` để kiểm tra toàn bộ các tính năng mới và đảm bảo tất cả test cases chạy qua trên Godot 4.7 headless (Exit code 0).
 
 Hãy viết code hoàn chỉnh, chuẩn GDScript typed, không dùng placeholder hay TODO.
