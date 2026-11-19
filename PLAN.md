@@ -30,10 +30,17 @@
     - [x] Bộ Shader ma thuật: Vòng lửa sinh tử, Dòng sông ranh giới, Kết giới đốt điểm, Tàng hình.
     - [x] Xuất `assets/manifest.json` đăng ký 100% asset.
 
-- [ ] **Milestone 2: Tích hợp Giao diện Bàn cờ 2D & Đấu Boss Roguelike (Cánh cửa 3D)**
-  - [ ] Nối mạch Core Logic vào UI Scene (`chessboard.tscn`, `hand_bar.tscn`, `passive_slot.tscn`).
-  - [ ] Xây dựng AI Boss với trạng thái Fog of War (không đọc lén bài úp).
-  - [ ] Tích hợp giao diện chọn 10 cánh cửa Roguelike 3D (Forward+).
+- [ ] **Milestone 2: Tích hợp Giao diện Bàn cờ 2D & Đấu Boss Roguelike**
+  - [ ] **Giai đoạn 2A: Nối mạch Core Logic và UI Scene (Ưu tiên số 1):**
+    - [ ] Tạo Main Game Scene (`res://src/scenes/game_scene.tscn` / `game_controller.gd`) tích hợp toàn bộ các Scene UI từ `assets/ui/` (`chessboard.tscn`, `hand_bar.tscn`, `card_ui.tscn`, `passive_slot.tscn`, `combat_hud.tscn`).
+    - [ ] Kết nối tương tác bàn cờ: click chọn quân, hiển thị các ô đi hợp lệ, ăn quân, phong cấp tốt, cập nhật trực quan quân cờ bằng sprite SVG từ `assets/sprites/pieces/`.
+    - [ ] Kết nối tương tác thẻ bài: render danh sách bài trên tay (`hand_bar`), hiển thị popup/tooltip chi tiết thẻ bài (`card_ui`), logic click đánh Active và kéo/chọn úp vào 4 ô `passive_slot`.
+    - [ ] Kết nối HUD trận đấu (`combat_hud.tscn`): cập nhật điểm số động, pha lượt đi (Draw/Main/Move/End), nút End Turn.
+    - [ ] Áp dụng các Shader hiệu ứng (`death_ring`, `river_barrier`, `barrier_burn`, `holy_war`, `stealth`) vào bàn cờ khi trạng thái tương ứng được kích hoạt.
+    - [ ] Thiết lập Main Scene mặc định trong `project.godot` để chạy được game trực tiếp trên Godot 4.7.
+  - [ ] **Giai đoạn 2B: AI Boss Roguelike & Cánh cửa 3D:**
+    - [ ] Xây dựng AI Boss với trạng thái Fog of War (không đọc lén bài úp).
+    - [ ] Tích hợp giao diện chọn 10 cánh cửa Roguelike 3D (Forward+).
 
 - [ ] **Milestone 3: Kiểm thử Chéo (QA), Đóng gói & Nghiệm thu (Delivery)**
   - [ ] Chạy tự động `godot --headless -s res://src/core/test_runner.gd` kiểm tra 100% ca kiểm thử.

@@ -1,25 +1,20 @@
 # BỘ NHỚ TRẠNG THÁI DỰ ÁN (PERSISTENT STATE)
-**Cập nhật lần cuối:** 19/11/2026 - Milestone 1: Ag2 và Ag3 Hoàn Tất 100%, Nghiệm Thu Hoàn Thành
+**Cập nhật lần cuối:** 19/11/2026 - Milestone 2: Bắt đầu Giai đoạn 2A - Nối mạch Core Logic và UI Scene
 
 ## 1. Mốc hiện tại
-- **Milestone 1:** Triển khai core gameplay và tài nguyên đồ họa theo hợp đồng kỹ thuật.
-- **Giai đoạn:** Ag2 đã hoàn tất 100% Core Logic & Headless Test (7/7 Pass). Ag3 đã xuất đầy đủ 46/46 tài nguyên đồ họa (SVG, Shader, Theme, Scene) vào `assets/` và cập nhật `assets/manifest.json`. Toàn bộ kiểm thử nghiệm thu chéo đã vượt qua. Sẵn sàng bước sang Milestone 2.
+- **Milestone 1:** Hoàn tất 100%, commit `3394420` đã được push an toàn lên remote `https://github.com/Beliar0z/ChessToDie.git` (nhánh `main`).
+- **Milestone 2 - Giai đoạn 2A:** Nối mạch Core Logic và UI Scene (Bàn cờ, Tay bài, Slot thụ động, HUD trận đấu, Tích hợp Shader).
 
 ## 2. Các quyết định Game Designer đã chốt
-1. **Repository từ xa:** Sử dụng `https://github.com/Beliar0z/ChessToDie.git` làm remote origin chính thức của dự án.
-2. **Số lượng thẻ bài:** Khóa 51 lá bài cho Milestone 1 (31 Active + 20 Passive), 9 lá còn lại cập nhật sau.
-3. **Vòng lửa sinh tử:** Nếu điểm về 0 mà chưa chiếu hết, bên có điểm ban đầu lớn hơn thì thua (Decision B - đánh thuế kẻ mạnh).
-4. **Giới hạn bài:** Mỗi turn được dùng 1 Active + úp 1 Passive; tối đa 4 ô úp trên sân; kích hoạt Passive phản xạ không giới hạn số lần khi đủ điều kiện.
-5. **Cứu thua chiếu hết:** Cho phép úp cả 2 lá (Passive 15 & 16), nhưng khi bị chiếu hết chỉ kích hoạt duy nhất 1 lá (ưu tiên lá úp trước).
-6. **Lời nguyền (Active 31):** Đếm ngược số turn của quân = điểm của quân đó (Tốt 1đ = 1 turn, Xe 5đ = 5 turn). Hết turn không đi thì về mộ.
-7. **Thánh chiến (Holy War):** Chỉ còn 2 Vua trên sân. Phá luật FIDE: 2 Vua được phép áp sát và ăn lẫn nhau trực tiếp (Decision A).
-8. **Cấu trúc thực thi:** Ag2 code vào `src/`, Ag3 xuất asset vào `assets/`.
-9. **Auto-Dispatch Protocol:** Tự động kích hoạt song song qua `agy` CLI, nghiệm thu tự động qua Headless Test Godot 4.7.1.
+1. **Remote Git:** Đã cấp phép và push thành công lên GitHub `origin main`.
+2. **Ưu tiên Milestone 2:** Tập trung hoàn thiện giai đoạn 2A (Nối mạch Core Logic với UI Scene để người chơi tương tác đánh cờ và dùng bài trực tiếp trên giao diện) trước khi làm AI Boss và cánh cửa Roguelike 3D.
+3. **Độ phân giải & hiển thị:** Chuẩn 1920x1080, CanvasItem / Expand.
 
 ## 3. Trạng thái Ag2 & Ag3
-- **Ag2 (Coder):** ĐÃ HOÀN TẤT 100%. Toàn bộ 11 module GDScript chuẩn typed và 7/7 test cases trong `src/core/test_runner.gd` đã vượt qua kiểm thử headless trên Godot 4.7.1 (Exit Code 0).
-- **Ag3 (Graphic Designer):** ĐÃ HOÀN TẤT 100%. Toàn bộ 46/46 file tài nguyên (12 SVG quân chuẩn, 12 SVG siêu quân & thực thể, 8 SVG status marks, 3 SVG khung bài, 5 Shader, 6 Theme & Scene UI) đã tạo đầy đủ, XML hợp lệ, đúng chuẩn Dark Fantasy / Chess.com phẳng và đăng ký vào `assets/manifest.json`.
+- **Ag2 (Coder):** Đã hoàn tất 11 module core. Chuẩn bị nhận spec bóc tách cho UI controller, kết nối signals giữa TurnManager/CardEngine với UI scenes (`board_view`, `hand_bar`, `card_ui`, `passive_slot`, `combat_hud`).
+- **Ag3 (Graphic Designer):** Đã xuất 46 asset vào `assets/`. Chuẩn bị nhận spec bổ sung (nếu cần tinh chỉnh layout/texture cho scene chính `game_scene.tscn`).
 
 ## 4. Việc cần làm ngay khi mở lại CLI
-- Commit và push toàn bộ mã nguồn `src/` và tài nguyên `assets/` của Milestone 1 lên GitHub remote.
-- Bắt đầu triển khai Milestone 2: Nối mạch Core Logic vào UI Scene (`chessboard.tscn`, `card_ui.tscn`, `hand_bar.tscn`, `passive_slot.tscn`, `combat_hud.tscn`) và tích hợp AI Boss Roguelike.
+- Bóc tách hợp đồng kỹ thuật cho Giai đoạn 2A: `tasks/code_spec.md` (đặc tả controller và event flow cho UI), `tasks/art_spec.md` (tổng hợp scene root `game_scene.tscn`).
+- Chuẩn bị prompt cho Ag2 và Ag3, kích hoạt điều phối song song qua `tasks/dispatch_sprint.ps1`.
+- Kiểm thử chạy Scene trên Godot 4.7.
