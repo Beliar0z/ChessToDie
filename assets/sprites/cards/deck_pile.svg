@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="deckGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F3E5AB"/>
+      <stop offset="40%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#7A5C10"/>
+    </linearGradient>
+    <linearGradient id="deckPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D1B4E"/>
+      <stop offset="50%" stop-color="#191028"/>
+      <stop offset="100%" stop-color="#0B0712"/>
+    </linearGradient>
+    <linearGradient id="deckEdge" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4A3B2C"/>
+      <stop offset="50%" stop-color="#8C733E"/>
+      <stop offset="100%" stop-color="#3A2D1B"/>
+    </linearGradient>
+    <radialGradient id="glowCrimson" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF3333" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#8B0000" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3B0000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Shadow below deck -->
+  <ellipse cx="64" cy="116" rx="46" ry="8" fill="#000000" opacity="0.6"/>
+
+  <!-- Stack depth (bottom layers) -->
+  <!-- Card 4 (base) -->
+  <rect x="22" y="32" width="68" height="84" rx="5" fill="#0a0810" stroke="#332440" stroke-width="1.5"/>
+  <line x1="22" y1="116" x2="90" y2="116" stroke="url(#deckEdge)" stroke-width="2"/>
+
+  <!-- Card 3 -->
+  <rect x="26" y="27" width="68" height="84" rx="5" fill="#120e1c" stroke="#4a375a" stroke-width="1.5"/>
+  <line x1="26" y1="111" x2="94" y2="111" stroke="url(#deckEdge)" stroke-width="2"/>
+
+  <!-- Card 2 -->
+  <rect x="30" y="22" width="68" height="84" rx="5" fill="#181324" stroke="url(#deckGold)" stroke-width="1.2" opacity="0.8"/>
+  <line x1="30" y1="106" x2="98" y2="106" stroke="url(#deckEdge)" stroke-width="2.5"/>
+
+  <!-- Top Card (Card 1) -->
+  <g transform="translate(34, 14)">
+    <!-- Base card rectangle -->
+    <rect x="0" y="0" width="68" height="84" rx="5" fill="url(#deckPurple)" stroke="url(#deckGold)" stroke-width="2"/>
+    <!-- Inner border -->
+    <rect x="4" y="4" width="60" height="76" rx="3" fill="none" stroke="#6B5B82" stroke-width="0.8" stroke-dasharray="3 2"/>
+
+    <!-- Central Mystic Circle -->
+    <circle cx="34" cy="42" r="22" fill="none" stroke="url(#deckGold)" stroke-width="1.2" opacity="0.75"/>
+    <circle cx="34" cy="42" r="16" fill="none" stroke="#8B0000" stroke-width="0.8"/>
+
+    <!-- Qliphoth Inverted Tree Motif -->
+    <!-- Nodes -->
+    <circle cx="34" cy="26" r="3.5" fill="#1A1528" stroke="url(#deckGold)" stroke-width="1"/>
+    <circle cx="23" cy="35" r="3" fill="#1A1528" stroke="url(#deckGold)" stroke-width="0.8"/>
+    <circle cx="45" cy="35" r="3" fill="#1A1528" stroke="url(#deckGold)" stroke-width="0.8"/>
+    <!-- Central Heart Gem -->
+    <circle cx="34" cy="42" r="4.5" fill="#B22222" stroke="url(#deckGold)" stroke-width="1.2"/>
+    <circle cx="34" cy="42" r="2.5" fill="#FF4444"/>
+    <circle cx="25" cy="51" r="3" fill="#1A1528" stroke="url(#deckGold)" stroke-width="0.8"/>
+    <circle cx="43" cy="51" r="3" fill="#1A1528" stroke="url(#deckGold)" stroke-width="0.8"/>
+    <circle cx="34" cy="60" r="3.5" fill="#3B1254" stroke="url(#deckGold)" stroke-width="1"/>
+
+    <!-- Connecting Pathways -->
+    <line x1="34" y1="29.5" x2="34" y2="37.5" stroke="url(#deckGold)" stroke-width="0.8"/>
+    <line x1="34" y1="46.5" x2="34" y2="56.5" stroke="url(#deckGold)" stroke-width="0.8"/>
+    <line x1="34" y1="26" x2="23" y2="35" stroke="url(#deckGold)" stroke-width="0.7"/>
+    <line x1="34" y1="26" x2="45" y2="35" stroke="url(#deckGold)" stroke-width="0.7"/>
+    <line x1="23" y1="35" x2="34" y2="42" stroke="url(#deckGold)" stroke-width="0.7"/>
+    <line x1="45" y1="35" x2="34" y2="42" stroke="url(#deckGold)" stroke-width="0.7"/>
+    <line x1="34" y1="42" x2="25" y2="51" stroke="url(#deckGold)" stroke-width="0.7"/>
+    <line x1="34" y1="42" x2="43" y2="51" stroke="url(#deckGold)" stroke-width="0.7"/>
+    <line x1="25" y1="51" x2="34" y2="60" stroke="url(#deckGold)" stroke-width="0.7"/>
+    <line x1="43" y1="51" x2="34" y2="60" stroke="url(#deckGold)" stroke-width="0.7"/>
+
+    <!-- Corner Runic Accents -->
+    <path d="M 6 10 L 10 6" stroke="url(#deckGold)" stroke-width="1"/>
+    <path d="M 62 10 L 58 6" stroke="url(#deckGold)" stroke-width="1"/>
+    <path d="M 6 74 L 10 78" stroke="url(#deckGold)" stroke-width="1"/>
+    <path d="M 62 74 L 58 78" stroke="url(#deckGold)" stroke-width="1"/>
+
+    <!-- Runes/Text -->
+    <text x="34" y="73" font-family="serif" font-size="5" fill="#D4AF37" text-anchor="middle" letter-spacing="1">DECK</text>
+  </g>
+</svg>

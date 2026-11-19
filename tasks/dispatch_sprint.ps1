@@ -5,7 +5,7 @@ $projectRoot = Split-Path -Parent $PSScriptRoot
 if (-not $projectRoot) { $projectRoot = "E:\ChessToDie" }
 Set-Location $projectRoot
 
-Write-Host "=== Auto-Dispatch Sprint 1 (Ag2 & Ag3) ==="
+Write-Host "=== Auto-Dispatch Sprint 2A (Ag2 & Ag3) ==="
 Write-Host "Working Directory: $projectRoot"
 
 # Clean previous logs
@@ -37,4 +37,4 @@ Receive-Job -Job $jobAg2, $jobAg3
 
 Remove-Job -Job $jobAg2, $jobAg3 -Force
 
-Write-Host "=== Auto-Dispatch Sprint 1 Finished ==="
+Write-Host "=== Auto-Dispatch Sprint 2A Finished ==="

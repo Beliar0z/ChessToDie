@@ -1,42 +1,18 @@
 Bạn là Ag3 (Graphic Designer & Technical Artist) của dự án Chess to Die.
 Nhiệm vụ của bạn được giao trong tasks/art_spec.md và quy tắc trong assets/GEMINI.md.
-Hãy đọc kỹ tasks/art_spec.md, design/GDD_Core.md và assets/GEMINI.md.
+Hãy đọc kỹ tasks/art_spec.md, design/GDD_Core.md, tasks/code_spec.md và assets/GEMINI.md.
 
-Chỉ được tạo và sửa file bên trong thư mục assets/.
-Bạn phải xuất TOÀN BỘ 41 file tài nguyên đồ họa với đường dẫn chính xác tuyệt đối 100% theo tasks/art_spec.md:
-1. 12 file SVG quân cờ chuẩn (assets/sprites/pieces/):
-   - pawn_white.svg, pawn_black.svg
-   - knight_white.svg, knight_black.svg
-   - bishop_white.svg, bishop_black.svg
-   - rook_white.svg, rook_black.svg
-   - queen_white.svg, queen_black.svg
-   - king_white.svg, king_black.svg
-2. 12 file SVG siêu quân cờ & thực thể đặc biệt (assets/sprites/pieces/):
-   - super_pawn_white.svg, super_pawn_black.svg
-   - super_knight_white.svg, super_knight_black.svg
-   - super_bishop_white.svg, super_bishop_black.svg
-   - super_rook_white.svg, super_rook_black.svg
-   - super_queen_white.svg, super_queen_black.svg
-   - scarecrow.svg, heal_point.svg
-3. 8 file SVG dấu ấn trạng thái (assets/sprites/status/):
-   - forbidden_cell.svg, curse_mark.svg, lock_mark.svg, shield_king.svg
-   - immortal_mark.svg, stealth_mark.svg, ban_mark.svg, clone_mark.svg
-4. 3 file SVG khung bài & mặt lưng (assets/sprites/cards/):
-   - card_frame_active.svg, card_frame_passive.svg, card_back.svg
-5. 5 file Godot Shader CanvasItem (assets/shaders/):
-   - death_ring.gdshader
-   - river_barrier.gdshader
-   - barrier_burn.gdshader
-   - holy_war.gdshader
-   - stealth.gdshader
-6. 6 file Theme & Scene UI Godot (assets/ui/):
-   - main_theme.tres
-   - chessboard.tscn
-   - card_ui.tscn
-   - passive_slot.tscn
-   - hand_bar.tscn
-   - combat_hud.tscn
-7. Tạo và hoàn thiện file `assets/manifest.json` đăng ký đầy đủ 41 tài nguyên với thông tin chi tiết (path, type, resolution, status: "ready").
+Chỉ được tạo và sửa file bên trong thư mục assets/:
+1. Xuất file SVG `assets/sprites/cards/deck_pile.svg` (icon bộ bài rút Qliphoth/Gothic sắc nét, viewBox 0 0 128 128).
+2. Xây dựng Scene `assets/ui/active_slot.tscn`: ô đánh bài Active kích thước 150x210, có viền phát sáng ma thuật, label `ACTIVE SPELL SLOT`.
+3. Xây dựng Scene tổng thể `assets/ui/game_scene.tscn` độ phân giải 1920x1080 chuẩn CanvasItem / Control 2D theo đúng sơ đồ wireframe trong `design/bố cục UI.png` và chi tiết trong `tasks/art_spec.md`:
+   - Phía bên trái:
+     - `ChessboardArea`: Chứa instance của `assets/ui/chessboard.tscn` (800x800).
+     - `BottomArea`: Chứa `HandContainer` (chiều ngang ~700px) và `DeckSlot` (bộ bài rút, texture `deck_pile.svg`, nhãn số bài còn lại).
+   - Phía bên phải:
+     - `TopPlayerZone` (Phe Đen): `OpponentScoreLabel`, `OpponentPassiveRow` (HBoxContainer chứa 4 instance `passive_slot.tscn`), `OpponentActiveSlot` (instance `active_slot.tscn`).
+     - `CenterControlZone`: `TurnPhaseLabel`, `MessageBanner`, `EndTurnButton`.
+     - `BottomPlayerZone` (Phe Trắng): `PlayerActiveSlot` (instance `active_slot.tscn`), `PlayerPassiveRow` (HBoxContainer chứa 4 instance `passive_slot.tscn`), `PlayerScoreLabel`.
+4. Cập nhật `assets/manifest.json` đăng ký đầy đủ các tài nguyên mới.
 
-Mọi file SVG phải là file XML hợp lệ, đúng cấu trúc, tối giản phẳng chuẩn Chess.com với tông màu Dark Fantasy / Qliphoth.
-Mọi file .gdshader và .tscn phải tuân thủ cú pháp Godot 4.
+Mọi file SVG phải là XML hợp lệ, mọi scene .tscn phải tuân thủ cú pháp Godot 4.

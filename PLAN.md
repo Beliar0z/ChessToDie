@@ -31,13 +31,14 @@
     - [x] Xuất `assets/manifest.json` đăng ký 100% asset.
 
 - [ ] **Milestone 2: Tích hợp Giao diện Bàn cờ 2D & Đấu Boss Roguelike**
-  - [ ] **Giai đoạn 2A: Nối mạch Core Logic và UI Scene (Ưu tiên số 1):**
-    - [ ] Tạo Main Game Scene (`res://src/scenes/game_scene.tscn` / `game_controller.gd`) tích hợp toàn bộ các Scene UI từ `assets/ui/` (`chessboard.tscn`, `hand_bar.tscn`, `card_ui.tscn`, `passive_slot.tscn`, `combat_hud.tscn`).
-    - [ ] Kết nối tương tác bàn cờ: click chọn quân, hiển thị các ô đi hợp lệ, ăn quân, phong cấp tốt, cập nhật trực quan quân cờ bằng sprite SVG từ `assets/sprites/pieces/`.
-    - [ ] Kết nối tương tác thẻ bài: render danh sách bài trên tay (`hand_bar`), hiển thị popup/tooltip chi tiết thẻ bài (`card_ui`), logic click đánh Active và kéo/chọn úp vào 4 ô `passive_slot`.
-    - [ ] Kết nối HUD trận đấu (`combat_hud.tscn`): cập nhật điểm số động, pha lượt đi (Draw/Main/Move/End), nút End Turn.
-    - [ ] Áp dụng các Shader hiệu ứng (`death_ring`, `river_barrier`, `barrier_burn`, `holy_war`, `stealth`) vào bàn cờ khi trạng thái tương ứng được kích hoạt.
-    - [ ] Thiết lập Main Scene mặc định trong `project.godot` để chạy được game trực tiếp trên Godot 4.7.
+  - [x] **Giai đoạn 2A: Nối mạch Core Logic và UI Scene (Ưu tiên số 1):**
+    - [x] Tạo Main Game Scene (`res://assets/ui/game_scene.tscn` / `res://src/scenes/game_controller.gd`) tích hợp toàn bộ các Scene UI từ `assets/ui/` (`chessboard.tscn`, `hand_bar.tscn`, `card_ui.tscn`, `passive_slot.tscn`, `active_slot.tscn`, `combat_hud.tscn`) theo wireframe `design/bố cục UI.png`.
+    - [x] Kết nối tương tác bàn cờ: click chọn quân, highlight các ô đi hợp lệ, ăn quân, phong cấp tốt, cập nhật trực quan quân cờ bằng sprite SVG từ `assets/sprites/pieces/`.
+    - [x] Kết nối tương tác thẻ bài: render bài trên tay (`hand_bar`), click phóng to thẻ bài (`card_ui`), click đánh Active vào `active_slot` và úp vào 4 ô `passive_slot`.
+    - [x] Kết nối HUD trận đấu: cập nhật điểm số động, pha lượt đi (Draw/Main/Move/End), nút End Turn, banner thông báo sự kiện đặc biệt.
+    - [x] Áp dụng các Shader hiệu ứng (`death_ring`, `river_barrier`, `barrier_burn`, `holy_war`, `stealth`) vào bàn cờ khi trạng thái tương ứng được kích hoạt.
+    - [x] Thiết lập Main Scene mặc định trong `project.godot` (`run/main_scene="res://assets/ui/game_scene.tscn"`) chạy được trực tiếp trên Godot 4.7.
+    - [x] Thêm test case `test_ui_scene_integration` vào `test_runner.gd` — Đạt 8/8 test cases PASS.
   - [ ] **Giai đoạn 2B: AI Boss Roguelike & Cánh cửa 3D:**
     - [ ] Xây dựng AI Boss với trạng thái Fog of War (không đọc lén bài úp).
     - [ ] Tích hợp giao diện chọn 10 cánh cửa Roguelike 3D (Forward+).

@@ -1,6 +1,6 @@
 {
-  "total_assets": 46,
-  "completed_assets": 46,
+  "total_assets": 49,
+  "completed_assets": 49,
   "assets": [
     {
       "path": "res://assets/sprites/pieces/pawn_white.svg",
@@ -274,6 +274,24 @@
     },
     {
       "path": "res://assets/ui/combat_hud.tscn",
+      "type": "tscn",
+      "resolution": "1920x1080",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/deck_pile.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/ui/active_slot.tscn",
+      "type": "tscn",
+      "resolution": "150x210",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/ui/game_scene.tscn",
       "type": "tscn",
       "resolution": "1920x1080",
       "status": "ready"

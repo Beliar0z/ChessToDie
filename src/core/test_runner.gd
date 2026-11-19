@@ -8,61 +8,69 @@ func _init() -> void:
 	print("==================================================")
 
 	var tests_passed: int = 0
-	var total_tests: int = 7
+	var total_tests: int = 8
 
 	if test_standard_fide_moves():
 		tests_passed += 1
-		print("[PASS] 1/7: test_standard_fide_moves")
+		print("[PASS] 1/8: test_standard_fide_moves")
 	else:
-		print("[FAIL] 1/7: test_standard_fide_moves")
+		print("[FAIL] 1/8: test_standard_fide_moves")
 		quit(1)
 		return
 
 	if test_card_draw_engine():
 		tests_passed += 1
-		print("[PASS] 2/7: test_card_draw_engine")
+		print("[PASS] 2/8: test_card_draw_engine")
 	else:
-		print("[FAIL] 2/7: test_card_draw_engine")
+		print("[FAIL] 2/8: test_card_draw_engine")
 		quit(1)
 		return
 
 	if test_turn_restrictions():
 		tests_passed += 1
-		print("[PASS] 3/7: test_turn_restrictions")
+		print("[PASS] 3/8: test_turn_restrictions")
 	else:
-		print("[FAIL] 3/7: test_turn_restrictions")
+		print("[FAIL] 3/8: test_turn_restrictions")
 		quit(1)
 		return
 
 	if test_checkmate_hook_survival():
 		tests_passed += 1
-		print("[PASS] 4/7: test_checkmate_hook_survival")
+		print("[PASS] 4/8: test_checkmate_hook_survival")
 	else:
-		print("[FAIL] 4/7: test_checkmate_hook_survival")
+		print("[FAIL] 4/8: test_checkmate_hook_survival")
 		quit(1)
 		return
 
 	if test_death_ring_stalemate_resolution():
 		tests_passed += 1
-		print("[PASS] 5/7: test_death_ring_stalemate_resolution")
+		print("[PASS] 5/8: test_death_ring_stalemate_resolution")
 	else:
-		print("[FAIL] 5/7: test_death_ring_stalemate_resolution")
+		print("[FAIL] 5/8: test_death_ring_stalemate_resolution")
 		quit(1)
 		return
 
 	if test_holy_war_kings_combat():
 		tests_passed += 1
-		print("[PASS] 6/7: test_holy_war_kings_combat")
+		print("[PASS] 6/8: test_holy_war_kings_combat")
 	else:
-		print("[FAIL] 6/7: test_holy_war_kings_combat")
+		print("[FAIL] 6/8: test_holy_war_kings_combat")
 		quit(1)
 		return
 
 	if test_curse_countdown():
 		tests_passed += 1
-		print("[PASS] 7/7: test_curse_countdown")
+		print("[PASS] 7/8: test_curse_countdown")
 	else:
-		print("[FAIL] 7/7: test_curse_countdown")
+		print("[FAIL] 7/8: test_curse_countdown")
+		quit(1)
+		return
+
+	if test_ui_scene_integration():
+		tests_passed += 1
+		print("[PASS] 8/8: test_ui_scene_integration")
+	else:
+		print("[FAIL] 8/8: test_ui_scene_integration")
 		quit(1)
 		return
 
@@ -473,4 +481,78 @@ func test_curse_countdown() -> bool:
 		print("Cursed Rook was not added to black graveyard.")
 		return false
 
+	return true
+
+# 8. UI Scene Integration test
+func test_ui_scene_integration() -> bool:
+	var controller: GameController = null
+	var scene_path: String = "res://assets/ui/game_scene.tscn"
+
+	if ResourceLoader.exists(scene_path):
+		var scene: PackedScene = load(scene_path) as PackedScene
+		if scene == null:
+			print("Error: Could not load scene at %s" % scene_path)
+			return false
+		var instance: Node = scene.instantiate()
+		controller = instance as GameController
+		if controller == null:
+			print("Error: Root node of %s does not have GameController script" % scene_path)
+			return false
+	else:
+		# Graceful Fallback (Rule 5)
+		print("Note: %s not yet created by Ag3; validating GameController with fallback." % scene_path)
+		controller = GameController.new()
+
+	controller.setup_game()
+
+	# Check existence of all required child nodes
+	var required_nodes: Array[String] = [
+		"Chessboard",
+		"HandContainer",
+		"DeckSlot",
+		"PlayerActiveSlot",
+		"OpponentActiveSlot",
+		"PlayerPassiveRow",
+		"OpponentPassiveRow",
+		"EndTurnButton"
+	]
+
+	for node_name in required_nodes:
+		var found_node: Node = controller.find_child(node_name, true, false)
+		if found_node == null:
+			print("Error: Missing required node '%s' in GameController scene" % node_name)
+			return false
+
+	# Simulate 1 chess move: White pawn e2 (4, 1) to e4 (4, 3)
+	var from_pos: Vector2i = Vector2i(4, 1)
+	var to_pos: Vector2i = Vector2i(4, 3)
+
+	var piece_before: PieceData = controller.turn_manager.board.get_piece(from_pos)
+	if piece_before == null or piece_before.type != PieceData.PieceType.PAWN:
+		print("Error: Expected White pawn at e2 (4, 1)")
+		return false
+
+	# Trigger board click on e2 to select
+	controller._on_tile_clicked(from_pos)
+	if controller.board_view.selected_cell != from_pos:
+		print("Error: Board selection failed for cell (4, 1)")
+		return false
+
+	# Trigger board click on e4 to move
+	controller._on_tile_clicked(to_pos)
+	if controller.board_view.selected_cell != Vector2i(-1, -1):
+		print("Error: Board cell was not deselected after move")
+		return false
+
+	var piece_after: PieceData = controller.turn_manager.board.get_piece(to_pos)
+	if piece_after == null or piece_after.type != PieceData.PieceType.PAWN:
+		print("Error: Pawn was not moved to e4 (4, 3)")
+		return false
+
+	# Verify turn transitioned to Black
+	if controller.turn_manager.current_turn_team != PieceData.Team.BLACK:
+		print("Error: Turn did not advance to Black team after move")
+		return false
+
+	controller.free()
 	return true
