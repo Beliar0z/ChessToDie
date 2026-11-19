@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 420" width="300" height="420">
+  <defs>
+    <radialGradient id="gcp" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#1E163B"/>
+      <stop offset="50%" stop-color="#0F0B1E"/>
+      <stop offset="100%" stop-color="#05030A"/>
+    </radialGradient>
+    <linearGradient id="gsilver" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="50%" stop-color="#94A3B8"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+  </defs>
+  <!-- Card Base -->
+  <rect x="6" y="6" width="288" height="408" rx="16" fill="url(#gcp)" stroke="url(#gsilver)" stroke-width="5"/>
+  <rect x="14" y="14" width="272" height="392" rx="12" fill="none" stroke="#6D28D9" stroke-width="2"/>
+  <!-- Header Title Banner -->
+  <path d="M24 24 L276 24 L264 58 L36 58 Z" fill="#1E103A" stroke="url(#gsilver)" stroke-width="2.5" stroke-linejoin="round"/>
+  <text x="150" y="46" font-family="sans-serif" font-size="16" font-weight="bold" fill="#C4B5FD" text-anchor="middle" letter-spacing="2">PASSIVE TRAP</text>
+  <!-- Artwork Window Frame -->
+  <rect x="28" y="70" width="244" height="170" rx="8" fill="#0A0614" stroke="url(#gsilver)" stroke-width="3"/>
+  <circle cx="150" cy="155" r="48" fill="#1C1033" stroke="#6D28D9" stroke-width="2"/>
+  <!-- Eye of the Abyss inside Window -->
+  <path d="M122 155 C132 142 142 136 150 136 C158 136 168 142 178 155 C168 168 158 174 150 174 C142 174 132 168 122 155 Z" fill="#4C1D95" stroke="#A78BFA" stroke-width="2"/>
+  <circle cx="150" cy="155" r="7" fill="#C4B5FD"/>
+  <!-- Description Box -->
+  <rect x="28" y="254" width="244" height="136" rx="8" fill="#120A24" stroke="#6D28D9" stroke-width="2"/>
+  <!-- Trap Gem Top-Right -->
+  <circle cx="266" cy="34" r="18" fill="#4C1D95" stroke="url(#gsilver)" stroke-width="3"/>
+  <text x="266" y="40" font-family="sans-serif" font-size="16" font-weight="bold" fill="#EDE9FE" text-anchor="middle">P</text>
+  <!-- Corner Gothic Accents -->
+  <circle cx="24" cy="24" r="5" fill="url(#gsilver)"/>
+  <circle cx="276" cy="24" r="5" fill="url(#gsilver)"/>
+  <circle cx="24" cy="396" r="5" fill="url(#gsilver)"/>
+  <circle cx="276" cy="396" r="5" fill="url(#gsilver)"/>
+</svg>

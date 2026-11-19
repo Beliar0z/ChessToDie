@@ -3,7 +3,7 @@
 class_name MoveValidator
 extends RefCounted
 
-static func get_pseudo_legal_moves(board: BoardState, from_pos: Vector2i, holy_war_active: bool = false) -> Array[Vector2i]:
+static func get_pseudo_legal_moves(board: BoardState, from_pos: Vector2i, holy_war_active: bool = false, include_castling: bool = true) -> Array[Vector2i]:
 	var moves: Array[Vector2i] = []
 	var piece: PieceData = board.get_piece(from_pos)
 	if piece == null or piece.is_locked or piece.is_banned:
@@ -48,7 +48,7 @@ static func get_pseudo_legal_moves(board: BoardState, from_pos: Vector2i, holy_w
 		PieceData.PieceType.QUEEN:
 			_add_queen_moves(board, from_pos, piece, moves, holy_war_active)
 		PieceData.PieceType.KING:
-			_add_king_moves(board, from_pos, piece, moves, holy_war_active)
+			_add_king_moves(board, from_pos, piece, moves, holy_war_active, include_castling)
 		PieceData.PieceType.SUPER_PAWN:
 			_add_super_pawn_moves(board, from_pos, piece, moves, holy_war_active)
 		PieceData.PieceType.SUPER_KNIGHT:
@@ -212,7 +212,7 @@ static func _add_super_queen_moves(board: BoardState, from_pos: Vector2i, piece:
 	_add_queen_moves(board, from_pos, piece, moves, holy_war_active)
 	_add_knight_moves(board, from_pos, piece, moves, holy_war_active)
 
-static func _add_king_moves(board: BoardState, from_pos: Vector2i, piece: PieceData, moves: Array[Vector2i], holy_war_active: bool) -> void:
+static func _add_king_moves(board: BoardState, from_pos: Vector2i, piece: PieceData, moves: Array[Vector2i], holy_war_active: bool, include_castling: bool = true) -> void:
 	var dirs: Array[Vector2i] = [
 		Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1),
 		Vector2i(1, 1), Vector2i(-1, 1), Vector2i(1, -1), Vector2i(-1, -1)
@@ -222,8 +222,8 @@ static func _add_king_moves(board: BoardState, from_pos: Vector2i, piece: PieceD
 		if _can_occupy_or_capture(board, from_pos, target_pos, piece, holy_war_active):
 			moves.append(target_pos)
 
-	# Castling (only if not holy war, not moved, not in check)
-	if not holy_war_active and piece.move_count == 0 and not is_in_check(board, piece.team):
+	# Castling (only if not holy war, not moved, not in check, and include_castling is true)
+	if include_castling and not holy_war_active and piece.move_count == 0 and not is_in_check(board, piece.team):
 		var y: int = from_pos.y
 		# Kingside (towards x=7)
 		var rook_k: PieceData = board.get_piece(Vector2i(7, y))
@@ -245,9 +245,17 @@ static func is_square_attacked(board: BoardState, pos: Vector2i, by_team: PieceD
 		for x in range(BoardState.BOARD_SIZE):
 			var p: PieceData = board.grid[y][x] as PieceData
 			if p != null and p.team == by_team and p.can_attack():
-				var attacks: Array[Vector2i] = get_pseudo_legal_moves(board, Vector2i(x, y), false)
-				if attacks.has(pos):
-					return true
+				if p.type == PieceData.PieceType.PAWN:
+					var forward: int = 1 if p.team == PieceData.Team.WHITE else -1
+					if pos == Vector2i(x - 1, y + forward) or pos == Vector2i(x + 1, y + forward):
+						return true
+				elif p.type == PieceData.PieceType.KING:
+					if abs(pos.x - x) <= 1 and abs(pos.y - y) <= 1:
+						return true
+				else:
+					var attacks: Array[Vector2i] = get_pseudo_legal_moves(board, Vector2i(x, y), false, false)
+					if attacks.has(pos):
+						return true
 	return false
 
 static func is_in_check(board: BoardState, team: PieceData.Team) -> bool:

@@ -30,15 +30,16 @@ Vì phiên làm việc CLI sẽ mất lịch sử sau khi đóng cửa sổ, b�
 ## CƠ CHẾ TỰ ĐỘNG ĐIỀU PHỐI (AUTO-DISPATCH PROTOCOL)
 Bạn không được yêu cầu Game Designer tự mở thêm cửa sổ Terminal thủ công. Khi đã khóa xong `tasks/code_spec.md` và `tasks/art_spec.md`, bạn phải **tự động thực thi song song** Ag2 và Ag3 theo đúng quy trình sau:
 
-1. **Dọn dẹp:** Đảm bảo cả Ag2 và Ag3 đều chạy trực tiếp trong thư mục gốc dự án (`src/` và `assets/`).
-2. **Lệnh CLI trên hệ thống:** Dùng lệnh `agy` với các cờ:
-   `agy --dangerously-skip-permissions -p "<prompt>"`
+1. **Dọn dẹp & Chuẩn bị:** Đảm bảo cả Ag2 và Ag3 đều chạy trực tiếp trong thư mục gốc dự án (`src/` và `assets/`). Các prompt chi tiết được lưu sẵn trong `tasks/ag2_prompt.txt` và `tasks/ag3_prompt.txt`.
+2. **Lệnh CLI trên hệ thống:** Dùng lệnh `agy` nhận prompt qua đường ống stdin (tránh lỗi nuốt ngoặc kép trên Windows PowerShell/cmd):
+   `Get-Content -Raw tasks/ag2_prompt.txt -Encoding UTF8 | agy --dangerously-skip-permissions > tasks/ag2.log 2> tasks/ag2_err.log`
+   *(Lưu ý: Không truyền cờ `-p` khi pipe stdin vì `-p` trong `agy` bắt buộc có đối số chuỗi đi kèm, nếu để `-p` đứng một mình trước dấu chuyển hướng `>` sẽ bị lỗi `flag needs an argument: -p`)*.
 3. **Kích hoạt đồng thời 2 Sub-Agent chạy ngầm:**
-   - **Tiến trình Ag2 (Coder):** Đọc `src/GEMINI.md`, `design/GDD_Core.md` và `tasks/code_spec.md`, triển khai toàn bộ code vào `src/`, ghi log ra `tasks/ag2.log`.
-   - **Tiến trình Ag3 (Artist):** Đọc `assets/GEMINI.md`, `design/GDD_Core.md` và `tasks/art_spec.md`, xuất toàn bộ asset vào `assets/` và cập nhật `assets/manifest.json`, ghi log ra `tasks/ag3.log`.
-   - Chạy song song và đợi cả 2 tiến trình kết thúc hoàn toàn.
+   - **Tiến trình Ag2 (Coder):** Đọc qua stdin từ `tasks/ag2_prompt.txt` (tham chiếu `src/GEMINI.md`, `design/GDD_Core.md` và `tasks/code_spec.md`), triển khai toàn bộ code vào `src/`, ghi log ra `tasks/ag2.log` và `tasks/ag2_err.log`.
+   - **Tiến trình Ag3 (Artist):** Đọc qua stdin từ `tasks/ag3_prompt.txt` (tham chiếu `assets/GEMINI.md`, `design/GDD_Core.md` và `tasks/art_spec.md`), xuất toàn bộ asset vào `assets/` và cập nhật `assets/manifest.json`, ghi log ra `tasks/ag3.log` và `tasks/ag3_err.log`.
+   - Chạy song song bằng `Start-Job` và đợi cả 2 job kết thúc hoàn toàn (`Wait-Job`).
 4. **Tự động Nghiệm thu (Auto-QA):**
-   - Đọc `tasks/ag2.log` và `tasks/ag3.log`.
+   - Đọc `tasks/ag2.log`, `tasks/ag3.log`, `tasks/ag2_err.log` và `tasks/ag3_err.log`.
    - Kiểm tra chéo 100% file trong `assets/manifest.json` khớp với đường dẫn gọi trong `src/`.
    - Chạy lệnh:
      `& "E:\Godot_v4.7.1-stable_win64.exe\Godot_v4.7.1-stable_win64_console.exe" --headless --path E:\ChessToDie -s res://src/core/test_runner.gd`
@@ -63,11 +64,20 @@ Khi thiết kế đã rõ, bạn tạo/cập nhật 3 file sau:
 > **QUY TẮC KHỚP NỐI (BẮT BUỘC):** Mọi đường dẫn và tên file asset trong `tasks/code_spec.md` và `tasks/art_spec.md` phải trùng khớp 100% từng ký tự (ví dụ: `assets/pieces/super_queen.svg`, `assets/vfx/curse_mark.png`). Điều này đảm bảo Ag2 và Ag3 chạy song song cùng một giây mà không lệch code.
 
 ### Bước 3: Điều phối Song song (Thực thi theo Auto-Dispatch)
-- Kích hoạt đồng thời **Ag2** và **Ag3** chạy ngầm bằng PowerShell theo đúng `CƠ CHẾ TỰ ĐỘNG ĐIỀU PHỐI`:
-  powershell
-  $p2 = Start-Process -FilePath "agy" -ArgumentList '--dangerously-skip-permissions -p "Đọc src/GEMINI.md, design/GDD_Core.md và tasks/code_spec.md. Code toàn bộ vào src/ và ghi log ra tasks/ag2.log"' -PassThru -NoNewWindow
-  $p3 = Start-Process -FilePath "agy" -ArgumentList '--dangerously-skip-permissions -p "Đọc assets/GEMINI.md, design/GDD_Core.md và tasks/art_spec.md. Xuất toàn bộ asset vào assets/ và ghi log ra tasks/ag3.log"' -PassThru -NoNewWindow
-  Wait-Process -Id $p2.Id, $p3.Id
+- Kích hoạt đồng thời **Ag2** và **Ag3** chạy ngầm bằng PowerShell `Start-Job` theo đúng `CƠ CHẾ TỰ ĐỘNG ĐIỀU PHỐI` (hoặc chạy qua script `tasks/dispatch_sprint.ps1`):
+  ```powershell
+  $job2 = Start-Job -ScriptBlock {
+      Set-Location "E:\ChessToDie"
+      Get-Content -Raw tasks/ag2_prompt.txt -Encoding UTF8 | agy --dangerously-skip-permissions > tasks/ag2.log 2> tasks/ag2_err.log
+  }
+  $job3 = Start-Job -ScriptBlock {
+      Set-Location "E:\ChessToDie"
+      Get-Content -Raw tasks/ag3_prompt.txt -Encoding UTF8 | agy --dangerously-skip-permissions > tasks/ag3.log 2> tasks/ag3_err.log
+  }
+  Wait-Job -Job $job2, $job3
+  Receive-Job -Job $job2, $job3
+  Remove-Job -Job $job2, $job3 -Force
+  ```
 
 
 

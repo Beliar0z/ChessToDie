@@ -13,22 +13,22 @@
   - [x] Rà soát toàn bộ luật và 51 lá bài, chốt 6 quyết định thiết kế then chốt với Game Designer.
   - [x] Tạo bản phân tích kỹ thuật `tasks/gdd_audit.md`.
 
-- [~] **Milestone 1: Khóa Hợp đồng Kỹ thuật & Phát triển Core Song song (Parallel Sprint 1)**
+- [x] **Milestone 1: Khóa Hợp đồng Kỹ thuật & Phát triển Core Song song (Parallel Sprint 1)**
   - [x] Bóc tách và khóa hợp đồng kỹ thuật: `tasks/code_spec.md` và `tasks/art_spec.md`.
-  - [ ] **Ag2 (Coder):** Xây dựng Core Logic cờ vua FIDE + Biến thể 51 lá bài (Headless GDScript):
-    - [ ] Hệ thống bàn cờ $8 \times 8$, nước đi chuẩn và hệ thống điểm/HP quân cờ.
-    - [ ] Cấu trúc dữ liệu thẻ bài `CardResource` (`res://src/resources/cards/`).
-    - [ ] Bộ máy Turn Machine 4 Phase (`DrawPhase`, `MainPhase`, `MovePhase`, `EndPhase`).
-    - [ ] Bộ xử lý 31 Active Cards và 20 Passive Cards.
-    - [ ] Checkmate Interception Hook (cứu thua khi bị chiếu hết).
-    - [ ] Bộ xử lý Vòng lửa sinh tử & Thánh chiến (Holy War giữa 2 Vua).
-    - [ ] Bộ chạy Unit Test Headless `res://src/core/test_runner.gd`.
-  - [ ] **Ag3 (Graphic Designer):** Dựng UI 2D tối giản Chess.com & Hệ thống Asset Vector/Shader:
-    - [ ] Khung giao diện bàn cờ 2D và Theme `res://assets/ui/main_theme.tres`.
-    - [ ] Bộ Icon 24 quân cờ chuẩn và siêu quân cờ (SVG sắc nét).
-    - [ ] Khung thẻ bài Active, Passive và Mặt sau bài úp.
-    - [ ] Bộ Shader ma thuật: Vòng lửa sinh tử, Dòng sông ranh giới, Kết giới đốt điểm, Tàng hình.
-    - [ ] Xuất `assets/manifest.json` đăng ký 100% asset.
+  - [x] **Ag2 (Coder):** Xây dựng Core Logic cờ vua FIDE + Biến thể 51 lá bài (Headless GDScript):
+    - [x] Hệ thống bàn cờ $8 \times 8$, nước đi chuẩn và hệ thống điểm/HP quân cờ.
+    - [x] Cấu trúc dữ liệu thẻ bài `CardResource` (`res://src/resources/cards/`).
+    - [x] Bộ máy Turn Machine 4 Phase (`DrawPhase`, `MainPhase`, `MovePhase`, `EndPhase`).
+    - [x] Bộ xử lý 31 Active Cards và 20 Passive Cards.
+    - [x] Checkmate Interception Hook (cứu thua khi bị chiếu hết).
+    - [x] Bộ xử lý Vòng lửa sinh tử & Thánh chiến (Holy War giữa 2 Vua).
+    - [x] Bộ chạy Unit Test Headless `res://src/core/test_runner.gd`.
+  - [x] **Ag3 (Graphic Designer):** Dựng UI 2D tối giản Chess.com & Hệ thống Asset Vector/Shader:
+    - [x] Khung giao diện bàn cờ 2D và Theme `res://assets/ui/main_theme.tres`.
+    - [x] Bộ Icon 24 quân cờ chuẩn và siêu quân cờ (SVG sắc nét).
+    - [x] Khung thẻ bài Active, Passive và Mặt sau bài úp.
+    - [x] Bộ Shader ma thuật: Vòng lửa sinh tử, Dòng sông ranh giới, Kết giới đốt điểm, Tàng hình.
+    - [x] Xuất `assets/manifest.json` đăng ký 100% asset.
 
 - [ ] **Milestone 2: Tích hợp Giao diện Bàn cờ 2D & Đấu Boss Roguelike (Cánh cửa 3D)**
   - [ ] Nối mạch Core Logic vào UI Scene (`chessboard.tscn`, `hand_bar.tscn`, `passive_slot.tscn`).

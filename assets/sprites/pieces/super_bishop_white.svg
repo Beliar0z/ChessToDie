@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="gsb_1" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#F5F6F8"/>
+      <stop offset="100%" stop-color="#C8CBD2"/>
+    </radialGradient>
+  </defs>
+  <!-- Dual mitre halo -->
+  <circle cx="64" cy="60" r="42" fill="none" stroke="#4B0082" stroke-width="2" stroke-dasharray="6 4" opacity="0.7"/>
+  <!-- Base -->
+  <path d="M28 114 L100 114 L92 96 L36 96 Z" fill="url(#gsb_1)" stroke="#3E424D" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M38 96 C44 82 48 72 50 58 L78 58 C80 72 84 82 90 96 Z" fill="url(#gsb_1)" stroke="#3E424D" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Twin Mitre Body -->
+  <path d="M40 58 C34 42 42 22 56 16 C62 26 64 42 64 58 Z" fill="url(#gsb_1)" stroke="#3E424D" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M88 58 C94 42 86 22 72 16 C66 26 64 42 64 58 Z" fill="#4B0082" stroke="#3E424D" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Dual polarity orbs -->
+  <circle cx="56" cy="14" r="5" fill="#FFD700" stroke="#3E424D" stroke-width="2"/>
+  <circle cx="72" cy="14" r="5" fill="#3E424D" stroke="#FFD700" stroke-width="2"/>
+  <!-- Yin Yang / Polarity rune -->
+  <circle cx="64" cy="74" r="9" fill="#FFD700"/>
+  <circle cx="64" cy="74" r="4" fill="#3E424D"/>
+</svg>

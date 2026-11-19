@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="gim" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="50%" stop-color="#80DEEA"/>
+      <stop offset="100%" stop-color="#00ACC1"/>
+    </radialGradient>
+  </defs>
+  <!-- Brilliant Diamond Octagon -->
+  <polygon points="64,12 102,34 116,72 92,108 36,108 12,72 26,34" fill="url(#gim)" stroke="#E0F7FA" stroke-width="3.5" stroke-linejoin="round" opacity="0.9"/>
+  <!-- Inner Prism Facets -->
+  <polygon points="64,28 88,44 88,84 64,100 40,84 40,44" fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+  <line x1="64" y1="12" x2="64" y2="28" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="102" y1="34" x2="88" y2="44" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="92" y1="108" x2="64" y2="100" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="36" y1="108" x2="40" y2="84" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="12" y1="72" x2="40" y2="84" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="26" y1="34" x2="40" y2="44" stroke="#FFFFFF" stroke-width="2"/>
+  <!-- Central Sparkle -->
+  <circle cx="64" cy="64" r="6" fill="#FFFFFF"/>
+</svg>

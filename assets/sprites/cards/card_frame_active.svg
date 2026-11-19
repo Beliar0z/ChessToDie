@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 420" width="300" height="420">
+  <defs>
+    <radialGradient id="gca" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#4A0E17"/>
+      <stop offset="50%" stop-color="#20060A"/>
+      <stop offset="100%" stop-color="#0E0204"/>
+    </radialGradient>
+    <linearGradient id="ggold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5E084"/>
+      <stop offset="50%" stop-color="#C59B27"/>
+      <stop offset="100%" stop-color="#7B5C0D"/>
+    </linearGradient>
+  </defs>
+  <!-- Card Base -->
+  <rect x="6" y="6" width="288" height="408" rx="16" fill="url(#gca)" stroke="url(#ggold)" stroke-width="5"/>
+  <rect x="14" y="14" width="272" height="392" rx="12" fill="none" stroke="#8B0000" stroke-width="2"/>
+  <!-- Header Title Banner -->
+  <path d="M24 24 L276 24 L264 58 L36 58 Z" fill="#2E080E" stroke="url(#ggold)" stroke-width="2.5" stroke-linejoin="round"/>
+  <text x="150" y="46" font-family="sans-serif" font-size="16" font-weight="bold" fill="#FCE794" text-anchor="middle" letter-spacing="2">ACTIVE SPELL</text>
+  <!-- Artwork Window Frame -->
+  <rect x="28" y="70" width="244" height="170" rx="8" fill="#150306" stroke="url(#ggold)" stroke-width="3"/>
+  <circle cx="150" cy="155" r="48" fill="#38080E" stroke="#8B0000" stroke-width="2"/>
+  <!-- Bloodflame Sigil inside Window -->
+  <path d="M150 120 C138 140 126 156 138 174 C146 186 162 186 166 172 C172 152 156 142 150 120 Z" fill="#E63946"/>
+  <!-- Description Box -->
+  <rect x="28" y="254" width="244" height="136" rx="8" fill="#1E0508" stroke="#8B0000" stroke-width="2"/>
+  <!-- Cost Gem Top-Right -->
+  <circle cx="266" cy="34" r="18" fill="#8B0000" stroke="url(#ggold)" stroke-width="3"/>
+  <text x="266" y="40" font-family="sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF" text-anchor="middle">1</text>
+  <!-- Corner Gothic Accents -->
+  <circle cx="24" cy="24" r="5" fill="url(#ggold)"/>
+  <circle cx="276" cy="24" r="5" fill="url(#ggold)"/>
+  <circle cx="24" cy="396" r="5" fill="url(#ggold)"/>
+  <circle cx="276" cy="396" r="5" fill="url(#ggold)"/>
+</svg>

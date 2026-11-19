@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="gst" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#37474F" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.8"/>
+    </radialGradient>
+  </defs>
+  <!-- Shadow Veil Fog -->
+  <circle cx="64" cy="64" r="54" fill="url(#gst)" stroke="#64748B" stroke-width="2" stroke-dasharray="8 6"/>
+  <!-- Shrouded Phantom Eyes -->
+  <path d="M26 64 C36 48 50 42 64 42 C78 42 92 48 102 64 C92 80 78 86 64 86 C50 86 36 80 26 64 Z" fill="#1E293B" stroke="#94A3B8" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="64" cy="64" rx="14" ry="14" fill="#0F172A" stroke="#38BDF8" stroke-width="2.5"/>
+  <ellipse cx="64" cy="64" rx="5" ry="9" fill="#38BDF8"/>
+  <!-- Cloak mist wisps -->
+  <path d="M34 88 C48 94 80 94 94 88" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <path d="M42 98 C54 102 74 102 86 98" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+</svg>

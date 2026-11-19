@@ -121,6 +121,12 @@ func move_piece(from_pos: Vector2i, to_pos: Vector2i) -> PieceData:
 	piece.move_count += 1
 	piece.curse_moved = true
 
+	# Pawn promotion to Queen on back rank
+	if piece.type == PieceData.PieceType.PAWN:
+		if (piece.team == PieceData.Team.WHITE and to_pos.y == BOARD_SIZE - 1) or (piece.team == PieceData.Team.BLACK and to_pos.y == 0):
+			piece.type = PieceData.PieceType.QUEEN
+			piece.points = PieceData.get_default_points(PieceData.PieceType.QUEEN)
+
 	move_history.append({
 		"from": from_pos,
 		"to": to_pos,

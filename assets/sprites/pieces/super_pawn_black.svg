@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="gsp_0" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#141518"/>
+      <stop offset="100%" stop-color="#070809"/>
+    </radialGradient>
+  </defs>
+  <!-- Tri-spikes aura -->
+  <path d="M22 62 L38 48 L34 68 Z" fill="#8B0000" opacity="0.85"/>
+  <path d="M106 62 L90 48 L94 68 Z" fill="#8B0000" opacity="0.85"/>
+  <path d="M64 12 L56 26 L72 26 Z" fill="#8B0000" opacity="0.9"/>
+  <!-- Base -->
+  <path d="M28 114 L100 114 L90 96 L38 96 Z" fill="url(#gsp_0)" stroke="#A4A8B0" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Body triple armor -->
+  <path d="M38 96 C42 82 46 66 50 54 L78 54 C82 66 86 82 90 96 Z" fill="url(#gsp_0)" stroke="#A4A8B0" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="64" cy="40" r="18" fill="url(#gsp_0)" stroke="#A4A8B0" stroke-width="4"/>
+  <!-- Triple core crest -->
+  <circle cx="64" cy="40" r="7" fill="#B22222"/>
+  <circle cx="52" cy="74" r="5" fill="#B22222"/>
+  <circle cx="76" cy="74" r="5" fill="#B22222"/>
+  <path d="M46 104 L82 104" stroke="#B22222" stroke-width="3"/>
+</svg>

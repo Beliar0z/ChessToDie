@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="gcl" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0284C7" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0C4A6E" stop-opacity="0.7"/>
+    </radialGradient>
+  </defs>
+  <rect x="8" y="8" width="112" height="112" rx="10" fill="url(#gcl)" stroke="#38BDF8" stroke-width="2"/>
+  <!-- Ghost Clone 1 (Offset Left) -->
+  <circle cx="48" cy="46" r="14" fill="none" stroke="#7DD3FC" stroke-width="3" stroke-dasharray="4 3" opacity="0.65"/>
+  <path d="M30 84 C30 70 38 64 48 64 C58 64 66 70 66 84" fill="none" stroke="#7DD3FC" stroke-width="3" stroke-dasharray="4 3" opacity="0.65"/>
+  <!-- Primary Clone (Offset Right) -->
+  <circle cx="78" cy="50" r="15" fill="#0369A1" stroke="#BAE6FD" stroke-width="3.5"/>
+  <path d="M58 90 C58 74 66 68 78 68 C90 68 98 74 98 90 Z" fill="#0369A1" stroke="#BAE6FD" stroke-width="3.5" stroke-linejoin="round"/>
+  <circle cx="78" cy="50" r="5" fill="#38BDF8"/>
+  <line x1="48" y1="46" x2="78" y2="50" stroke="#38BDF8" stroke-width="2" stroke-dasharray="2 2"/>
+</svg>

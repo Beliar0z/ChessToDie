@@ -1,0 +1,282 @@
+{
+  "total_assets": 46,
+  "completed_assets": 46,
+  "assets": [
+    {
+      "path": "res://assets/sprites/pieces/pawn_white.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/pawn_black.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/knight_white.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/knight_black.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/bishop_white.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/bishop_black.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/rook_white.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/rook_black.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/queen_white.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/queen_black.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/king_white.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/king_black.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_pawn_white.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_pawn_black.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_knight_white.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_knight_black.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_bishop_white.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_bishop_black.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_rook_white.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_rook_black.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_queen_white.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_queen_black.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/scarecrow.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/heal_point.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/status/forbidden_cell.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/status/curse_mark.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/status/lock_mark.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/status/shield_king.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/status/immortal_mark.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/status/stealth_mark.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/status/ban_mark.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/status/clone_mark.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/card_frame_active.svg",
+      "type": "svg",
+      "resolution": "300x420",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/card_frame_passive.svg",
+      "type": "svg",
+      "resolution": "300x420",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/card_back.svg",
+      "type": "svg",
+      "resolution": "300x420",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/shaders/death_ring.gdshader",
+      "type": "gdshader",
+      "resolution": "procedural",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/shaders/river_barrier.gdshader",
+      "type": "gdshader",
+      "resolution": "procedural",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/shaders/barrier_burn.gdshader",
+      "type": "gdshader",
+      "resolution": "procedural",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/shaders/holy_war.gdshader",
+      "type": "gdshader",
+      "resolution": "procedural",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/shaders/stealth.gdshader",
+      "type": "gdshader",
+      "resolution": "procedural",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/ui/main_theme.tres",
+      "type": "tres",
+      "resolution": "style_theme",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/ui/chessboard.tscn",
+      "type": "tscn",
+      "resolution": "1920x1080",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/ui/card_ui.tscn",
+      "type": "tscn",
+      "resolution": "150x210",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/ui/passive_slot.tscn",
+      "type": "tscn",
+      "resolution": "100x140",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/ui/hand_bar.tscn",
+      "type": "tscn",
+      "resolution": "1200x220",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/ui/combat_hud.tscn",
+      "type": "tscn",
+      "resolution": "1920x1080",
+      "status": "ready"
+    }
+  ]
+}

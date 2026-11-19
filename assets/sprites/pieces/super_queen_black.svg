@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="gsq_0" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#141518"/>
+      <stop offset="100%" stop-color="#070809"/>
+    </radialGradient>
+  </defs>
+  <!-- Arch-Demon Astral Wings / Halo -->
+  <path d="M16 52 C24 28 46 20 54 26 C42 40 40 64 42 78 Z" fill="#D4AF37" opacity="0.75"/>
+  <path d="M112 52 C104 28 82 20 74 26 C86 40 88 64 86 78 Z" fill="#D4AF37" opacity="0.75"/>
+  <!-- Base -->
+  <path d="M24 114 L104 114 L94 96 L34 96 Z" fill="url(#gsq_0)" stroke="#A4A8B0" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M38 96 C42 80 46 68 50 58 L78 58 C82 68 86 80 90 96 Z" fill="url(#gsq_0)" stroke="#A4A8B0" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Double Demon Crown -->
+  <path d="M28 58 L18 28 L40 42 L52 18 L64 36 L76 18 L88 42 L110 28 L100 58 Z" fill="url(#gsq_0)" stroke="#A4A8B0" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="18" cy="24" r="4.5" fill="#B22222"/>
+  <circle cx="52" cy="14" r="4.5" fill="#B22222"/>
+  <circle cx="64" cy="30" r="5.5" fill="#D4AF37"/>
+  <circle cx="76" cy="14" r="4.5" fill="#B22222"/>
+  <circle cx="110" cy="24" r="4.5" fill="#B22222"/>
+  <circle cx="64" cy="76" r="8" fill="#B22222"/>
+</svg>

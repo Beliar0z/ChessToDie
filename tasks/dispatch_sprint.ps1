@@ -1,20 +1,40 @@
 ﻿# E:\ChessToDie\tasks\dispatch_sprint.ps1
 $ErrorActionPreference = "Continue"
 
+$projectRoot = Split-Path -Parent $PSScriptRoot
+if (-not $projectRoot) { $projectRoot = "E:\ChessToDie" }
+Set-Location $projectRoot
+
 Write-Host "=== Auto-Dispatch Sprint 1 (Ag2 & Ag3) ==="
+Write-Host "Working Directory: $projectRoot"
 
-$promptAg2 = 'Đọc kỹ src/GEMINI.md, design/GDD_Core.md, tasks/code_spec.md và tasks/ag2_prompt.txt. Triển khai toàn bộ 11 module GDScript chuẩn typed và test runner vào src/ theo đúng spec. Báo cáo hoàn tất.'
-$promptAg3 = 'Đọc kỹ assets/GEMINI.md, design/GDD_Core.md, tasks/art_spec.md và tasks/ag3_prompt.txt. Tạo và xuất toàn bộ 41 tài nguyên vào assets/ và cập nhật assets/manifest.json theo đúng spec. Báo cáo hoàn tất.'
+# Clean previous logs
+"" | Set-Content -Path "tasks/ag2.log" -Encoding UTF8
+"" | Set-Content -Path "tasks/ag2_err.log" -Encoding UTF8
+"" | Set-Content -Path "tasks/ag3.log" -Encoding UTF8
+"" | Set-Content -Path "tasks/ag3_err.log" -Encoding UTF8
 
-# Start Ag2 (Coder)
-$p2 = Start-Process -FilePath "cmd.exe" -ArgumentList "/c agy --dangerously-skip-permissions -p `"$promptAg2`" > tasks\ag2.log 2>&1" -PassThru -NoNewWindow
+# Start Ag2 (Coder) via Start-Job reading prompt from stdin
+$jobAg2 = Start-Job -ScriptBlock {
+    param($dir)
+    Set-Location $dir
+    Get-Content -Raw tasks/ag2_prompt.txt -Encoding UTF8 | agy --dangerously-skip-permissions > tasks/ag2.log 2> tasks/ag2_err.log
+} -ArgumentList $projectRoot
 
-# Start Ag3 (Artist)
-$p3 = Start-Process -FilePath "cmd.exe" -ArgumentList "/c agy --dangerously-skip-permissions -p `"$promptAg3`" > tasks\ag3.log 2>&1" -PassThru -NoNewWindow
+# Start Ag3 (Artist) via Start-Job reading prompt from stdin
+$jobAg3 = Start-Job -ScriptBlock {
+    param($dir)
+    Set-Location $dir
+    Get-Content -Raw tasks/ag3_prompt.txt -Encoding UTF8 | agy --dangerously-skip-permissions > tasks/ag3.log 2> tasks/ag3_err.log
+} -ArgumentList $projectRoot
 
-Write-Host "Ag2 PID: $($p2.Id), Ag3 PID: $($p3.Id)"
+Write-Host "Ag2 Job ID: $($jobAg2.Id), Ag3 Job ID: $($jobAg3.Id)"
+Write-Host "Waiting for Ag2 and Ag3 to finish..."
 
-# Wait for both processes to complete
-Wait-Process -Id $p2.Id, $p3.Id
+Wait-Job -Job $jobAg2, $jobAg3
+
+Receive-Job -Job $jobAg2, $jobAg3
+
+Remove-Job -Job $jobAg2, $jobAg3 -Force
 
 Write-Host "=== Auto-Dispatch Sprint 1 Finished ==="

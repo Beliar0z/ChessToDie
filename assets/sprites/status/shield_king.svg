@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="gskg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#FFE082"/>
+      <stop offset="60%" stop-color="#FFB300"/>
+      <stop offset="100%" stop-color="#B58105"/>
+    </radialGradient>
+  </defs>
+  <!-- Sacred Aegis Crest -->
+  <path d="M64 14 L104 28 C104 68 88 98 64 114 C40 98 24 68 24 28 Z" fill="url(#gskg)" stroke="#FFF8E1" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M64 24 L94 36 C94 66 82 88 64 102 C46 88 34 66 34 36 Z" fill="none" stroke="#8D6E63" stroke-width="2"/>
+  <!-- Golden Holy Cross in Shield -->
+  <path d="M64 36 L64 88 M46 54 L82 54" stroke="#4E342E" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="64" cy="54" r="5" fill="#FFE082"/>
+</svg>

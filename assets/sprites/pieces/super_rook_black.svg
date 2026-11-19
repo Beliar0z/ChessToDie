@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="gsr_0" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#141518"/>
+      <stop offset="100%" stop-color="#070809"/>
+    </radialGradient>
+  </defs>
+  <!-- Diagonal fortress blades -->
+  <path d="M18 42 L34 56 L24 64 Z" fill="#8B0000" stroke="#A4A8B0" stroke-width="2"/>
+  <path d="M110 42 L94 56 L104 64 Z" fill="#8B0000" stroke="#A4A8B0" stroke-width="2"/>
+  <!-- Heavy Fortress Base -->
+  <path d="M24 114 L104 114 L96 96 L32 96 Z" fill="url(#gsr_0)" stroke="#A4A8B0" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M38 96 L42 48 L86 48 L90 96 Z" fill="url(#gsr_0)" stroke="#A4A8B0" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Spiked ramparts -->
+  <path d="M30 48 L30 24 L42 24 L42 34 L54 34 L54 20 L74 20 L74 34 L86 34 L86 24 L98 24 L98 48 Z" fill="url(#gsr_0)" stroke="#A4A8B0" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="64" cy="70" r="8" fill="#B22222"/>
+  <!-- Cross embrasure slit -->
+  <line x1="64" y1="36" x2="64" y2="48" stroke="#B22222" stroke-width="4"/>
+  <line x1="56" y1="42" x2="72" y2="42" stroke="#B22222" stroke-width="4"/>
+</svg>

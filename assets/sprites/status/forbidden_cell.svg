@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="gfc" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#B22222" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#4A0000" stop-opacity="0.75"/>
+    </radialGradient>
+  </defs>
+  <rect x="6" y="6" width="116" height="116" rx="8" fill="url(#gfc)" stroke="#8B0000" stroke-width="4"/>
+  <!-- Barbed Cross Spikes -->
+  <line x1="24" y1="24" x2="104" y2="104" stroke="#FF2A2A" stroke-width="12" stroke-linecap="round"/>
+  <line x1="104" y1="24" x2="24" y2="104" stroke="#FF2A2A" stroke-width="12" stroke-linecap="round"/>
+  <line x1="24" y1="24" x2="104" y2="104" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+  <line x1="104" y1="24" x2="24" y2="104" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+  <!-- Central Lock Ring -->
+  <circle cx="64" cy="64" r="16" fill="#1A1C20" stroke="#FF2A2A" stroke-width="3"/>
+  <circle cx="64" cy="64" r="6" fill="#FF2A2A"/>
+</svg>
