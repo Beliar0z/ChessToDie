@@ -8,109 +8,165 @@ func _init() -> void:
 	print("==================================================")
 
 	var tests_passed: int = 0
-	var total_tests: int = 13
+	var total_tests: int = 20
 
 	if test_standard_fide_moves():
 		tests_passed += 1
-		print("[PASS] 1/13: test_standard_fide_moves")
+		print("[PASS] 1/14: test_standard_fide_moves")
 	else:
-		print("[FAIL] 1/13: test_standard_fide_moves")
+		print("[FAIL] 1/14: test_standard_fide_moves")
 		quit(1)
 		return
 
 	if test_card_draw_engine():
 		tests_passed += 1
-		print("[PASS] 2/13: test_card_draw_engine")
+		print("[PASS] 2/14: test_card_draw_engine")
 	else:
-		print("[FAIL] 2/13: test_card_draw_engine")
+		print("[FAIL] 2/14: test_card_draw_engine")
 		quit(1)
 		return
 
 	if test_turn_restrictions():
 		tests_passed += 1
-		print("[PASS] 3/13: test_turn_restrictions")
+		print("[PASS] 3/14: test_turn_restrictions")
 	else:
-		print("[FAIL] 3/13: test_turn_restrictions")
+		print("[FAIL] 3/14: test_turn_restrictions")
 		quit(1)
 		return
 
 	if test_checkmate_hook_survival():
 		tests_passed += 1
-		print("[PASS] 4/13: test_checkmate_hook_survival")
+		print("[PASS] 4/14: test_checkmate_hook_survival")
 	else:
-		print("[FAIL] 4/13: test_checkmate_hook_survival")
+		print("[FAIL] 4/14: test_checkmate_hook_survival")
 		quit(1)
 		return
 
 	if test_death_ring_stalemate_resolution():
 		tests_passed += 1
-		print("[PASS] 5/13: test_death_ring_stalemate_resolution")
+		print("[PASS] 5/14: test_death_ring_stalemate_resolution")
 	else:
-		print("[FAIL] 5/13: test_death_ring_stalemate_resolution")
+		print("[FAIL] 5/14: test_death_ring_stalemate_resolution")
 		quit(1)
 		return
 
 	if test_holy_war_kings_combat():
 		tests_passed += 1
-		print("[PASS] 6/13: test_holy_war_kings_combat")
+		print("[PASS] 6/14: test_holy_war_kings_combat")
 	else:
-		print("[FAIL] 6/13: test_holy_war_kings_combat")
+		print("[FAIL] 6/14: test_holy_war_kings_combat")
 		quit(1)
 		return
 
 	if test_curse_countdown():
 		tests_passed += 1
-		print("[PASS] 7/13: test_curse_countdown")
+		print("[PASS] 7/14: test_curse_countdown")
 	else:
-		print("[FAIL] 7/13: test_curse_countdown")
+		print("[FAIL] 7/14: test_curse_countdown")
 		quit(1)
 		return
 
 	if test_ui_scene_integration():
 		tests_passed += 1
-		print("[PASS] 8/13: test_ui_scene_integration")
+		print("[PASS] 8/14: test_ui_scene_integration")
 	else:
-		print("[FAIL] 8/13: test_ui_scene_integration")
+		print("[FAIL] 8/14: test_ui_scene_integration")
 		quit(1)
 		return
 
 	if test_fan_arc_hand_layout():
 		tests_passed += 1
-		print("[PASS] 9/13: test_fan_arc_hand_layout")
+		print("[PASS] 9/14: test_fan_arc_hand_layout")
 	else:
-		print("[FAIL] 9/13: test_fan_arc_hand_layout")
+		print("[FAIL] 9/14: test_fan_arc_hand_layout")
 		quit(1)
 		return
 
 	if test_piece_position_history_and_queen_tether():
 		tests_passed += 1
-		print("[PASS] 10/13: test_piece_position_history_and_queen_tether")
+		print("[PASS] 10/14: test_piece_position_history_and_queen_tether")
 	else:
-		print("[FAIL] 10/13: test_piece_position_history_and_queen_tether")
+		print("[FAIL] 10/14: test_piece_position_history_and_queen_tether")
 		quit(1)
 		return
 
 	if test_passive_glow_to_click_and_triggers():
 		tests_passed += 1
-		print("[PASS] 11/13: test_passive_glow_to_click_and_triggers")
+		print("[PASS] 11/14: test_passive_glow_to_click_and_triggers")
 	else:
-		print("[FAIL] 11/13: test_passive_glow_to_click_and_triggers")
+		print("[FAIL] 11/14: test_passive_glow_to_click_and_triggers")
 		quit(1)
 		return
 
 	if test_active_one_per_turn_warning_and_slot_render():
 		tests_passed += 1
-		print("[PASS] 12/13: test_active_one_per_turn_warning_and_slot_render")
+		print("[PASS] 12/14: test_active_one_per_turn_warning_and_slot_render")
 	else:
-		print("[FAIL] 12/13: test_active_one_per_turn_warning_and_slot_render")
+		print("[FAIL] 12/14: test_active_one_per_turn_warning_and_slot_render")
 		quit(1)
 		return
 
 	if test_multi_target_sequencing():
 		tests_passed += 1
-		print("[PASS] 13/13: test_multi_target_sequencing")
+		print("[PASS] 13/14: test_multi_target_sequencing")
 	else:
-		print("[FAIL] 13/13: test_multi_target_sequencing")
+		print("[FAIL] 13/14: test_multi_target_sequencing")
+		quit(1)
+		return
+
+	if test_card_icons_and_vfx_integration():
+		tests_passed += 1
+		print("[PASS] 14/15: test_card_icons_and_vfx_integration")
+	else:
+		print("[FAIL] 14/15: test_card_icons_and_vfx_integration")
+		quit(1)
+		return
+
+	if test_manual_draw_and_status_tooltip():
+		tests_passed += 1
+		print("[PASS] 15/20: test_manual_draw_and_status_tooltip")
+	else:
+		print("[FAIL] 15/20: test_manual_draw_and_status_tooltip")
+		quit(1)
+		return
+
+	if test_active_01_double_move_queen():
+		tests_passed += 1
+		print("[PASS] 16/20: test_active_01_double_move_queen")
+	else:
+		print("[FAIL] 16/20: test_active_01_double_move_queen")
+		quit(1)
+		return
+
+	if test_passive_20_ban_exact_two_turns():
+		tests_passed += 1
+		print("[PASS] 17/20: test_passive_20_ban_exact_two_turns")
+	else:
+		print("[FAIL] 17/20: test_passive_20_ban_exact_two_turns")
+		quit(1)
+		return
+
+	if test_passive_next_turn_rule_and_burn_zone():
+		tests_passed += 1
+		print("[PASS] 18/20: test_passive_next_turn_rule_and_burn_zone")
+	else:
+		print("[FAIL] 18/20: test_passive_next_turn_rule_and_burn_zone")
+		quit(1)
+		return
+
+	if test_gravity_vortex_and_castling_and_temp_summon():
+		tests_passed += 1
+		print("[PASS] 19/20: test_gravity_vortex_and_castling_and_temp_summon")
+	else:
+		print("[FAIL] 19/20: test_gravity_vortex_and_castling_and_temp_summon")
+		quit(1)
+		return
+
+	if test_remaining_passives_11_12_14_17_18_19():
+		tests_passed += 1
+		print("[PASS] 20/20: test_remaining_passives_11_12_14_17_18_19")
+	else:
+		print("[FAIL] 20/20: test_remaining_passives_11_12_14_17_18_19")
 		quit(1)
 		return
 
@@ -627,7 +683,7 @@ func test_fan_arc_hand_layout() -> bool:
 
 	# Test hover effect: mouse_entered
 	hand_view._on_card_mouse_entered(first_holder)
-	if first_holder.rotation_degrees != 0.0 or first_holder.scale != Vector2(1.28, 1.28) or first_holder.z_index != 50:
+	if first_holder.rotation_degrees != 0.0 or first_holder.scale != CardHandView.HOVER_SCALE or first_holder.z_index != 50:
 		print("Hover state failed: rot=%f, scale=%s, z=%d" % [first_holder.rotation_degrees, str(first_holder.scale), first_holder.z_index])
 		hand_view.free()
 		return false
@@ -680,8 +736,8 @@ func test_piece_position_history_and_queen_tether() -> bool:
 		print("execute_queen_tether returned empty array.")
 		return false
 
-	if board.get_piece(Vector2i(3, 0)) != white_queen or not white_queen.is_locked or white_queen.locked_turns != 2:
-		print("Queen was not returned to (3, 0) and locked.")
+	if board.get_piece(Vector2i(3, 0)) != white_queen or white_queen.is_locked:
+		print("Queen was not returned to (3, 0) cleanly without unwanted lock.")
 		return false
 
 	return true
@@ -702,6 +758,9 @@ func test_passive_glow_to_click_and_triggers() -> bool:
 	if slot.get("is_ready_to_trigger", false) != false:
 		print("Passive slot prematurely marked ready to trigger.")
 		return false
+
+	# Advance 1 turn so PASSIVE_06 satisfies turns_on_board >= 1 rule (GDD line 14)
+	tm.passive_manager.on_turn_end(PieceData.Team.WHITE)
 
 	# Simulate Boss moves Queen
 	var b_queen: PieceData = tm.board.get_piece(Vector2i(3, 7))
@@ -820,5 +879,510 @@ func test_multi_target_sequencing() -> bool:
 		if not tm2.board.is_cell_forbidden(c):
 			print("Cell %s was not marked forbidden by ACTIVE_05." % str(c))
 			return false
+
+	return true
+
+# 14. Card Icons (51 SVGs) & VFXManager Integration test
+func test_card_icons_and_vfx_integration() -> bool:
+	var all_cards: Dictionary = CardDatabase.get_all_cards()
+	if all_cards.size() != 51:
+		print("Expected 51 cards in CardDatabase, got %d." % all_cards.size())
+		return false
+
+	for id_key in all_cards.keys():
+		var card: CardResource = all_cards[id_key] as CardResource
+		var expected_path: String = "res://assets/sprites/cards/art/" + String(id_key).to_lower() + ".png"
+		if card == null or card.icon_path != expected_path:
+			print("Card %s has invalid icon_path: '%s' (expected '%s')" % [str(id_key), card.icon_path if card != null else "null", expected_path])
+			return false
+
+	var vfx: VFXManager = VFXManager.new()
+	var bv: BoardView = BoardView.new()
+	vfx.setup(bv)
+
+	var vfx_types: Array[String] = ["ripple", "explosion_cross", "vortex", "lock_chains", "fusion_beam", "dissolve"]
+	for vt in vfx_types:
+		vfx.play_tile_vfx(Vector2i(3, 3), vt)
+
+	vfx.trigger_board_shake(8.0, 0.25)
+	vfx.play_card_cast_vfx(CardDatabase.get_card("ACTIVE_25"), bv)
+
+	if VFXManager.get_vfx_type_for_card(CardDatabase.get_card("ACTIVE_25")) != "explosion_cross":
+		print("VFXManager card mapping failed for ACTIVE_25.")
+		vfx.free()
+		bv.free()
+		return false
+
+	if VFXManager.get_vfx_type_for_card(CardDatabase.get_card("ACTIVE_30")) != "vortex":
+		print("VFXManager card mapping failed for ACTIVE_30.")
+		vfx.free()
+		bv.free()
+		return false
+
+	vfx.free()
+	bv.free()
+	return true
+
+# 15. Manual Draw Mode & StatusTooltip (Piece effects + Passive slots + Fog of War)
+func test_manual_draw_and_status_tooltip() -> bool:
+	# Part A: Manual Draw Mode in CardEngine
+	var engine: CardEngine = CardEngine.new(PieceData.Team.WHITE)
+	engine.setup_default_deck()
+	engine.manual_draw_mode = true
+	engine.draw_initial_hand() # 6 cards, 21 left in deck
+
+	if engine.has_pending_draw() or engine.pending_draws != 0:
+		print("Manual draw should start with 0 pending draws.")
+		return false
+
+	# Move 1 -> still 0 pending draws
+	var m1: bool = engine.on_move_completed()
+	if m1 or engine.pending_draws != 0 or engine.hand.size() != 6:
+		print("Move 1 unexpectedly triggered manual draw.")
+		return false
+
+	# Move 2 -> pending_draws == 1, hand size remains 6 (no auto-draw!)
+	var m2: bool = engine.on_move_completed()
+	if not m2 or engine.pending_draws != 1 or not engine.has_pending_draw() or engine.hand.size() != 6:
+		print("Move 2 failed to queue pending draw in manual_draw_mode.")
+		return false
+
+	# Claim pending draw -> draws 1 card, pending_draws returns to 0
+	var claimed: CardResource = engine.claim_pending_draw()
+	if claimed == null or engine.hand.size() != 7 or engine.pending_draws != 0 or engine.has_pending_draw():
+		print("claim_pending_draw failed to draw 1 card and decrement pending_draws.")
+		return false
+
+	# Test skip_pending_draw
+	engine.on_move_completed()
+	engine.on_move_completed()
+	if engine.pending_draws != 1:
+		print("Expected pending_draws == 1 before skip.")
+		return false
+	engine.skip_pending_draw()
+	if engine.pending_draws != 0 or engine.hand.size() != 7:
+		print("skip_pending_draw failed.")
+		return false
+
+	# Part B: StatusTooltip formatting for pieces & Fog of War
+	var board: BoardState = BoardState.new()
+	board.setup_initial_board()
+
+	var white_queen: PieceData = board.get_piece(Vector2i(3, 0))
+	white_queen.is_locked = true
+	white_queen.locked_turns = 2
+	white_queen.is_cursed = true
+	white_queen.curse_turns = 3
+	white_queen.is_immortal = true
+	white_queen.immortal_turns = 1
+
+	var piece_tip: Dictionary = StatusTooltip.build_piece_tooltip_data(board, Vector2i(3, 0), PieceData.Team.WHITE)
+	if not bool(piece_tip.get("should_show", false)):
+		print("StatusTooltip did not activate for debuffed/buffed piece.")
+		return false
+
+	var tip_body: String = "\n".join(piece_tip.get("lines", []))
+	if not tip_body.contains("còn 2 lượt") or not tip_body.contains("còn 3 lượt") or not tip_body.contains("còn 1 lượt"):
+		print("StatusTooltip piece lines missing turn counts: %s" % tip_body)
+		return false
+
+	# Fog of War: Enemy stealthed piece must NOT reveal tooltip
+	var black_rook: PieceData = board.get_piece(Vector2i(0, 7))
+	black_rook.is_stealth = true
+	black_rook.stealth_turns = 2
+	var stealth_tip: Dictionary = StatusTooltip.build_piece_tooltip_data(board, Vector2i(0, 7), PieceData.Team.WHITE)
+	if bool(stealth_tip.get("should_show", false)):
+		print("Fog of War violated: enemy stealthed piece showed tooltip.")
+		return false
+
+	# Part C: StatusTooltip formatting for Passive slots (own vs opponent)
+	var pm: PassiveManager = PassiveManager.new()
+	var p_card: CardResource = CardDatabase.get_card("PASSIVE_06")
+	pm.place_passive(PieceData.Team.WHITE, p_card, 1)
+	pm.place_passive(PieceData.Team.BLACK, p_card, 1)
+
+	var own_slot: Dictionary = pm.get_slot(PieceData.Team.WHITE, 0)
+	own_slot["is_ready_to_trigger"] = true
+	var own_tip: Dictionary = StatusTooltip.build_passive_tooltip_data(own_slot, PieceData.Team.WHITE, 3, pm, PieceData.Team.WHITE)
+	if not bool(own_tip.get("should_show", false)) or not String(own_tip.get("title", "")).contains(p_card.title):
+		print("Own passive tooltip missing card title.")
+		return false
+	var own_body: String = "\n".join(own_tip.get("lines", []))
+	if not own_body.contains("2 vòng") or not own_body.contains("SẴN SÀNG KÍCH HOẠT"):
+		print("Own passive tooltip missing round count or ready status: %s" % own_body)
+		return false
+
+	var opp_slot: Dictionary = pm.get_slot(PieceData.Team.BLACK, 0)
+	var opp_tip: Dictionary = StatusTooltip.build_passive_tooltip_data(opp_slot, PieceData.Team.BLACK, 3, pm, PieceData.Team.WHITE)
+	if not bool(opp_tip.get("should_show", false)) or String(opp_tip.get("title", "")) != "Bài Bẫy Úp (Đối Thủ)":
+		print("Opponent passive tooltip violated Fog of War: %s" % str(opp_tip))
+		return false
+
+	# Instantiate StatusTooltip node & verify clamp
+	var tooltip_node: StatusTooltip = StatusTooltip.new()
+	var tip_lines: Array[String] = []
+	for l in piece_tip.get("lines", []):
+		tip_lines.append(String(l))
+	tooltip_node.show_tooltip(String(piece_tip.get("title", "")), tip_lines, Rect2(Vector2(1850, 1000), Vector2(60, 60)))
+	if not tooltip_node.visible or tooltip_node.global_position.x + tooltip_node.size.x > 1920.0:
+		print("StatusTooltip failed to clamp within 1920x1080 bounds.")
+		tooltip_node.free()
+		return false
+	tooltip_node.free()
+
+	return true
+
+# 16. ACTIVE_01 (Song Trùng): Queen moves exactly 2 consecutive times in 1 turn before switching to Black
+func test_active_01_double_move_queen() -> bool:
+	var tm: TurnManager = TurnManager.new()
+	tm.start_game()
+	# Clear pawn in front of White Queen at d2 (3, 1)
+	tm.board.remove_piece(Vector2i(3, 1))
+
+	var card_a01: CardResource = CardDatabase.get_card("ACTIVE_01")
+	tm.white_engine.hand.append(card_a01)
+	if not tm.play_active_card(card_a01, Vector2i(3, 0)):
+		print("Failed to play ACTIVE_01 on White Queen.")
+		return false
+
+	# Move 1: Queen d1 (3, 0) -> d4 (3, 3)
+	if not tm.execute_move(Vector2i(3, 0), Vector2i(3, 3)):
+		print("Queen 1st move failed.")
+		return false
+
+	# Must still be White's turn with double_move_piece_pos == (3, 3)
+	if tm.current_turn_team != PieceData.Team.WHITE or tm.double_move_piece_pos != Vector2i(3, 3):
+		print("Turn switched prematurely or double_move_piece_pos invalid: team=%d, pos=%s" % [tm.current_turn_team, str(tm.double_move_piece_pos)])
+		return false
+
+	# Another White piece (pawn e2 -> e3) MUST be rejected during 2nd move
+	if tm.execute_move(Vector2i(4, 1), Vector2i(4, 2)):
+		print("Another piece was allowed to move during ACTIVE_01 2nd move window.")
+		return false
+
+	# Move 2: Queen d4 (3, 3) -> f4 (5, 3)
+	if not tm.execute_move(Vector2i(3, 3), Vector2i(5, 3)):
+		print("Queen 2nd move failed.")
+		return false
+
+	# Now turn must switch to Black and double_move_piece_pos reset
+	if tm.current_turn_team != PieceData.Team.BLACK or tm.double_move_piece_pos != Vector2i(-1, -1):
+		print("Turn did not switch to Black after 2nd move.")
+		return false
+
+	if tm.board.get_piece(Vector2i(5, 3)) == null or tm.board.get_piece(Vector2i(5, 3)).type != PieceData.PieceType.QUEEN:
+		print("White Queen not found at final destination (5, 3).")
+		return false
+
+	return true
+
+# 17. PASSIVE_20 (Truy Hồn Trục Xuất): Black piece captures White -> banned for EXACTLY 2 Black turns, unbanned on 3rd
+func test_passive_20_ban_exact_two_turns() -> bool:
+	var tm: TurnManager = TurnManager.new()
+	tm.start_game()
+
+	# Place PASSIVE_20 for White on turn 1
+	var card_p20: CardResource = CardDatabase.get_card("PASSIVE_20")
+	tm.white_engine.hand.append(card_p20)
+	if not tm.place_passive_card(card_p20):
+		print("Failed to place PASSIVE_20.")
+		return false
+
+	# Place a Black Knight at d5 (3, 4) and a White Pawn at e3 (4, 2) -> Knight can capture e3
+	var b_knight: PieceData = PieceData.new(PieceData.PieceType.KNIGHT, PieceData.Team.BLACK)
+	tm.board.set_piece(Vector2i(3, 4), b_knight)
+	# White moves e2 (4, 1) -> e3 (4, 2) -> ends White turn 1 (PASSIVE_20 turns_on_board becomes 1)
+	if not tm.execute_move(Vector2i(4, 1), Vector2i(4, 2)):
+		print("White setup move failed.")
+		return false
+
+	# Black captures White pawn at (4, 2) with Knight from (3, 4)
+	if not tm.execute_move(Vector2i(3, 4), Vector2i(4, 2)):
+		print("Black capture move failed.")
+		return false
+
+	# Verify PASSIVE_20 became ready to trigger
+	var slot: Dictionary = tm.passive_manager.get_slot(PieceData.Team.WHITE, 0)
+	if not bool(slot.get("is_ready_to_trigger", false)):
+		print("PASSIVE_20 did not trigger on enemy capture.")
+		return false
+
+	# White triggers PASSIVE_20 (now it is White's turn)
+	var trig_res: Dictionary = tm.execute_passive_trigger(PieceData.Team.WHITE, 0)
+	if not bool(trig_res.get("success", false)) or not b_knight.is_banned or b_knight.banned_turns != 2:
+		print("PASSIVE_20 failed to ban Black Knight for 2 turns.")
+		return false
+
+	# White finishes turn
+	tm.execute_move(Vector2i(0, 1), Vector2i(0, 2))
+
+	# Black Turn 1: Knight at (4, 2) MUST be banned (cannot move)
+	if not b_knight.is_banned or not MoveValidator.get_legal_moves(tm.board, Vector2i(4, 2), false).is_empty():
+		print("Black Knight was not banned on Black Turn 1.")
+		return false
+	# Black moves another piece (a7 -> a6)
+	tm.execute_move(Vector2i(0, 6), Vector2i(0, 5))
+	if not b_knight.is_banned or b_knight.banned_turns != 1:
+		print("After Black Turn 1, expected banned_turns == 1, got %d (banned=%s)." % [b_knight.banned_turns, str(b_knight.is_banned)])
+		return false
+
+	# White finishes turn
+	tm.execute_move(Vector2i(1, 1), Vector2i(1, 2))
+
+	# Black Turn 2: Knight MUST STILL be banned
+	if not b_knight.is_banned or not MoveValidator.get_legal_moves(tm.board, Vector2i(4, 2), false).is_empty():
+		print("Black Knight was unbanned too early on Black Turn 2.")
+		return false
+	# Black moves another piece (b7 -> b6) -> end of Black Turn 2 should unban Knight!
+	tm.execute_move(Vector2i(1, 6), Vector2i(1, 5))
+	if b_knight.is_banned or b_knight.banned_turns != 0:
+		print("Black Knight stayed permanently banned after 2 turns! banned=%s, turns=%d" % [str(b_knight.is_banned), b_knight.banned_turns])
+		return false
+
+	# White finishes turn
+	tm.execute_move(Vector2i(2, 1), Vector2i(2, 2))
+
+	# Black Turn 3: Knight MUST be able to move normally again!
+	var knight_moves_t3: Array[Vector2i] = MoveValidator.get_legal_moves(tm.board, Vector2i(4, 2), false)
+	if knight_moves_t3.is_empty():
+		print("Black Knight has no legal moves on Black Turn 3 after unban.")
+		return false
+
+	return true
+
+# 18. Passive next-turn rule (turns_on_board >= 1), PASSIVE_05 burn 0.5/turn x2, PASSIVE_06 no lock
+func test_passive_next_turn_rule_and_burn_zone() -> bool:
+	var tm: TurnManager = TurnManager.new()
+	tm.start_game()
+
+	# Part A: Passive placed in turn 1 CANNOT trigger in turn 1
+	var p03: CardResource = CardDatabase.get_card("PASSIVE_03")
+	tm.white_engine.hand.append(p03)
+	tm.place_passive_card(p03)
+	var early_trig: Array[Dictionary] = tm.passive_manager.evaluate_triggers("main_phase_started", {"board": tm.board})
+	if not early_trig.is_empty():
+		print("Passive triggered on the same turn it was placed (turns_on_board == 0).")
+		return false
+
+	# After 1 turn end, turns_on_board == 1 -> now it CAN trigger
+	tm.passive_manager.on_turn_end(PieceData.Team.WHITE)
+	var valid_trig: Array[Dictionary] = tm.passive_manager.evaluate_triggers("main_phase_started", {"board": tm.board})
+	if valid_trig.is_empty():
+		print("Passive failed to trigger on next turn (turns_on_board == 1).")
+		return false
+
+	# Part B: PASSIVE_05 burns 0.5 pts/turn for 2 turns and expires automatically
+	var tm2: TurnManager = TurnManager.new()
+	tm2.start_game()
+	var p05: CardResource = CardDatabase.get_card("PASSIVE_05")
+	tm2.white_engine.hand.append(p05)
+	tm2.place_passive_card(p05)
+	tm2.passive_manager.on_turn_end(PieceData.Team.WHITE)
+
+	# Put a Black Pawn (1.0 pt) at (4, 4) and trigger PASSIVE_05 centered at (4, 3) -> (4, 4) is inside burn zone
+	var victim_pawn: PieceData = PieceData.new(PieceData.PieceType.PAWN, PieceData.Team.BLACK)
+	tm2.board.set_piece(Vector2i(4, 4), victim_pawn)
+	tm2.execute_passive_trigger(PieceData.Team.WHITE, 0, [Vector2i(4, 3)])
+	if not tm2.board.barrier_burn_zones.has(Vector2i(4, 4)):
+		print("PASSIVE_05 did not create burn zone at (4, 4).")
+		return false
+
+	# End Turn 1: pawn takes -0.5 -> 0.5 remaining, still alive
+	tm2.end_turn()
+	if not is_equal_approx(victim_pawn.current_points, 0.5) or tm2.board.get_piece(Vector2i(4, 4)) != victim_pawn:
+		print("PASSIVE_05 burn tick 1 failed: pts=%f" % victim_pawn.current_points)
+		return false
+
+	# End Turn 2: pawn takes -0.5 -> 0.0 -> destroyed to grave, burn zone expires
+	tm2.end_turn()
+	if tm2.board.get_piece(Vector2i(4, 4)) != null or not tm2.board.grave_black.has(victim_pawn):
+		print("PASSIVE_05 burn tick 2 failed to destroy 0-point pawn.")
+		return false
+	if not tm2.board.barrier_burn_zones.is_empty():
+		print("PASSIVE_05 burn zone did not expire after 2 turns.")
+		return false
+
+	# Part C: PASSIVE_06 pulls both Queens back 2 moves WITHOUT locking them
+	var b3: BoardState = BoardState.new()
+	b3.setup_initial_board()
+	b3.remove_piece(Vector2i(3, 1))
+	var wq: PieceData = b3.get_piece(Vector2i(3, 0))
+	b3.move_piece(Vector2i(3, 0), Vector2i(3, 3))
+	b3.move_piece(Vector2i(3, 3), Vector2i(5, 3))
+	b3.execute_queen_tether()
+	if b3.get_piece(Vector2i(3, 0)) != wq or wq.is_locked:
+		print("PASSIVE_06 failed to pull Queen back cleanly without lock.")
+		return false
+
+	return true
+
+# 19. ACTIVE_30 Gravity Vortex (pull radius 2 & ban center 3 turns), FIDE Castling, ACTIVE_14 temp summon (1 turn)
+func test_gravity_vortex_and_castling_and_temp_summon() -> bool:
+	# Part A: ACTIVE_30 Gravity Vortex
+	var tm: TurnManager = TurnManager.new()
+	tm.board._init_empty_grid()
+	tm.board.set_piece(Vector2i(4, 0), PieceData.new(PieceData.PieceType.KING, PieceData.Team.WHITE))
+	tm.board.set_piece(Vector2i(4, 7), PieceData.new(PieceData.PieceType.KING, PieceData.Team.BLACK))
+
+	# Center at (4, 4) (rank 5). Piece A at (4, 3) (dist 1 -> pulled into center -> BANNED 3 turns).
+	# Piece B at (2, 4) (dist 2 -> pulled 1 step to (3, 4), NOT banned).
+	var p_near: PieceData = PieceData.new(PieceData.PieceType.KNIGHT, PieceData.Team.BLACK)
+	var p_far: PieceData = PieceData.new(PieceData.PieceType.BISHOP, PieceData.Team.WHITE)
+	tm.board.set_piece(Vector2i(4, 3), p_near)
+	tm.board.set_piece(Vector2i(2, 4), p_far)
+	tm.current_phase = TurnManager.Phase.MAIN_PHASE
+	tm.current_turn_team = PieceData.Team.WHITE
+
+	var card_vortex: CardResource = CardDatabase.get_card("ACTIVE_30")
+	tm.white_engine.hand.append(card_vortex)
+	if not tm.play_active_card(card_vortex, Vector2i(4, 4)):
+		print("Failed to play ACTIVE_30.")
+		return false
+
+	if tm.board.get_piece(Vector2i(4, 4)) != p_near or not p_near.is_banned or p_near.banned_turns != 3:
+		print("ACTIVE_30 failed to pull adjacent piece to center and ban for 3 turns.")
+		return false
+	if tm.board.get_piece(Vector2i(3, 4)) != p_far or p_far.is_banned:
+		print("ACTIVE_30 failed to pull distance-2 piece 1 square inward without banning.")
+		return false
+
+	# Part B: FIDE Castling (King + Rook both move)
+	var tm_c: TurnManager = TurnManager.new()
+	tm_c.start_game()
+	# Clear f1 (5, 0) and g1 (6, 0) for White kingside castling
+	tm_c.board.remove_piece(Vector2i(5, 0))
+	tm_c.board.remove_piece(Vector2i(6, 0))
+	var w_king: PieceData = tm_c.board.get_piece(Vector2i(4, 0))
+	var w_rook: PieceData = tm_c.board.get_piece(Vector2i(7, 0))
+
+	if not tm_c.execute_move(Vector2i(4, 0), Vector2i(6, 0)):
+		print("White kingside castling failed.")
+		return false
+	if tm_c.board.get_piece(Vector2i(6, 0)) != w_king or tm_c.board.get_piece(Vector2i(5, 0)) != w_rook:
+		print("FIDE castling did not move both King to g1 and Rook to f1.")
+		return false
+
+	# Part C: ACTIVE_14 Temporary Summon lasts 1 turn then returns to grave
+	var tm_s: TurnManager = TurnManager.new()
+	tm_s.start_game()
+	var dead_knight: PieceData = PieceData.new(PieceData.PieceType.KNIGHT, PieceData.Team.WHITE)
+	tm_s.board.grave_white.append(dead_knight)
+	var card_a14: CardResource = CardDatabase.get_card("ACTIVE_14")
+	tm_s.white_engine.hand.append(card_a14)
+	if not tm_s.play_active_card(card_a14, Vector2i(4, 2)):
+		print("Failed to play ACTIVE_14.")
+		return false
+	if tm_s.board.get_piece(Vector2i(4, 2)) != dead_knight or dead_knight.temporary_summon_turns != 1:
+		print("ACTIVE_14 did not summon piece with temporary_summon_turns == 1.")
+		return false
+	# End White's turn -> summoned piece must vanish back to grave
+	tm_s.end_turn()
+	if tm_s.board.get_piece(Vector2i(4, 2)) != null or not tm_s.board.grave_white.has(dead_knight):
+		print("ACTIVE_14 temporary summon did not disappear after 1 turn.")
+		return false
+
+	return true
+
+# 20. Remaining Passives: PASSIVE_11, PASSIVE_12, PASSIVE_14, PASSIVE_17, PASSIVE_18, PASSIVE_19
+func test_remaining_passives_11_12_14_17_18_19() -> bool:
+	# PASSIVE_11: 10 checks -> immortal for 3 turns
+	var tm11: TurnManager = TurnManager.new()
+	tm11.start_game()
+	var w_queen: PieceData = tm11.board.get_piece(Vector2i(3, 0))
+	w_queen.check_count = 10
+	tm11.passive_manager.place_passive(PieceData.Team.WHITE, CardDatabase.get_card("PASSIVE_11"), 1)
+	tm11.passive_manager.on_turn_end(PieceData.Team.WHITE)
+	tm11.execute_passive_trigger(PieceData.Team.WHITE, 0)
+	if not w_queen.is_immortal or w_queen.immortal_turns != 3:
+		print("PASSIVE_11 did not grant 3-turn immortality after 10 checks.")
+		return false
+
+	# PASSIVE_12: >= 50 moves & equal points -> reset board once
+	var tm12: TurnManager = TurnManager.new()
+	tm12.start_game()
+	tm12.board.remove_piece(Vector2i(0, 1))
+	tm12.board.remove_piece(Vector2i(0, 6))
+	tm12.total_moves_played = 50
+	tm12.passive_manager.place_passive(PieceData.Team.WHITE, CardDatabase.get_card("PASSIVE_12"), 1)
+	tm12.passive_manager.on_turn_end(PieceData.Team.WHITE)
+	tm12.execute_passive_trigger(PieceData.Team.WHITE, 0)
+	if not tm12.passive_12_used or tm12.board.get_piece(Vector2i(0, 1)) == null or tm12.board.get_piece(Vector2i(0, 6)) == null:
+		print("PASSIVE_12 did not reset board at 50 moves with equal points.")
+		return false
+
+	# PASSIVE_14: King escape + force opponent to move King next turn
+	var tm14: TurnManager = TurnManager.new()
+	tm14.board._init_empty_grid()
+	tm14.board.set_piece(Vector2i(6, 0), PieceData.new(PieceData.PieceType.KING, PieceData.Team.WHITE))
+	tm14.board.set_piece(Vector2i(4, 7), PieceData.new(PieceData.PieceType.KING, PieceData.Team.BLACK))
+	tm14.board.set_piece(Vector2i(0, 6), PieceData.new(PieceData.PieceType.PAWN, PieceData.Team.BLACK))
+	tm14.current_phase = TurnManager.Phase.MAIN_PHASE
+	tm14.current_turn_team = PieceData.Team.BLACK
+	tm14.passive_manager.place_passive(PieceData.Team.WHITE, CardDatabase.get_card("PASSIVE_14"), 1)
+	tm14.passive_manager.on_turn_end(PieceData.Team.WHITE)
+	tm14.execute_passive_trigger(PieceData.Team.WHITE, 0, [Vector2i(2, 0)])
+	if tm14.board.find_king(PieceData.Team.WHITE) != Vector2i(2, 0) or tm14.forced_king_move_team != int(PieceData.Team.BLACK):
+		print("PASSIVE_14 did not teleport King and set forced_king_move_team.")
+		return false
+	# Black tries to move Pawn instead of King -> MUST be rejected!
+	if tm14.execute_move(Vector2i(0, 6), Vector2i(0, 5)):
+		print("PASSIVE_14 failed to force Black to move King.")
+		return false
+	# Black moves King -> succeeds and clears forced_king_move_team
+	if not tm14.execute_move(Vector2i(4, 7), Vector2i(3, 7)) or tm14.forced_king_move_team != -1:
+		print("PASSIVE_14 failed when Black moved King.")
+		return false
+
+	# PASSIVE_17: Destroy 1 of opponent's 3 diagonal pawns
+	var tm17: TurnManager = TurnManager.new()
+	tm17.board._init_empty_grid()
+	tm17.board.set_piece(Vector2i(4, 0), PieceData.new(PieceData.PieceType.KING, PieceData.Team.WHITE))
+	tm17.board.set_piece(Vector2i(4, 7), PieceData.new(PieceData.PieceType.KING, PieceData.Team.BLACK))
+	tm17.board.set_piece(Vector2i(1, 5), PieceData.new(PieceData.PieceType.PAWN, PieceData.Team.BLACK))
+	tm17.board.set_piece(Vector2i(2, 4), PieceData.new(PieceData.PieceType.PAWN, PieceData.Team.BLACK))
+	tm17.board.set_piece(Vector2i(3, 3), PieceData.new(PieceData.PieceType.PAWN, PieceData.Team.BLACK))
+	tm17.passive_manager.place_passive(PieceData.Team.WHITE, CardDatabase.get_card("PASSIVE_17"), 1)
+	tm17.passive_manager.on_turn_end(PieceData.Team.WHITE)
+	tm17.execute_passive_trigger(PieceData.Team.WHITE, 0, [Vector2i(2, 4)])
+	if tm17.board.get_piece(Vector2i(2, 4)) != null:
+		print("PASSIVE_17 failed to destroy selected diagonal enemy pawn.")
+		return false
+
+	# PASSIVE_18 + PASSIVE_19: Fire diagonal deals -1 pt on entry, PASSIVE_19 buffs +2 pts
+	var tm18: TurnManager = TurnManager.new()
+	tm18.board._init_empty_grid()
+	tm18.board.set_piece(Vector2i(4, 0), PieceData.new(PieceData.PieceType.KING, PieceData.Team.WHITE))
+	tm18.board.set_piece(Vector2i(4, 7), PieceData.new(PieceData.PieceType.KING, PieceData.Team.BLACK))
+	tm18.board.set_piece(Vector2i(0, 1), PieceData.new(PieceData.PieceType.PAWN, PieceData.Team.WHITE))
+	tm18.board.set_piece(Vector2i(1, 2), PieceData.new(PieceData.PieceType.PAWN, PieceData.Team.WHITE))
+	tm18.board.set_piece(Vector2i(2, 3), PieceData.new(PieceData.PieceType.PAWN, PieceData.Team.WHITE))
+	var b_rook: PieceData = PieceData.new(PieceData.PieceType.ROOK, PieceData.Team.BLACK) # 5 pts
+	tm18.board.set_piece(Vector2i(3, 6), b_rook)
+	tm18.passive_manager.place_passive(PieceData.Team.WHITE, CardDatabase.get_card("PASSIVE_18"), 1)
+	tm18.passive_manager.place_passive(PieceData.Team.BLACK, CardDatabase.get_card("PASSIVE_19"), 1)
+	tm18.passive_manager.on_turn_end(PieceData.Team.WHITE)
+	tm18.passive_manager.on_turn_end(PieceData.Team.BLACK)
+	tm18.execute_passive_trigger(PieceData.Team.WHITE, 0)
+	if not tm18.board.fire_diagonals.has(Vector2i(3, 4)):
+		print("PASSIVE_18 failed to populate fire_diagonals at (3, 4).")
+		return false
+	# Black Rook moves (3, 6) -> (3, 4) onto fire diagonal -> loses 1 pt (5 -> 4), triggers PASSIVE_19 ready
+	tm18.current_turn_team = PieceData.Team.BLACK
+	tm18.current_phase = TurnManager.Phase.MAIN_PHASE
+	if not tm18.execute_move(Vector2i(3, 6), Vector2i(3, 4)):
+		print("Black Rook move onto fire diagonal failed.")
+		return false
+	if not is_equal_approx(b_rook.current_points, 4.0) or not b_rook.affected_by_point_penalty:
+		print("PASSIVE_18 did not deduct 1 point on fire diagonal entry: pts=%f" % b_rook.current_points)
+		return false
+	var p19_slot: Dictionary = tm18.passive_manager.get_slot(PieceData.Team.BLACK, 0)
+	if not bool(p19_slot.get("is_ready_to_trigger", false)):
+		print("PASSIVE_19 did not become ready after point penalty.")
+		return false
+	# Black triggers PASSIVE_19 -> Rook gets +2 pts (4 -> 6)
+	tm18.execute_passive_trigger(PieceData.Team.BLACK, 0)
+	if not is_equal_approx(b_rook.current_points, 6.0):
+		print("PASSIVE_19 failed to buff affected piece +2 pts: pts=%f" % b_rook.current_points)
+		return false
 
 	return true

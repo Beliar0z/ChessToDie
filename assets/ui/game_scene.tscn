@@ -1,13 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://gs01gamescene"]
+[gd_scene format=3 uid="uid://cxl5t7o474ivm"]
 
 [ext_resource type="Script" uid="uid://cjn8ox7wt0y2v" path="res://src/scenes/game_controller.gd" id="1_controller"]
 [ext_resource type="Theme" uid="uid://d1a2b3c4e5f6" path="res://assets/ui/main_theme.tres" id="2_theme"]
-[ext_resource type="PackedScene" uid="uid://cb01chessboard" path="res://assets/ui/chessboard.tscn" id="3_chessboard"]
-[ext_resource type="PackedScene" uid="uid://as01activeslot" path="res://assets/ui/active_slot.tscn" id="4_active_slot"]
-[ext_resource type="PackedScene" uid="uid://ps01passiveslot" path="res://assets/ui/passive_slot.tscn" id="5_passive_slot"]
-[ext_resource type="Texture2D" uid="uid://l8u5ijqn3npd" path="res://assets/sprites/cards/deck_pile.svg" id="6_deck_pile"]
+[ext_resource type="PackedScene" uid="uid://gonud8841i4l" path="res://assets/ui/chessboard.tscn" id="3_chessboard"]
+[ext_resource type="PackedScene" uid="uid://dkeryltu4y3nr" path="res://assets/ui/active_slot.tscn" id="4_active_slot"]
+[ext_resource type="PackedScene" uid="uid://b7cj7aganbv76" path="res://assets/ui/passive_slot.tscn" id="5_passive_slot"]
+[ext_resource type="Texture2D" uid="uid://dttluti2lefls" path="res://assets/sprites/cards/the_sun_back.png" id="6_deck_pile"]
+[ext_resource type="Shader" uid="uid://dcxbhp0nrid4i" path="res://assets/shaders/passive_pulse.gdshader" id="7_passive_pulse"]
 
-[node name="GameScene" type="Control"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_deck_glow"]
+shader = ExtResource("7_passive_pulse")
+shader_parameter/gold_color = Color(1, 0.843, 0, 1)
+shader_parameter/void_violet = Color(0.68, 0.36, 1, 1)
+shader_parameter/pulse_speed = 3.8
+
+[node name="GameScene" type="Control" unique_id=347688633]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,7 +24,7 @@ grow_vertical = 2
 theme = ExtResource("2_theme")
 script = ExtResource("1_controller")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1539224182]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,30 +33,54 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.059, 0.063, 0.071, 1)
 
-[node name="ChessboardArea" type="Control" parent="."]
+[node name="OpponentHandArea" type="Control" parent="." unique_id=1513919739]
 layout_mode = 1
 anchors_preset = 0
-offset_left = 110.0
-offset_top = 30.0
-offset_right = 870.0
-offset_bottom = 790.0
+offset_left = 60.0
+offset_top = 8.0
+offset_right = 860.0
+offset_bottom = 122.0
 
-[node name="Chessboard" parent="ChessboardArea" instance=ExtResource("3_chessboard")]
+[node name="OpponentHandLabel" type="Label" parent="OpponentHandArea" unique_id=2490058]
 layout_mode = 1
-offset_left = -380.0
-offset_top = -380.0
-offset_right = 380.0
-offset_bottom = 380.0
+offset_top = 8.0
+offset_right = 200.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0.95, 0.9, 0.78, 0.95)
+theme_override_font_sizes/font_size = 14
+text = "ĐỐI THỦ: 6 LÁ"
 
-[node name="BottomArea" type="Control" parent="."]
+[node name="OpponentHandContainer" type="Control" parent="OpponentHandArea" unique_id=222032670]
 layout_mode = 1
 anchors_preset = 0
-offset_left = 40.0
-offset_top = 815.0
-offset_right = 940.0
-offset_bottom = 1055.0
+offset_top = 6.0
+offset_right = 800.0
+offset_bottom = 110.0
 
-[node name="HandContainer" type="Control" parent="BottomArea"]
+[node name="ChessboardArea" type="Control" parent="." unique_id=975018573]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 120.0
+offset_top = 130.0
+offset_right = 800.0
+offset_bottom = 810.0
+
+[node name="Chessboard" parent="ChessboardArea" unique_id=517941865 instance=ExtResource("3_chessboard")]
+layout_mode = 1
+offset_left = -340.0
+offset_top = -340.0
+offset_right = 340.0
+offset_bottom = 340.0
+
+[node name="BottomArea" type="Control" parent="." unique_id=2069070995]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 796.0
+offset_right = 900.0
+offset_bottom = 1046.0
+
+[node name="HandContainer" type="Control" parent="BottomArea" unique_id=423340893]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,218 +88,180 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RightArea" type="Control" parent="."]
+[node name="RightArea" type="Control" parent="." unique_id=1290072068]
 layout_mode = 1
 anchors_preset = 0
-offset_left = 980.0
-offset_top = 30.0
-offset_right = 1880.0
-offset_bottom = 1050.0
+offset_left = 920.0
+offset_top = 20.0
+offset_right = 1890.0
+offset_bottom = 1066.0
 
-[node name="TopPlayerZone" type="Control" parent="RightArea"]
+[node name="TopPlayerZone" type="Control" parent="RightArea" unique_id=612677459]
 layout_mode = 1
 anchors_preset = 0
-offset_right = 900.0
-offset_bottom = 395.0
+offset_right = 970.0
+offset_bottom = 448.0
 
-[node name="OpponentScoreLabel" type="Label" parent="RightArea/TopPlayerZone"]
+[node name="OpponentScoreLabel" type="Label" parent="RightArea/TopPlayerZone" unique_id=1827952933]
 layout_mode = 1
-anchors_preset = 0
-offset_left = 20.0
-offset_top = 0.0
-offset_right = 260.0
-offset_bottom = 28.0
+offset_left = 16.0
+offset_top = 4.0
+offset_right = 360.0
+offset_bottom = 32.0
 theme_override_font_sizes/font_size = 18
 text = "ĐEN: 39 ĐIỂM"
 
-[node name="OpponentHandArea" type="Control" parent="RightArea/TopPlayerZone"]
+[node name="OpponentPassiveRow" type="HBoxContainer" parent="RightArea/TopPlayerZone" unique_id=638609390]
 layout_mode = 1
-anchors_preset = 0
-offset_left = 20.0
-offset_top = 28.0
-offset_right = 720.0
-offset_bottom = 126.0
-
-[node name="OpponentHandLabel" type="Label" parent="RightArea/TopPlayerZone/OpponentHandArea"]
-layout_mode = 1
-anchors_preset = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 350.0
-offset_bottom = 22.0
-theme_override_colors/font_color = Color(0.85, 0.8, 0.7, 0.9)
-theme_override_font_sizes/font_size = 14
-text = "TAY BÀI ĐỐI THỦ: 0 LÁ"
-
-[node name="OpponentHandContainer" type="Control" parent="RightArea/TopPlayerZone/OpponentHandArea"]
-layout_mode = 1
-anchors_preset = 0
-offset_left = 0.0
-offset_top = 24.0
-offset_right = 700.0
-offset_bottom = 98.0
-
-[node name="OpponentPassiveRow" type="HBoxContainer" parent="RightArea/TopPlayerZone"]
-layout_mode = 1
-anchors_preset = 0
-offset_left = 20.0
-offset_top = 132.0
-offset_right = 540.0
-offset_bottom = 262.0
+offset_left = 16.0
+offset_top = 36.0
+offset_right = 648.0
+offset_bottom = 242.0
 theme_override_constants/separation = 12
 
-[node name="PassiveSlot_0" parent="RightArea/TopPlayerZone/OpponentPassiveRow" instance=ExtResource("5_passive_slot")]
-custom_minimum_size = Vector2(120, 130)
+[node name="PassiveSlot_0" parent="RightArea/TopPlayerZone/OpponentPassiveRow" unique_id=823428977 instance=ExtResource("5_passive_slot")]
 layout_mode = 2
 
-[node name="PassiveSlot_1" parent="RightArea/TopPlayerZone/OpponentPassiveRow" instance=ExtResource("5_passive_slot")]
-custom_minimum_size = Vector2(120, 130)
+[node name="PassiveSlot_1" parent="RightArea/TopPlayerZone/OpponentPassiveRow" unique_id=15969957 instance=ExtResource("5_passive_slot")]
 layout_mode = 2
 
-[node name="PassiveSlot_2" parent="RightArea/TopPlayerZone/OpponentPassiveRow" instance=ExtResource("5_passive_slot")]
-custom_minimum_size = Vector2(120, 130)
+[node name="PassiveSlot_2" parent="RightArea/TopPlayerZone/OpponentPassiveRow" unique_id=820809500 instance=ExtResource("5_passive_slot")]
 layout_mode = 2
 
-[node name="PassiveSlot_3" parent="RightArea/TopPlayerZone/OpponentPassiveRow" instance=ExtResource("5_passive_slot")]
-custom_minimum_size = Vector2(120, 130)
+[node name="PassiveSlot_3" parent="RightArea/TopPlayerZone/OpponentPassiveRow" unique_id=1860089732 instance=ExtResource("5_passive_slot")]
 layout_mode = 2
 
-[node name="OpponentDeckSlot" type="Control" parent="RightArea/TopPlayerZone"]
+[node name="OpponentDeckSlot" type="Control" parent="RightArea/TopPlayerZone" unique_id=2007993860]
 layout_mode = 1
 anchors_preset = 0
-offset_left = 740.0
-offset_top = 132.0
-offset_right = 860.0
-offset_bottom = 262.0
+offset_left = 785.0
+offset_top = 36.0
+offset_right = 941.0
+offset_bottom = 266.0
 
-[node name="OpponentDeckTexture" type="TextureRect" parent="RightArea/TopPlayerZone/OpponentDeckSlot"]
+[node name="OpponentDeckTexture" type="TextureRect" parent="RightArea/TopPlayerZone/OpponentDeckSlot" unique_id=1879835197]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -26.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_deck_pile")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="OpponentDeckLabel" type="Label" parent="RightArea/TopPlayerZone/OpponentDeckSlot"]
+[node name="OpponentDeckLabel" type="Label" parent="RightArea/TopPlayerZone/OpponentDeckSlot" unique_id=515022818]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -24.0
+offset_top = -22.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_colors/font_color = Color(0.96, 0.94, 0.9, 0.95)
 theme_override_font_sizes/font_size = 12
 text = "BOSS DECK"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="OpponentActiveSlot" parent="RightArea/TopPlayerZone" instance=ExtResource("4_active_slot")]
-custom_minimum_size = Vector2(120, 125)
+[node name="OpponentActiveSlot" parent="RightArea/TopPlayerZone" unique_id=1431120857 instance=ExtResource("4_active_slot")]
 layout_mode = 1
-offset_left = 215.0
-offset_top = 266.0
-offset_right = 335.0
-offset_bottom = 391.0
+offset_left = 258.0
+offset_top = 252.0
+offset_right = 406.0
+offset_bottom = 448.0
 
-[node name="CenterControlZone" type="Control" parent="RightArea"]
-layout_mode = 1
-anchors_preset = 0
-offset_top = 405.0
-offset_right = 900.0
-offset_bottom = 615.0
-
-[node name="TurnPhaseLabel" type="Label" parent="RightArea/CenterControlZone"]
+[node name="CenterControlZone" type="Control" parent="RightArea" unique_id=1328924778]
 layout_mode = 1
 anchors_preset = 0
-offset_left = 40.0
-offset_top = 10.0
-offset_right = 860.0
-offset_bottom = 46.0
+offset_top = 424.0
+offset_right = 970.0
+offset_bottom = 554.0
+
+[node name="TurnPhaseLabel" type="Label" parent="RightArea/CenterControlZone" unique_id=1598025757]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 4.0
+offset_right = 950.0
+offset_bottom = 34.0
 theme_override_font_sizes/font_size = 22
 text = "ROUND 1 - LƯỢT TRẮNG | MAIN PHASE"
 horizontal_alignment = 1
 
-[node name="MessageBanner" type="Label" parent="RightArea/CenterControlZone"]
+[node name="MessageBanner" type="Label" parent="RightArea/CenterControlZone" unique_id=2030999364]
 layout_mode = 1
-anchors_preset = 0
-offset_left = 40.0
-offset_top = 52.0
-offset_right = 860.0
-offset_bottom = 122.0
+offset_left = 20.0
+offset_top = 36.0
+offset_right = 950.0
+offset_bottom = 78.0
 theme_override_colors/font_color = Color(0.83, 0.69, 0.22, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "CHESS TO DIE"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="EndTurnButton" type="Button" parent="RightArea/CenterControlZone"]
+[node name="EndTurnButton" type="Button" parent="RightArea/CenterControlZone" unique_id=799011372]
 layout_mode = 1
-anchors_preset = 0
-offset_left = 350.0
-offset_top = 135.0
-offset_right = 550.0
-offset_bottom = 185.0
+offset_left = 375.0
+offset_top = 84.0
+offset_right = 595.0
+offset_bottom = 130.0
 theme_override_font_sizes/font_size = 18
 text = "END TURN"
 
-[node name="BottomPlayerZone" type="Control" parent="RightArea"]
+[node name="BottomPlayerZone" type="Control" parent="RightArea" unique_id=2145704621]
 layout_mode = 1
 anchors_preset = 0
-offset_top = 625.0
-offset_right = 900.0
-offset_bottom = 1020.0
+offset_top = 560.0
+offset_right = 970.0
+offset_bottom = 1010.0
 
-[node name="PlayerActiveSlot" parent="RightArea/BottomPlayerZone" instance=ExtResource("4_active_slot")]
-custom_minimum_size = Vector2(120, 170)
+[node name="PlayerActiveSlot" parent="RightArea/BottomPlayerZone" unique_id=1763085472 instance=ExtResource("4_active_slot")]
 layout_mode = 1
-offset_left = 215.0
-offset_top = 6.0
-offset_right = 335.0
-offset_bottom = 176.0
+offset_left = 258.0
+offset_top = 4.0
+offset_right = 406.0
+offset_bottom = 200.0
 
-[node name="PlayerPassiveRow" type="HBoxContainer" parent="RightArea/BottomPlayerZone"]
+[node name="PlayerPassiveRow" type="HBoxContainer" parent="RightArea/BottomPlayerZone" unique_id=968215925]
 layout_mode = 1
-anchors_preset = 0
-offset_left = 20.0
-offset_top = 188.0
-offset_right = 540.0
-offset_bottom = 358.0
+offset_left = 16.0
+offset_top = 208.0
+offset_right = 648.0
+offset_bottom = 414.0
 theme_override_constants/separation = 12
 
-[node name="PassiveSlot_0" parent="RightArea/BottomPlayerZone/PlayerPassiveRow" instance=ExtResource("5_passive_slot")]
-custom_minimum_size = Vector2(120, 170)
+[node name="PassiveSlot_0" parent="RightArea/BottomPlayerZone/PlayerPassiveRow" unique_id=1357056570 instance=ExtResource("5_passive_slot")]
 layout_mode = 2
 
-[node name="PassiveSlot_1" parent="RightArea/BottomPlayerZone/PlayerPassiveRow" instance=ExtResource("5_passive_slot")]
-custom_minimum_size = Vector2(120, 170)
+[node name="PassiveSlot_1" parent="RightArea/BottomPlayerZone/PlayerPassiveRow" unique_id=1563171365 instance=ExtResource("5_passive_slot")]
 layout_mode = 2
 
-[node name="PassiveSlot_2" parent="RightArea/BottomPlayerZone/PlayerPassiveRow" instance=ExtResource("5_passive_slot")]
-custom_minimum_size = Vector2(120, 170)
+[node name="PassiveSlot_2" parent="RightArea/BottomPlayerZone/PlayerPassiveRow" unique_id=1452018720 instance=ExtResource("5_passive_slot")]
 layout_mode = 2
 
-[node name="PassiveSlot_3" parent="RightArea/BottomPlayerZone/PlayerPassiveRow" instance=ExtResource("5_passive_slot")]
-custom_minimum_size = Vector2(120, 170)
+[node name="PassiveSlot_3" parent="RightArea/BottomPlayerZone/PlayerPassiveRow" unique_id=1687380610 instance=ExtResource("5_passive_slot")]
 layout_mode = 2
 
-[node name="DeckSlot" type="Button" parent="RightArea/BottomPlayerZone"]
+[node name="DeckSlot" type="Button" parent="RightArea/BottomPlayerZone" unique_id=1553255149]
 layout_mode = 1
-anchors_preset = 0
-offset_left = 740.0
-offset_top = 188.0
-offset_right = 860.0
-offset_bottom = 358.0
+offset_left = 785.0
+offset_top = 186.0
+offset_right = 941.0
+offset_bottom = 418.0
 flat = true
 
-[node name="DeckTexture" type="TextureRect" parent="RightArea/BottomPlayerZone/DeckSlot"]
+[node name="DeckTexture" type="TextureRect" parent="RightArea/BottomPlayerZone/DeckSlot" unique_id=1092846229]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -26.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -276,25 +269,41 @@ texture = ExtResource("6_deck_pile")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="DeckLabel" type="Label" parent="RightArea/BottomPlayerZone/DeckSlot"]
+[node name="DeckGlowBorder" type="ReferenceRect" parent="RightArea/BottomPlayerZone/DeckSlot" unique_id=872326801]
+visible = false
+material = SubResource("ShaderMaterial_deck_glow")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+border_color = Color(1, 0.843, 0, 0.98)
+border_width = 4.0
+editor_only = false
+
+[node name="DeckLabel" type="Label" parent="RightArea/BottomPlayerZone/DeckSlot" unique_id=1612561686]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -24.0
+offset_top = -22.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_colors/font_color = Color(0.96, 0.94, 0.9, 0.95)
 theme_override_font_sizes/font_size = 12
 text = "DECK: 27 / 27"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="PlayerScoreLabel" type="Label" parent="RightArea/BottomPlayerZone"]
+[node name="PlayerScoreLabel" type="Label" parent="RightArea/BottomPlayerZone" unique_id=744280518]
 layout_mode = 1
-anchors_preset = 0
-offset_left = 20.0
-offset_top = 365.0
+offset_left = 16.0
+offset_top = 424.0
 offset_right = 420.0
-offset_bottom = 395.0
+offset_bottom = 450.0
 theme_override_font_sizes/font_size = 18
 text = "TRẮNG: 39 ĐIỂM"

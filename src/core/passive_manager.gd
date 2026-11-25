@@ -103,6 +103,8 @@ func evaluate_triggers(event_name: String, context: Dictionary) -> Array[Diction
 
 		for i in range(slots.size()):
 			var slot: Dictionary = slots[i]
+			if int(slot.get("turns_on_board", 0)) < 1:
+				continue
 			var card: CardResource = slot.get("card", null) as CardResource
 			if card == null:
 				continue
@@ -183,8 +185,18 @@ func evaluate_triggers(event_name: String, context: Dictionary) -> Array[Diction
 						ready = true
 
 				"PASSIVE_11": # CHECK_VETERAN: quân chiếu 10 lần
-					if int(context.get("max_check_count", 0)) >= 10:
+					var checking_p: PieceData = context.get("checking_piece", null) as PieceData
+					if checking_p != null and checking_p.team == team and checking_p.check_count >= 10:
 						ready = true
+					elif int(context.get("max_check_count", 0)) >= 10 and (checking_p == null or checking_p.team == team):
+						ready = true
+					elif context.has("board"):
+						var b11: BoardState = context["board"] as BoardState
+						for entry in b11.get_all_pieces(team):
+							var ep: PieceData = entry["piece"] as PieceData
+							if ep != null and ep.check_count >= 10:
+								ready = true
+								break
 
 				"PASSIVE_12": # RESTART_50MOVES: 50 nước điểm bằng nhau
 					if int(context.get("total_moves", 0)) >= 50 and bool(context.get("points_equal", false)):
@@ -207,10 +219,18 @@ func evaluate_triggers(event_name: String, context: Dictionary) -> Array[Diction
 				"PASSIVE_17": # CHAIN_BREAKER: đối phương có 3 Tốt chéo
 					if bool(context.get("opp_has_diagonal_pawns", false)):
 						ready = true
+					elif context.has("board"):
+						var b17: BoardState = context["board"] as BoardState
+						if not b17.has_three_diagonal_pawns(opp_team).is_empty():
+							ready = true
 
 				"PASSIVE_18": # FIRE_DIAGONAL: bản thân có 3 Tốt chéo
 					if bool(context.get("ally_has_diagonal_pawns", false)):
 						ready = true
+					elif context.has("board"):
+						var b18: BoardState = context["board"] as BoardState
+						if not b18.has_three_diagonal_pawns(team).is_empty():
+							ready = true
 
 				"PASSIVE_19": # POINT_REACTIVE_BUFF: dính trừ điểm
 					if event_name == "point_penalty_applied" and int(context.get("target_team", -1)) == int(team):

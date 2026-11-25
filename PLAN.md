@@ -39,6 +39,11 @@
     - [x] Áp dụng các Shader hiệu ứng (`death_ring`, `river_barrier`, `barrier_burn`, `holy_war`, `stealth`) vào bàn cờ khi trạng thái tương ứng được kích hoạt.
     - [x] Thiết lập Main Scene mặc định trong `project.godot` (`run/main_scene="res://assets/ui/game_scene.tscn"`) chạy được trực tiếp trên Godot 4.7.
     - [x] Thêm test case `test_ui_scene_integration` vào `test_runner.gd` — Đạt 8/8 test cases PASS.
+  - [x] **Giai đoạn 2A+ (Sprint Fix.md & Sprint Bổ Sung - Modular UI, 51 Icons & VFX):**
+    - [x] Nâng cấp Fan Arc mượt bằng `Tween`, Passive Glow-to-Click (`passive_pulse.gdshader`), Targeting System tuần tự, `position_history`.
+    - [x] Thiết kế lại `card_ui.tscn` 4 phần bằng `StyleBoxFlat` và vẽ đủ 51 icon SVG riêng biệt (`assets/sprites/cards/icons/`).
+    - [x] Triển khai `VFXManager` (bay bài vào `ActiveSlot`, 6 hiệu ứng chiêu thức trên ô cờ, Screen Shake) và áp trực tiếp 5 shader bàn cờ.
+    - [x] Bố cục UI Modular chuẩn Chess.com (`main_theme.tres`, tọa độ `a–h`/`1–8`, chấm nước đi & vòng ăn quân mượt), tự chụp `tasks/ui_preview.png` và đạt **14/14** Headless Test PASS.
   - [ ] **Giai đoạn 2B: AI Boss Roguelike & Cánh cửa 3D:**
     - [ ] Xây dựng AI Boss với trạng thái Fog of War (không đọc lén bài úp).
     - [ ] Tích hợp giao diện chọn 10 cánh cửa Roguelike 3D (Forward+).

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <circle cx="64" cy="64" r="56" fill="#261218" fill-opacity="0.55" stroke="#E84555" stroke-opacity="0.28" stroke-width="2"/>
+  <polygon points="64,14 114,64 64,114 14,64" fill="none" stroke="#E84555" stroke-opacity="0.16" stroke-width="1.5"/>
+  <rect x="26" y="26" width="76" height="76" rx="10" fill="none" stroke="#E84555" stroke-width="3" stroke-dasharray="10 6"/>
+  <g transform="translate(38,76) scale(0.9)"><path d="M-12,-18 h5 v5 h4 v-5 h6 v5 h4 v-5 h5 v10 l-4,3 v15 h4 v5 h-24 v-5 h4 v-15 l-4,-3 z" fill="#E84555" stroke="#E6C260" stroke-width="2.5" stroke-linejoin="round"/></g>
+  <g transform="translate(90,76) scale(0.9)"><path d="M-12,-18 h5 v5 h4 v-5 h6 v5 h4 v-5 h5 v10 l-4,3 v15 h4 v5 h-24 v-5 h4 v-15 l-4,-3 z" fill="#E84555" stroke="#E6C260" stroke-width="2.5" stroke-linejoin="round"/></g>
+  <g transform="translate(64,58) scale(1.35)"><path d="M-12,-18 h5 v5 h4 v-5 h6 v5 h4 v-5 h5 v10 l-4,3 v15 h4 v5 h-24 v-5 h4 v-15 l-4,-3 z" fill="#E6C260" stroke="#FFF2CC" stroke-width="2.5" stroke-linejoin="round"/></g>
+</svg>

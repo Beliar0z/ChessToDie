@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <circle cx="64" cy="64" r="56" fill="#1A1328" fill-opacity="0.55" stroke="#9E6BFF" stroke-opacity="0.28" stroke-width="2"/>
+  <polygon points="64,14 114,64 64,114 14,64" fill="none" stroke="#9E6BFF" stroke-opacity="0.16" stroke-width="1.5"/>
+  <line x1="24" y1="104" x2="104" y2="24" stroke="#9E6BFF" stroke-width="10" stroke-opacity="0.45" stroke-linecap="round"/>
+  <line x1="24" y1="104" x2="104" y2="24" stroke="#F5F0FF" stroke-width="3" stroke-linecap="round"/>
+  <g transform="translate(36,92) scale(0.85)"><circle cx="0" cy="-14" r="7" fill="#9E6BFF" stroke="#F5F0FF" stroke-width="2.5"/><path d="M-8,8 Q-6,-4 0,-6 Q6,-4 8,8 Z" fill="#9E6BFF" stroke="#F5F0FF" stroke-width="2.5" stroke-linejoin="round"/><rect x="-11" y="8" width="22" height="5" rx="2" fill="#9E6BFF" stroke="#F5F0FF" stroke-width="2.5"/></g>
+  <g transform="translate(64,64) scale(0.85)"><circle cx="0" cy="-14" r="7" fill="#9E6BFF" stroke="#F5F0FF" stroke-width="2.5"/><path d="M-8,8 Q-6,-4 0,-6 Q6,-4 8,8 Z" fill="#9E6BFF" stroke="#F5F0FF" stroke-width="2.5" stroke-linejoin="round"/><rect x="-11" y="8" width="22" height="5" rx="2" fill="#9E6BFF" stroke="#F5F0FF" stroke-width="2.5"/></g>
+  <g transform="translate(92,36) scale(0.85)"><circle cx="0" cy="-14" r="7" fill="#9E6BFF" stroke="#F5F0FF" stroke-width="2.5"/><path d="M-8,8 Q-6,-4 0,-6 Q6,-4 8,8 Z" fill="#9E6BFF" stroke="#F5F0FF" stroke-width="2.5" stroke-linejoin="round"/><rect x="-11" y="8" width="22" height="5" rx="2" fill="#9E6BFF" stroke="#F5F0FF" stroke-width="2.5"/></g>
+</svg>

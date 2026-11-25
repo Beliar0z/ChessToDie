@@ -124,11 +124,30 @@ func move_piece(from_pos: Vector2i, to_pos: Vector2i) -> PieceData:
 	piece.curse_moved = true
 	piece.record_position(to_pos)
 
+	# FIDE Castling: move accompanying Rook when King moves 2 squares horizontally
+	if piece.type == PieceData.PieceType.KING and absi(to_pos.x - from_pos.x) == 2:
+		var castle_y: int = from_pos.y
+		if to_pos.x == 6:
+			var rook_k: PieceData = get_piece(Vector2i(7, castle_y))
+			if rook_k != null and rook_k.type == PieceData.PieceType.ROOK:
+				set_piece(Vector2i(5, castle_y), rook_k)
+				set_piece(Vector2i(7, castle_y), null)
+				rook_k.move_count += 1
+				rook_k.record_position(Vector2i(5, castle_y))
+		elif to_pos.x == 2:
+			var rook_q: PieceData = get_piece(Vector2i(0, castle_y))
+			if rook_q != null and rook_q.type == PieceData.PieceType.ROOK:
+				set_piece(Vector2i(3, castle_y), rook_q)
+				set_piece(Vector2i(0, castle_y), null)
+				rook_q.move_count += 1
+				rook_q.record_position(Vector2i(3, castle_y))
+
 	# Pawn promotion to Queen on back rank
 	if piece.type == PieceData.PieceType.PAWN:
 		if (piece.team == PieceData.Team.WHITE and to_pos.y == BOARD_SIZE - 1) or (piece.team == PieceData.Team.BLACK and to_pos.y == 0):
 			piece.type = PieceData.PieceType.QUEEN
 			piece.points = PieceData.get_default_points(PieceData.PieceType.QUEEN)
+			piece.current_points = float(piece.points)
 
 	move_history.append({
 		"from": from_pos,
@@ -176,19 +195,38 @@ func execute_queen_tether() -> Array[Dictionary]:
 				q.record_position(dest_pos)
 				final_pos = dest_pos
 
-		q.is_locked = true
-		q.locked_turns = 2
 		results.append({"piece": q, "from": q_pos, "to": final_pos})
 
 	return results
 
+func has_three_diagonal_pawns(team: PieceData.Team) -> Array[Vector2i]:
+	var dirs: Array[Vector2i] = [Vector2i(1, 1), Vector2i(1, -1)]
+	for y in range(BOARD_SIZE):
+		for x in range(BOARD_SIZE):
+			var p0: PieceData = get_piece(Vector2i(x, y))
+			if p0 == null or p0.team != team or (p0.type != PieceData.PieceType.PAWN and p0.type != PieceData.PieceType.SUPER_PAWN):
+				continue
+			for d in dirs:
+				var c1: Vector2i = Vector2i(x, y) + d
+				var c2: Vector2i = Vector2i(x, y) + d * 2
+				var p1: PieceData = get_piece(c1)
+				var p2: PieceData = get_piece(c2)
+				if p1 != null and p1.team == team and (p1.type == PieceData.PieceType.PAWN or p1.type == PieceData.PieceType.SUPER_PAWN):
+					if p2 != null and p2.team == team and (p2.type == PieceData.PieceType.PAWN or p2.type == PieceData.PieceType.SUPER_PAWN):
+						return [Vector2i(x, y), c1, c2]
+	return []
+
 func find_king(team: PieceData.Team) -> Vector2i:
+	var fallback_clone: Vector2i = Vector2i(-1, -1)
 	for y in range(BOARD_SIZE):
 		for x in range(BOARD_SIZE):
 			var p: PieceData = grid[y][x] as PieceData
 			if p != null and p.type == PieceData.PieceType.KING and p.team == team:
-				return Vector2i(x, y)
-	return Vector2i(-1, -1)
+				if not p.is_clone:
+					return Vector2i(x, y)
+				if fallback_clone == Vector2i(-1, -1):
+					fallback_clone = Vector2i(x, y)
+	return fallback_clone
 
 func get_all_pieces(team: PieceData.Team) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
@@ -205,7 +243,7 @@ func get_total_team_points(team: PieceData.Team) -> float:
 		for x in range(BOARD_SIZE):
 			var p: PieceData = grid[y][x] as PieceData
 			if p != null and p.team == team:
-				total += float(p.points)
+				total += p.current_points
 	return total
 
 func get_team_piece_count(team: PieceData.Team) -> int:

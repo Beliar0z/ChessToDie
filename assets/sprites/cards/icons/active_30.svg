@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <circle cx="64" cy="64" r="56" fill="#261218" fill-opacity="0.55" stroke="#E84555" stroke-opacity="0.28" stroke-width="2"/>
+  <polygon points="64,14 114,64 64,114 14,64" fill="none" stroke="#E84555" stroke-opacity="0.16" stroke-width="1.5"/>
+
+  <circle cx="64" cy="64" r="14" fill="#261218" stroke="#FFF2CC" stroke-width="3.5"/>
+  <path d="M64,20 A44,44 0 0,1 108,64" fill="none" stroke="#E84555" stroke-width="5" stroke-linecap="round"/>
+  <path d="M108,64 A44,44 0 0,1 64,108" fill="none" stroke="#E6C260" stroke-width="5" stroke-linecap="round"/>
+  <path d="M64,108 A44,44 0 0,1 20,64" fill="none" stroke="#E84555" stroke-width="5" stroke-linecap="round"/>
+  <path d="M20,64 A44,44 0 0,1 64,20" fill="none" stroke="#E6C260" stroke-width="5" stroke-linecap="round"/>
+  <path d="M64,34 A30,30 0 0,1 94,64 A30,30 0 0,1 64,94 A30,30 0 0,1 34,64" fill="none" stroke="#E84555" stroke-width="3.5" stroke-dasharray="12 8"/>
+</svg>

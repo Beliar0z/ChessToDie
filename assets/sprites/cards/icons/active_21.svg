@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <circle cx="64" cy="64" r="56" fill="#261218" fill-opacity="0.55" stroke="#E84555" stroke-opacity="0.28" stroke-width="2"/>
+  <polygon points="64,14 114,64 64,114 14,64" fill="none" stroke="#E84555" stroke-opacity="0.16" stroke-width="1.5"/>
+  <g transform="translate(64,62) scale(1.55)"><circle cx="0" cy="-21" r="3.5" fill="#E6C260" stroke="#261218" stroke-width="2"/><path d="M0,-17 c9,6 11,16 6,25 h-12 c-5,-9 -3,-19 6,-25 z" fill="#E6C260" stroke="#261218" stroke-width="2.5" stroke-linejoin="round"/><line x1="-2" y1="-8" x2="5" y2="-1" stroke="#261218" stroke-width="2.5" stroke-linecap="round"/><rect x="-11" y="9" width="22" height="5" rx="2" fill="#E6C260" stroke="#261218" stroke-width="2.5"/></g>
+  <g stroke="#E84555" stroke-width="4" fill="none" stroke-linecap="round"><line x1="22" y1="30" x2="106" y2="98" stroke-dasharray="10 6"/><line x1="106" y1="30" x2="22" y2="98" stroke-dasharray="10 6"/></g>  <g transform="translate(64,68)"><path d="M-9,-4 v-6 a9,9 0 0,1 18,0 v6" fill="none" stroke="#FFF2CC" stroke-width="3.5"/><rect x="-13" y="-4" width="26" height="20" rx="4" fill="#261218" stroke="#FFF2CC" stroke-width="3"/><circle cx="0" cy="5" r="3" fill="#E84555"/></g>
+</svg>

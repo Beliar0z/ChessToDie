@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <circle cx="64" cy="64" r="56" fill="#261218" fill-opacity="0.55" stroke="#E84555" stroke-opacity="0.28" stroke-width="2"/>
+  <polygon points="64,14 114,64 64,114 14,64" fill="none" stroke="#E84555" stroke-opacity="0.16" stroke-width="1.5"/>
+
+  <line x1="64" y1="36" x2="36" y2="82" stroke="#E84555" stroke-width="4"/>
+  <line x1="64" y1="36" x2="92" y2="82" stroke="#E84555" stroke-width="4"/>
+  <line x1="36" y1="82" x2="92" y2="82" stroke="#E84555" stroke-width="4"/>
+  <g transform="translate(64,38)"><path d="M-7,-3 v-6 a7,7 0 0,1 14,0 v6" fill="none" stroke="#E6C260" stroke-width="3"/><rect x="-11" y="-3" width="22" height="17" rx="3" fill="#261218" stroke="#E6C260" stroke-width="3"/></g>
+  <g transform="translate(36,84)"><path d="M-7,-3 v-6 a7,7 0 0,1 14,0 v6" fill="none" stroke="#E6C260" stroke-width="3"/><rect x="-11" y="-3" width="22" height="17" rx="3" fill="#261218" stroke="#E6C260" stroke-width="3"/></g>
+  <g transform="translate(92,84)"><path d="M-7,-3 v-6 a7,7 0 0,1 14,0 v6" fill="none" stroke="#E6C260" stroke-width="3"/><rect x="-11" y="-3" width="22" height="17" rx="3" fill="#261218" stroke="#E6C260" stroke-width="3"/></g>
+</svg>

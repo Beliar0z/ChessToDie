@@ -27,6 +27,7 @@ enum Team {
 var type: PieceType = PieceType.PAWN
 var team: Team = Team.WHITE
 var points: int = 1
+var current_points: float = 1.0
 var hp: float = 1.0
 var move_count: int = 0
 var check_count: int = 0
@@ -48,6 +49,7 @@ var stealth_turns: int = 0
 
 var is_banned: bool = false
 var banned_turns: int = 0
+var just_applied_ban: bool = false
 var banned_origin_pos: Vector2i = Vector2i(-1, -1)
 
 var has_shield: bool = false
@@ -55,6 +57,10 @@ var shield_turns: int = 0
 
 var is_clone: bool = false
 var clone_source_type: PieceType = PieceType.PAWN
+
+var temporary_summon_turns: int = 0
+var scarecrow_turns: int = 0
+var affected_by_point_penalty: bool = false
 
 var double_move_active: bool = false
 var custom_move_mode: String = "" # "LINEAR", "DIAGONAL", "KNIGHT_STEP", "ROOK", "KNIGHT", "BISHOP", "QUEEN"
@@ -64,6 +70,7 @@ func _init(p_type: PieceType = PieceType.PAWN, p_team: Team = Team.WHITE) -> voi
 	type = p_type
 	team = p_team
 	points = get_default_points(p_type)
+	current_points = float(points)
 	hp = 1.0
 	move_count = 0
 	check_count = 0
@@ -126,6 +133,7 @@ func can_be_captured() -> bool:
 func clone() -> PieceData:
 	var copy: PieceData = PieceData.new(type, team)
 	copy.points = points
+	copy.current_points = current_points
 	copy.hp = hp
 	copy.move_count = move_count
 	copy.check_count = check_count
@@ -140,11 +148,15 @@ func clone() -> PieceData:
 	copy.stealth_turns = stealth_turns
 	copy.is_banned = is_banned
 	copy.banned_turns = banned_turns
+	copy.just_applied_ban = just_applied_ban
 	copy.banned_origin_pos = banned_origin_pos
 	copy.has_shield = has_shield
 	copy.shield_turns = shield_turns
 	copy.is_clone = is_clone
 	copy.clone_source_type = clone_source_type
+	copy.temporary_summon_turns = temporary_summon_turns
+	copy.scarecrow_turns = scarecrow_turns
+	copy.affected_by_point_penalty = affected_by_point_penalty
 	copy.double_move_active = double_move_active
 	copy.custom_move_mode = custom_move_mode
 	copy.square_color_swap = square_color_swap

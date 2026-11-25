@@ -14,6 +14,8 @@ var discard_pile: Array[CardResource] = []
 var self_move_count: int = 0
 var actives_used_this_turn: int = 0
 var passives_placed_this_turn: int = 0
+var manual_draw_mode: bool = false
+var pending_draws: int = 0
 
 func _init(p_team: PieceData.Team = PieceData.Team.WHITE) -> void:
 	team = p_team
@@ -23,6 +25,7 @@ func _init(p_team: PieceData.Team = PieceData.Team.WHITE) -> void:
 	self_move_count = 0
 	actives_used_this_turn = 0
 	passives_placed_this_turn = 0
+	pending_draws = 0
 
 func setup_default_deck() -> void:
 	deck.clear()
@@ -31,6 +34,7 @@ func setup_default_deck() -> void:
 	self_move_count = 0
 	actives_used_this_turn = 0
 	passives_placed_this_turn = 0
+	pending_draws = 0
 
 	var all_ids: Array = CardDatabase.get_all_card_ids()
 	var active_pool: Array[CardResource] = []
@@ -88,9 +92,29 @@ func draw_card() -> CardResource:
 func on_move_completed() -> bool:
 	self_move_count += 1
 	if self_move_count % DRAW_MOVE_INTERVAL == 0:
+		if manual_draw_mode:
+			pending_draws += 1
+			return true
 		var drawn: CardResource = draw_card()
 		return drawn != null
 	return false
+
+func has_pending_draw() -> bool:
+	return pending_draws > 0 and not deck.is_empty()
+
+func claim_pending_draw() -> CardResource:
+	if pending_draws <= 0 or hand.size() >= MAX_HAND_SIZE:
+		return null
+	var drawn: CardResource = draw_card()
+	if drawn != null:
+		pending_draws = maxi(0, pending_draws - 1)
+	return drawn
+
+func skip_pending_draw() -> void:
+	pending_draws = maxi(0, pending_draws - 1)
+
+func moves_until_next_draw() -> int:
+	return DRAW_MOVE_INTERVAL - (self_move_count % DRAW_MOVE_INTERVAL)
 
 func can_play_active(card: CardResource) -> bool:
 	if card == null or not card.is_active():

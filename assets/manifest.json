@@ -1,6 +1,6 @@
 {
-  "total_assets": 49,
-  "completed_assets": 49,
+  "total_assets": 180,
+  "completed_assets": 180,
   "assets": [
     {
       "path": "res://assets/sprites/pieces/pawn_white.svg",
@@ -257,15 +257,31 @@
     {
       "path": "res://assets/ui/card_ui.tscn",
       "type": "tscn",
-      "resolution": "150x210",
-      "status": "ready"
+      "resolution": "148x216",
+      "status": "ready",
+      "features": [
+        "CardBg",
+        "CardFrame",
+        "TitleLabel",
+        "TypeBadge",
+        "TypeLabel",
+        "ArtFrame",
+        "ArtIcon",
+        "Divider",
+        "DescLabel"
+      ]
     },
     {
       "path": "res://assets/ui/passive_slot.tscn",
       "type": "tscn",
-      "resolution": "120x170",
+      "resolution": "148x206",
       "status": "ready",
-      "features": ["GlowBorder", "CardContainer", "StatusTag", "CardBackTexture"]
+      "features": [
+        "GlowBorder",
+        "CardContainer",
+        "StatusTag",
+        "CardBackTexture"
+      ]
     },
     {
       "path": "res://assets/ui/hand_bar.tscn",
@@ -288,16 +304,811 @@
     {
       "path": "res://assets/ui/active_slot.tscn",
       "type": "tscn",
-      "resolution": "132x196",
+      "resolution": "148x196",
       "status": "ready",
-      "features": ["CardContainer", "GlowBorder", "MagicGlowBorder"]
+      "features": [
+        "CardContainer",
+        "GlowBorder",
+        "MagicGlowBorder"
+      ]
     },
     {
       "path": "res://assets/ui/game_scene.tscn",
       "type": "tscn",
       "resolution": "1920x1080",
       "status": "ready",
-      "features": ["OpponentHandArea", "OpponentHandContainer", "OpponentHandLabel"]
+      "features": [
+        "OpponentHandArea",
+        "OpponentHandContainer",
+        "OpponentHandLabel",
+        "DeckGlowBorder"
+      ]
+    },
+    {
+      "path": "res://assets/shaders/passive_pulse.gdshader",
+      "type": "gdshader",
+      "resolution": "procedural",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_01.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_02.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_03.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_04.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_05.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_06.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_07.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_08.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_09.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_10.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_11.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_12.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_13.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_14.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_15.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_16.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_17.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_18.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_19.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_20.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_21.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_22.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_23.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_24.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_25.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_26.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_27.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_28.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_29.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_30.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/active_31.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_01.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_02.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_03.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_04.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_05.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_06.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_07.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_08.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_09.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_10.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_11.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_12.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_13.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_14.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_15.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_16.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_17.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_18.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_19.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/icons/passive_20.svg",
+      "type": "svg",
+      "resolution": "128x128",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/bishop_black.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/bishop_white.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/heal_point.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/king_black.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/king_white.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/knight_black.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/knight_white.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/pawn_black.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/pawn_white.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/queen_black.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/queen_white.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/rook_black.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/rook_white.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/scarecrow.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_bishop_black.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_bishop_white.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_knight_black.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_knight_white.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_pawn_black.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_pawn_white.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_queen_black.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_queen_white.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_rook_black.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/pieces/super_rook_white.png",
+      "type": "png",
+      "resolution": "64x64",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/ui/textures/frame_active.png",
+      "type": "png",
+      "resolution": "148x206",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/ui/textures/frame_passive.png",
+      "type": "png",
+      "resolution": "148x206",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/the_sun_back.png",
+      "type": "png",
+      "resolution": "148x206",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/the_moon_back.png",
+      "type": "png",
+      "resolution": "148x206",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_01.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_02.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_03.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_04.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_05.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_06.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_07.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_08.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_09.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_10.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_11.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_12.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_13.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_14.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_15.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_16.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_17.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_18.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_19.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_20.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_21.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_22.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_23.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_24.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_25.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_26.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_27.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_28.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_29.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_30.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/active_31.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_01.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_02.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_03.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_04.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_05.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_06.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_07.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_08.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_09.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_10.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_11.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_12.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_13.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_14.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_15.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_16.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_17.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_18.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_19.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
+    },
+    {
+      "path": "res://assets/sprites/cards/art/passive_20.png",
+      "type": "png",
+      "resolution": "136x104",
+      "status": "ready"
     }
   ]
 }

@@ -35,7 +35,7 @@ static func _create_card(id: String, title: String, type: CardResource.CardType,
 	card.description = description
 	card.target_type = target_type
 	card.tag = tag if tag != "" else id
-	card.icon_path = "res://assets/sprites/cards/" + id.to_lower() + ".svg"
+	card.icon_path = "res://assets/sprites/cards/art/" + id.to_lower() + ".png"
 	return card
 
 static func _init_database() -> void:
@@ -69,7 +69,7 @@ static func _init_database() -> void:
 	_cards["ACTIVE_25"] = _create_card("ACTIVE_25", "Tốt Bộc Phá", CardResource.CardType.ACTIVE, 0, "Hy sinh 1 Tốt nổ hình chữ thập (bán kính 1 ô), tiêu diệt toàn bộ quân trong phạm vi.", "ALLY_PIECE", "PAWN_EXPLOSION")
 	_cards["ACTIVE_26"] = _create_card("ACTIVE_26", "Thân Thể Kim Cương", CardResource.CardType.ACTIVE, 0, "1 quân cờ bất tử trong 3 turn (đổi lại không thể ăn quân địch).", "ALLY_PIECE", "IMMORTAL_PIECE")
 	_cards["ACTIVE_27"] = _create_card("ACTIVE_27", "Bù Nhìn Thế Thân", CardResource.CardType.ACTIVE, 0, "Tạo 1 Bù nhìn (0đ) cản đường trong 3 turn hoặc đến khi bị >= 3 quân địch vây ăn.", "CELL", "SPAWN_SCARECROW")
-	_cards["ACTIVE_28"] = _create_card("ACTIVE_28", "Bóng Ma Chiến Trường", CardResource.CardType.ACTIVE, 0, "Tàng hình quân cờ (trừ Hậu) trong 2 turn, không bị thấy, không bị ăn và không thể ăn quân.", "ALLY_PIECE", "STEALTH_TROOPS")
+	_cards["ACTIVE_28"] = _create_card("ACTIVE_28", "Bóng Ma Chiến Trường", CardResource.CardType.ACTIVE, 0, "Tàng hình tối đa 2 quân cờ (trừ Hậu) trong 3 turn, không bị thấy, không bị ăn và không thể ăn quân.", "ALLY_PIECE", "STEALTH_TROOPS")
 	_cards["ACTIVE_29"] = _create_card("ACTIVE_29", "Phân Thân Thuật", CardResource.CardType.ACTIVE, 0, "Phân thân quân cờ (Tốt: 5, Mã/Tượng: 2, Vua: 3). Di chuyển đè quân địch sẽ Ban quân địch X round.", "ALLY_PIECE", "CLONE_WAR")
 	_cards["ACTIVE_30"] = _create_card("ACTIVE_30", "Hố Đen Trọng Lực", CardResource.CardType.ACTIVE, 0, "Đặt hố đen tại hàng 4/5 hút quân trong bán kính 2 ô vào tâm; quân vào tâm bị Ban 3 turn.", "CELL", "GRAVITY_VORTEX")
 	_cards["ACTIVE_31"] = _create_card("ACTIVE_31", "Lời Nguyền Tử Vong", CardResource.CardType.ACTIVE, 0, "Nguyền rủa 1 quân cờ; sau số turn = điểm quân cờ mà không đi thì bị tiêu diệt.", "ENEMY_PIECE", "DEATH_CURSE")
@@ -80,7 +80,7 @@ static func _init_database() -> void:
 	_cards["PASSIVE_03"] = _create_card("PASSIVE_03", "Thanh Tẩy Khí Lực", CardResource.CardType.PASSIVE, 0, "Hủy mọi hiệu ứng bất lợi đang có trên bàn cờ.", "NONE", "CLEANSE_DEBUFFS")
 	_cards["PASSIVE_04"] = _create_card("PASSIVE_04", "Phản Đòn Pháp Trận", CardResource.CardType.PASSIVE, 0, "Phản đòn: Hủy ngay lập tức 1 lá bài Active vừa được đối thủ tung ra.", "NONE", "COUNTER_ACTIVE")
 	_cards["PASSIVE_05"] = _create_card("PASSIVE_05", "Kết Giới Thiêu Đốt", CardResource.CardType.PASSIVE, 0, "Tạo kết giới 6 ô quanh quân địch vừa đi trong 2 lượt; mỗi lượt đốt 0.5đ, về 0đ thì chết.", "NONE", "BARRIER_BURN")
-	_cards["PASSIVE_06"] = _create_card("PASSIVE_06", "Nữ Hoàng Khóa Chân", CardResource.CardType.PASSIVE, 0, "Khi Hậu đối thủ di chuyển, kéo giật cả 2 Hậu về và khóa trong 2 lượt.", "NONE", "QUEEN_TETHER")
+	_cards["PASSIVE_06"] = _create_card("PASSIVE_06", "Nữ Hoàng Khóa Chân", CardResource.CardType.PASSIVE, 0, "Khi Hậu đối thủ di chuyển, kéo giật cả 2 Hậu về vị trí 2 nước trước đó.", "NONE", "QUEEN_TETHER")
 	_cards["PASSIVE_07"] = _create_card("PASSIVE_07", "Đoạt Tốt Trận Huyết", CardResource.CardType.PASSIVE, 0, "Khi toàn bộ Tốt đồng minh bị tiêu diệt, cướp 30% số Tốt còn lại của địch (làm tròn xuống).", "NONE", "STEAL_PAWNS")
 	_cards["PASSIVE_08"] = _create_card("PASSIVE_08", "Đảo Nghịch Thời Gian", CardResource.CardType.PASSIVE, 0, "Khi Vua bị 1 quân chiếu, buộc quân cờ vừa chiếu lùi về vị trí cũ.", "NONE", "REWIND_CHECK")
 	_cards["PASSIVE_09"] = _create_card("PASSIVE_09", "Phá Hủy Cạm Bẫy", CardResource.CardType.PASSIVE, 0, "Tiêu hủy toàn bộ bài Passive đang úp của đối thủ.", "NONE", "TRAP_DISARM")

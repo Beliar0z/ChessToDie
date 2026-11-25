@@ -225,20 +225,41 @@ static func _add_king_moves(board: BoardState, from_pos: Vector2i, piece: PieceD
 	# Castling (only if not holy war, not moved, not in check, and include_castling is true)
 	if include_castling and not holy_war_active and piece.move_count == 0 and not is_in_check(board, piece.team):
 		var y: int = from_pos.y
+		var opp_team: PieceData.Team = PieceData.Team.BLACK if piece.team == PieceData.Team.WHITE else PieceData.Team.WHITE
 		# Kingside (towards x=7)
 		var rook_k: PieceData = board.get_piece(Vector2i(7, y))
-		if rook_k != null and rook_k.type == PieceData.PieceType.ROOK and rook_k.move_count == 0:
-			if board.get_piece(Vector2i(5, y)) == null and board.get_piece(Vector2i(6, y)) == null:
-				var opp_team: PieceData.Team = PieceData.Team.BLACK if piece.team == PieceData.Team.WHITE else PieceData.Team.WHITE
+		if rook_k != null and rook_k.team == piece.team and rook_k.type == PieceData.PieceType.ROOK and rook_k.move_count == 0 and not rook_k.is_locked and not rook_k.is_banned:
+			if board.get_piece(Vector2i(5, y)) == null and board.get_piece(Vector2i(6, y)) == null and not board.is_cell_forbidden(Vector2i(5, y)) and not board.is_cell_forbidden(Vector2i(6, y)):
 				if not is_square_attacked(board, Vector2i(5, y), opp_team) and not is_square_attacked(board, Vector2i(6, y), opp_team):
 					moves.append(Vector2i(6, y))
 		# Queenside (towards x=0)
 		var rook_q: PieceData = board.get_piece(Vector2i(0, y))
-		if rook_q != null and rook_q.type == PieceData.PieceType.ROOK and rook_q.move_count == 0:
-			if board.get_piece(Vector2i(1, y)) == null and board.get_piece(Vector2i(2, y)) == null and board.get_piece(Vector2i(3, y)) == null:
-				var opp_team: PieceData.Team = PieceData.Team.BLACK if piece.team == PieceData.Team.WHITE else PieceData.Team.WHITE
+		if rook_q != null and rook_q.team == piece.team and rook_q.type == PieceData.PieceType.ROOK and rook_q.move_count == 0 and not rook_q.is_locked and not rook_q.is_banned:
+			if board.get_piece(Vector2i(1, y)) == null and board.get_piece(Vector2i(2, y)) == null and board.get_piece(Vector2i(3, y)) == null and not board.is_cell_forbidden(Vector2i(2, y)) and not board.is_cell_forbidden(Vector2i(3, y)):
 				if not is_square_attacked(board, Vector2i(2, y), opp_team) and not is_square_attacked(board, Vector2i(3, y), opp_team):
 					moves.append(Vector2i(2, y))
+
+static func count_attackers(board: BoardState, pos: Vector2i, by_team: PieceData.Team) -> int:
+	var sim_board: BoardState = board.clone()
+	var victim_team: PieceData.Team = PieceData.Team.BLACK if by_team == PieceData.Team.WHITE else PieceData.Team.WHITE
+	sim_board.set_piece(pos, PieceData.new(PieceData.PieceType.PAWN, victim_team))
+	var count: int = 0
+	for y in range(BoardState.BOARD_SIZE):
+		for x in range(BoardState.BOARD_SIZE):
+			var p: PieceData = sim_board.grid[y][x] as PieceData
+			if p != null and p.team == by_team and p.can_attack():
+				if p.type == PieceData.PieceType.PAWN:
+					var forward: int = 1 if p.team == PieceData.Team.WHITE else -1
+					if pos == Vector2i(x - 1, y + forward) or pos == Vector2i(x + 1, y + forward):
+						count += 1
+				elif p.type == PieceData.PieceType.KING:
+					if absi(pos.x - x) <= 1 and absi(pos.y - y) <= 1 and Vector2i(x, y) != pos:
+						count += 1
+				else:
+					var attacks: Array[Vector2i] = get_pseudo_legal_moves(sim_board, Vector2i(x, y), false, false)
+					if attacks.has(pos):
+						count += 1
+	return count
 
 static func is_square_attacked(board: BoardState, pos: Vector2i, by_team: PieceData.Team) -> bool:
 	for y in range(BoardState.BOARD_SIZE):

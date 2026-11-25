@@ -1,0 +1,531 @@
+{
+  "meta": {
+    "project": "Chess to Die",
+    "checkpoint": "DreamshaperPixelart.safetensors",
+    "sd_width": 512,
+    "sd_height": 384,
+    "steps": 18,
+    "cfg_scale": 7.5,
+    "sampler_name": "DPM++ 2M",
+    "batch_size": 1,
+    "base_grid": [68, 52],
+    "output_size": [136, 104],
+    "quantize_colors": 18,
+    "style_active_suffix": "pixel art, Balatro dark fantasy game card illustration, dramatic warm gold orange and crimson magic glow on deep dark obsidian background, bold black ink outlines, limited color palette, crisp 16-bit pixel art, centered iconic subject, high contrast",
+    "style_passive_suffix": "pixel art, Balatro dark fantasy game card illustration, mystical deep ocean blue ice cyan and moonlight arcane glow on dark midnight background, bold black ink outlines, limited color palette, crisp 16-bit pixel art, centered iconic subject, high contrast",
+    "negative_prompt_active": "blurry, anti-aliasing, smooth gradient, 3d render, photograph, realistic, text, letters, numbers, watermark, signature, white background, frame border, card border, ui, messy, low contrast, human portrait, anime face",
+    "negative_prompt_passive": "blurry, anti-aliasing, smooth gradient, 3d render, photograph, realistic, text, letters, numbers, watermark, signature, white background, frame border, card border, ui, messy, low contrast, human portrait, anime face"
+  },
+  "cards": [
+    {
+      "card_id": "active_01",
+      "db_id": "ACTIVE_01",
+      "title": "Song Trùng",
+      "card_type": "ACTIVE",
+      "tag": "DOUBLE_MOVE",
+      "seed": 41001,
+      "subject_prompt": "carved obsidian chess knight dashing forward leaving a blazing golden fiery afterimage ghost twin behind it on a dark chessboard, motion trails of amber sparks",
+      "output_path": "assets/sprites/cards/art/active_01.png"
+    },
+    {
+      "card_id": "active_02",
+      "db_id": "ACTIVE_02",
+      "title": "Dịch Chuyển",
+      "card_type": "ACTIVE",
+      "tag": "TELEPORT_PIECE",
+      "seed": 41002,
+      "subject_prompt": "chess bishop statue vanishing into a swirling golden orange arcane teleportation vortex portal above a dark checkered tile, glowing runic rings and embers",
+      "output_path": "assets/sprites/cards/art/active_02.png"
+    },
+    {
+      "card_id": "active_03",
+      "db_id": "ACTIVE_03",
+      "title": "Hoán Đổi",
+      "card_type": "ACTIVE",
+      "tag": "SWAP_ALLIES",
+      "seed": 41003,
+      "subject_prompt": "two marble chess pieces a rook and a knight linked by twin curving arcs of blazing golden orange lightning swapping places in midair over a dark chessboard",
+      "output_path": "assets/sprites/cards/art/active_03.png"
+    },
+    {
+      "card_id": "active_04",
+      "db_id": "ACTIVE_04",
+      "title": "Khiên Vua",
+      "card_type": "ACTIVE",
+      "tag": "KING_SHIELD",
+      "seed": 41004,
+      "subject_prompt": "crowned ivory chess king statue protected inside a radiant golden solar hexagonal energy shield barrier deflecting dark crimson sparks",
+      "output_path": "assets/sprites/cards/art/active_04.png"
+    },
+    {
+      "card_id": "active_05",
+      "db_id": "ACTIVE_05",
+      "title": "Vùng Cấm",
+      "card_type": "ACTIVE",
+      "tag": "FORBIDDEN_CELLS",
+      "seed": 41005,
+      "subject_prompt": "cracked dark chessboard tiles sealed with glowing crimson red X runes and erupting orange warning sigils of forbidden cursed ground",
+      "output_path": "assets/sprites/cards/art/active_05.png"
+    },
+    {
+      "card_id": "active_06",
+      "db_id": "ACTIVE_06",
+      "title": "Mã Xung Trận",
+      "card_type": "ACTIVE",
+      "tag": "KNIGHT_LINEAR",
+      "seed": 41006,
+      "subject_prompt": "armored chess knight horse statue charging straight ahead in a blazing lance of fiery orange and gold shockwaves shattering chessboard stones",
+      "output_path": "assets/sprites/cards/art/active_06.png"
+    },
+    {
+      "card_id": "active_07",
+      "db_id": "ACTIVE_07",
+      "title": "Chiến Xa Xiên",
+      "card_type": "ACTIVE",
+      "tag": "ROOK_DIAGONAL",
+      "seed": 41007,
+      "subject_prompt": "heavy stone fortress chess rook tower sliding diagonally across a chessboard trailing twin blazing golden flame tracks and crimson sparks",
+      "output_path": "assets/sprites/cards/art/active_07.png"
+    },
+    {
+      "card_id": "active_08",
+      "db_id": "ACTIVE_08",
+      "title": "Tượng Phi Mã",
+      "card_type": "ACTIVE",
+      "tag": "BISHOP_KNIGHT",
+      "seed": 41008,
+      "subject_prompt": "ornate chess bishop mitre piece leaping high over dark obstacles with fiery golden spirit wings shaped like a leaping horse arc",
+      "output_path": "assets/sprites/cards/art/active_08.png"
+    },
+    {
+      "card_id": "active_09",
+      "db_id": "ACTIVE_09",
+      "title": "Hợp Thể Tốt",
+      "card_type": "ACTIVE",
+      "tag": "FUSION_PAWN",
+      "seed": 41009,
+      "subject_prompt": "three small chess pawns merging in a bright golden alchemy fusion beam into one towering armored super pawn with a glowing crest",
+      "output_path": "assets/sprites/cards/art/active_09.png"
+    },
+    {
+      "card_id": "active_10",
+      "db_id": "ACTIVE_10",
+      "title": "Hợp Thể Mã",
+      "card_type": "ACTIVE",
+      "tag": "FUSION_KNIGHT",
+      "seed": 41010,
+      "subject_prompt": "two chess knight statues fusing in blazing orange firelight into one giant horned armored warhorse super knight with glowing mane",
+      "output_path": "assets/sprites/cards/art/active_10.png"
+    },
+    {
+      "card_id": "active_11",
+      "db_id": "ACTIVE_11",
+      "title": "Hợp Thể Xe",
+      "card_type": "ACTIVE",
+      "tag": "FUSION_ROOK",
+      "seed": 41011,
+      "subject_prompt": "two stone chess rooks welding together in molten gold lava light into one colossal spiked citadel super rook tower",
+      "output_path": "assets/sprites/cards/art/active_11.png"
+    },
+    {
+      "card_id": "active_12",
+      "db_id": "ACTIVE_12",
+      "title": "Hợp Thể Tượng",
+      "card_type": "ACTIVE",
+      "tag": "FUSION_BISHOP",
+      "seed": 41012,
+      "subject_prompt": "two chess bishops uniting in a radiant solar prism beam into one grand golden crowned super bishop radiating dual light and shadow",
+      "output_path": "assets/sprites/cards/art/active_12.png"
+    },
+    {
+      "card_id": "active_13",
+      "db_id": "ACTIVE_13",
+      "title": "Hợp Thể Hậu",
+      "card_type": "ACTIVE",
+      "tag": "FUSION_QUEEN",
+      "seed": 41013,
+      "subject_prompt": "two chess queens ascending in a supernova burst of crimson and gold fire into one supreme spiked imperial super queen statue with blazing halo",
+      "output_path": "assets/sprites/cards/art/active_13.png"
+    },
+    {
+      "card_id": "active_14",
+      "db_id": "ACTIVE_14",
+      "title": "Triệu Hồn Mộ Địa",
+      "card_type": "ACTIVE",
+      "tag": "GRAVE_SUMMON",
+      "seed": 41014,
+      "subject_prompt": "broken ghostly chess piece rising out of a cracked dark graveyard tomb surrounded by flickering amber orange spirit flames and necromantic runes",
+      "output_path": "assets/sprites/cards/art/active_14.png"
+    },
+    {
+      "card_id": "active_15",
+      "db_id": "ACTIVE_15",
+      "title": "Tế Đàn Chiến Xa",
+      "card_type": "ACTIVE",
+      "tag": "SACRIFICE_ROOK",
+      "seed": 41015,
+      "subject_prompt": "dark obsidian sacrificial altar with burning crimson candles forging a glowing golden chess rook fortress emerging from ritual flames",
+      "output_path": "assets/sprites/cards/art/active_15.png"
+    },
+    {
+      "card_id": "active_16",
+      "db_id": "ACTIVE_16",
+      "title": "Tế Đàn Tướng Mã",
+      "card_type": "ACTIVE",
+      "tag": "SACRIFICE_MINOR",
+      "seed": 41016,
+      "subject_prompt": "ancient stone blood altar glowing with golden orange runes summoning twin ghostly chess knight and bishop statues from fiery smoke",
+      "output_path": "assets/sprites/cards/art/active_16.png"
+    },
+    {
+      "card_id": "active_17",
+      "db_id": "ACTIVE_17",
+      "title": "Tế Đàn Nữ Hoàng",
+      "card_type": "ACTIVE",
+      "tag": "SACRIFICE_QUEEN",
+      "seed": 41017,
+      "subject_prompt": "grand crimson ritual altar blazing with pillar of solar gold fire resurrecting a towering dark fantasy chess queen crown statue",
+      "output_path": "assets/sprites/cards/art/active_17.png"
+    },
+    {
+      "card_id": "active_18",
+      "db_id": "ACTIVE_18",
+      "title": "Dòng Sông Ngăn Cách",
+      "card_type": "ACTIVE",
+      "tag": "RIVER_BARRIER",
+      "seed": 41018,
+      "subject_prompt": "chasm splitting a dark chessboard in half filled with a roaring glowing river of molten amber fire and dark lava blocking passage",
+      "output_path": "assets/sprites/cards/art/active_18.png"
+    },
+    {
+      "card_id": "active_19",
+      "db_id": "ACTIVE_19",
+      "title": "Xiềng Xích Xe",
+      "card_type": "ACTIVE",
+      "tag": "LOCK_ROOK",
+      "seed": 41019,
+      "subject_prompt": "heavy stone chess rook tower bound tightly by glowing red-hot iron chains and a massive golden padlock bolted to the chessboard",
+      "output_path": "assets/sprites/cards/art/active_19.png"
+    },
+    {
+      "card_id": "active_20",
+      "db_id": "ACTIVE_20",
+      "title": "Xiềng Xích Mã",
+      "card_type": "ACTIVE",
+      "tag": "LOCK_KNIGHT",
+      "seed": 41020,
+      "subject_prompt": "dark chess knight horse statue shackled by burning orange iron chains and glowing crimson lock sigils pinning it down",
+      "output_path": "assets/sprites/cards/art/active_20.png"
+    },
+    {
+      "card_id": "active_21",
+      "db_id": "ACTIVE_21",
+      "title": "Xiềng Xích Tượng",
+      "card_type": "ACTIVE",
+      "tag": "LOCK_BISHOP",
+      "seed": 41021,
+      "subject_prompt": "tall chess bishop statue wrapped in glowing molten gold chains and crimson magical seal bands immobilizing it on a tile",
+      "output_path": "assets/sprites/cards/art/active_21.png"
+    },
+    {
+      "card_id": "active_22",
+      "db_id": "ACTIVE_22",
+      "title": "Xiềng Xích Hậu",
+      "card_type": "ACTIVE",
+      "tag": "LOCK_QUEEN",
+      "seed": 41022,
+      "subject_prompt": "imperial chess queen statue imprisoned inside a cage of heavy glowing ember chains and a fiery crimson arcane lock",
+      "output_path": "assets/sprites/cards/art/active_22.png"
+    },
+    {
+      "card_id": "active_23",
+      "db_id": "ACTIVE_23",
+      "title": "Tam Trùng Tỏa",
+      "card_type": "ACTIVE",
+      "tag": "LOCK_THREE",
+      "seed": 41023,
+      "subject_prompt": "three dark chess pieces bound together by a triple glowing golden chain triangle and three blazing crimson seal padlocks",
+      "output_path": "assets/sprites/cards/art/active_23.png"
+    },
+    {
+      "card_id": "active_24",
+      "db_id": "ACTIVE_24",
+      "title": "Câm Lặng Bẫy",
+      "card_type": "ACTIVE",
+      "tag": "MUTE_PASSIVES",
+      "seed": 41024,
+      "subject_prompt": "shattered tarot trap cards sealed shut by a giant glowing golden crimson silence sigil and burning wax seal chains",
+      "output_path": "assets/sprites/cards/art/active_24.png"
+    },
+    {
+      "card_id": "active_25",
+      "db_id": "ACTIVE_25",
+      "title": "Tốt Bộc Phá",
+      "card_type": "ACTIVE",
+      "tag": "PAWN_EXPLOSION",
+      "seed": 41025,
+      "subject_prompt": "glowing cracked chess pawn detonating in a massive cross-shaped fiery orange and gold explosion blast across surrounding chessboard tiles",
+      "output_path": "assets/sprites/cards/art/active_25.png"
+    },
+    {
+      "card_id": "active_26",
+      "db_id": "ACTIVE_26",
+      "title": "Thân Thể Kim Cương",
+      "card_type": "ACTIVE",
+      "tag": "IMMORTAL_PIECE",
+      "seed": 41026,
+      "subject_prompt": "faceted crystalline golden diamond chess piece statue gleaming with invulnerable metallic radiance and protective amber aura",
+      "output_path": "assets/sprites/cards/art/active_26.png"
+    },
+    {
+      "card_id": "active_27",
+      "db_id": "ACTIVE_27",
+      "title": "Bù Nhìn Thế Thân",
+      "card_type": "ACTIVE",
+      "tag": "SPAWN_SCARECROW",
+      "seed": 41027,
+      "subject_prompt": "eerie dark fantasy wooden straw scarecrow effigy wearing a tattered hat and glowing amber eyes standing guard on a chessboard tile",
+      "output_path": "assets/sprites/cards/art/active_27.png"
+    },
+    {
+      "card_id": "active_28",
+      "db_id": "ACTIVE_28",
+      "title": "Bóng Ma Chiến Trường",
+      "card_type": "ACTIVE",
+      "tag": "STEALTH_TROOPS",
+      "seed": 41028,
+      "subject_prompt": "translucent shadowy spectral chess piece fading into swirling dark smoke and faint flickering amber embers on a dimly lit chessboard",
+      "output_path": "assets/sprites/cards/art/active_28.png"
+    },
+    {
+      "card_id": "active_29",
+      "db_id": "ACTIVE_29",
+      "title": "Phân Thân Thuật",
+      "card_type": "ACTIVE",
+      "tag": "CLONE_WAR",
+      "seed": 41029,
+      "subject_prompt": "central obsidian chess piece multiplying into a fan of glowing golden fiery mirage clones across a dark chessboard",
+      "output_path": "assets/sprites/cards/art/active_29.png"
+    },
+    {
+      "card_id": "active_30",
+      "db_id": "ACTIVE_30",
+      "title": "Hố Đen Trọng Lực",
+      "card_type": "ACTIVE",
+      "tag": "GRAVITY_VORTEX",
+      "seed": 41030,
+      "subject_prompt": "spinning dark abyssal black hole singularity with a blazing fiery orange accretion ring pulling floating chess pieces inward",
+      "output_path": "assets/sprites/cards/art/active_30.png"
+    },
+    {
+      "card_id": "active_31",
+      "db_id": "ACTIVE_31",
+      "title": "Lời Nguyền Tử Vong",
+      "card_type": "ACTIVE",
+      "tag": "DEATH_CURSE",
+      "seed": 41031,
+      "subject_prompt": "cracked obsidian chess piece branded with a burning crimson hourglass skull curse hovering above it with dripping ember smoke",
+      "output_path": "assets/sprites/cards/art/active_31.png"
+    },
+    {
+      "card_id": "passive_01",
+      "db_id": "PASSIVE_01",
+      "title": "Chiến Tích Thập Điểm",
+      "card_type": "PASSIVE",
+      "tag": "BOUNTY_10PTS",
+      "seed": 42001,
+      "subject_prompt": "gleaming silver trophy chalice overflowing with shattered enemy chess pieces and a glowing ice-blue spectral dagger striking downward",
+      "output_path": "assets/sprites/cards/art/passive_01.png"
+    },
+    {
+      "card_id": "passive_02",
+      "db_id": "PASSIVE_02",
+      "title": "Bất Khuất Trùng Sinh",
+      "card_type": "PASSIVE",
+      "tag": "RESURRECT_50PCT",
+      "seed": 42002,
+      "subject_prompt": "fallen chess knight statue reassembling itself from glowing ice-blue lunar shards and rising phoenix-like on a midnight chessboard",
+      "output_path": "assets/sprites/cards/art/passive_02.png"
+    },
+    {
+      "card_id": "passive_03",
+      "db_id": "PASSIVE_03",
+      "title": "Thanh Tẩy Khí Lực",
+      "card_type": "PASSIVE",
+      "tag": "CLEANSE_DEBUFFS",
+      "seed": 42003,
+      "subject_prompt": "radiant crystal chalice pouring a purifying wave of bright ice-blue moonlight across a dark chessboard dissolving dark cursed smoke",
+      "output_path": "assets/sprites/cards/art/passive_03.png"
+    },
+    {
+      "card_id": "passive_04",
+      "db_id": "PASSIVE_04",
+      "title": "Phản Đòn Pháp Trận",
+      "card_type": "PASSIVE",
+      "tag": "COUNTER_ACTIVE",
+      "seed": 42004,
+      "subject_prompt": "ornate silver arcane mirror shield reflecting and shattering a hostile magic bolt into brilliant ice-blue crystalline sparks",
+      "output_path": "assets/sprites/cards/art/passive_04.png"
+    },
+    {
+      "card_id": "passive_05",
+      "db_id": "PASSIVE_05",
+      "title": "Kết Giới Thiêu Đốt",
+      "card_type": "PASSIVE",
+      "tag": "BARRIER_BURN",
+      "seed": 42005,
+      "subject_prompt": "dark chess piece trapped inside a hexagonal cage of searing bright blue-white arcane frostfire runes burning its stone base",
+      "output_path": "assets/sprites/cards/art/passive_05.png"
+    },
+    {
+      "card_id": "passive_06",
+      "db_id": "PASSIVE_06",
+      "title": "Nữ Hoàng Khóa Chân",
+      "card_type": "PASSIVE",
+      "tag": "QUEEN_TETHER",
+      "seed": 42006,
+      "subject_prompt": "two opposing chess queen statues yanked backward and bound together by taut glowing ice-blue spectral chains across the board",
+      "output_path": "assets/sprites/cards/art/passive_06.png"
+    },
+    {
+      "card_id": "passive_07",
+      "db_id": "PASSIVE_07",
+      "title": "Đoạt Tốt Trận Huyết",
+      "card_type": "PASSIVE",
+      "tag": "STEAL_PAWNS",
+      "seed": 42007,
+      "subject_prompt": "row of enemy chess pawns pulled by glowing cyan moonlight puppet strings converting their color to bright silver-blue",
+      "output_path": "assets/sprites/cards/art/passive_07.png"
+    },
+    {
+      "card_id": "passive_08",
+      "db_id": "PASSIVE_08",
+      "title": "Đảo Nghịch Thời Gian",
+      "card_type": "PASSIVE",
+      "tag": "REWIND_CHECK",
+      "seed": 42008,
+      "subject_prompt": "ancient ornate silver pocket clockwork hourglass spinning backward in a glowing cyan time spiral reversing a chess piece move",
+      "output_path": "assets/sprites/cards/art/passive_08.png"
+    },
+    {
+      "card_id": "passive_09",
+      "db_id": "PASSIVE_09",
+      "title": "Phá Hủy Cạm Bẫy",
+      "card_type": "PASSIVE",
+      "tag": "TRAP_DISARM",
+      "seed": 42009,
+      "subject_prompt": "glowing ice-blue arcane crescent blade slicing clean through hidden face-down trap cards shattering them into blue dust",
+      "output_path": "assets/sprites/cards/art/passive_09.png"
+    },
+    {
+      "card_id": "passive_10",
+      "db_id": "PASSIVE_10",
+      "title": "Thập Trận Vọng Hồn",
+      "card_type": "PASSIVE",
+      "tag": "DELAYED_REVIVE",
+      "seed": 42010,
+      "subject_prompt": "mystical lunar lantern glowing with ten orbiting blue star wisps summoning ghostly chess pieces back from a misty graveyard",
+      "output_path": "assets/sprites/cards/art/passive_10.png"
+    },
+    {
+      "card_id": "passive_11",
+      "db_id": "PASSIVE_11",
+      "title": "Kỳ Thủ Lão Luyện",
+      "card_type": "PASSIVE",
+      "tag": "CHECK_VETERAN",
+      "seed": 42011,
+      "subject_prompt": "battle-scarred silver chess knight crowned with an immortal glowing ice-blue lunar laurel wreath standing victorious on a pedestal",
+      "output_path": "assets/sprites/cards/art/passive_11.png"
+    },
+    {
+      "card_id": "passive_12",
+      "db_id": "PASSIVE_12",
+      "title": "Ngũ Thập Luân Hồi",
+      "card_type": "PASSIVE",
+      "tag": "RESTART_50MOVES",
+      "seed": 42012,
+      "subject_prompt": "celestial ouroboros ring and twin balanced silver scales floating above a rotating midnight chessboard resetting in bright blue starlight",
+      "output_path": "assets/sprites/cards/art/passive_12.png"
+    },
+    {
+      "card_id": "passive_13",
+      "db_id": "PASSIVE_13",
+      "title": "Nhập Thành Thiên Uyển",
+      "card_type": "PASSIVE",
+      "tag": "CASTLING_SHIFT",
+      "seed": 42013,
+      "subject_prompt": "crowned chess king and fortress rook gliding deeper into a glowing azure starlit sanctuary gate in the center of the board",
+      "output_path": "assets/sprites/cards/art/passive_13.png"
+    },
+    {
+      "card_id": "passive_14",
+      "db_id": "PASSIVE_14",
+      "title": "Thoát Hiểm Hoàng Cung",
+      "card_type": "PASSIVE",
+      "tag": "CASTLE_ESCAPE",
+      "seed": 42014,
+      "subject_prompt": "chess king escaping from a crumbling castle tower through a secret glowing cyan moonlight archway portal leaving blue mist behind",
+      "output_path": "assets/sprites/cards/art/passive_14.png"
+    },
+    {
+      "card_id": "passive_15",
+      "db_id": "PASSIVE_15",
+      "title": "Vua Nghịch Cảnh Phá Vây",
+      "card_type": "PASSIVE",
+      "tag": "CHECKMATE_KING_ESCAPE",
+      "seed": 42015,
+      "subject_prompt": "crowned chess king bursting out of a tight encirclement with a blazing ice-blue shockwave and glowing silver broadsword",
+      "output_path": "assets/sprites/cards/art/passive_15.png"
+    },
+    {
+      "card_id": "passive_16",
+      "db_id": "PASSIVE_16",
+      "title": "Toàn Quân Phản Kích",
+      "card_type": "PASSIVE",
+      "tag": "CHECKMATE_ARMY_SURGE",
+      "seed": 42016,
+      "subject_prompt": "phalanx of chess pieces pawns knights and rooks surging forward together wrapped in a unified glowing cyan battle-horn aura",
+      "output_path": "assets/sprites/cards/art/passive_16.png"
+    },
+    {
+      "card_id": "passive_17",
+      "db_id": "PASSIVE_17",
+      "title": "Đoạn Tuyệt Liên Hoàn",
+      "card_type": "PASSIVE",
+      "tag": "CHAIN_BREAKER",
+      "seed": 42017,
+      "subject_prompt": "three diagonal enemy chess pawns struck by a sharp ice-blue lightning bolt shattering the middle pawn into glowing splinters",
+      "output_path": "assets/sprites/cards/art/passive_17.png"
+    },
+    {
+      "card_id": "passive_18",
+      "db_id": "PASSIVE_18",
+      "title": "Hỏa Diễm Tam Điểm",
+      "card_type": "PASSIVE",
+      "tag": "FIRE_DIAGONAL",
+      "seed": 42018,
+      "subject_prompt": "three aligned silver chess pawns igniting a blazing diagonal wall of spectral blue-white arcane flames across the chessboard",
+      "output_path": "assets/sprites/cards/art/passive_18.png"
+    },
+    {
+      "card_id": "passive_19",
+      "db_id": "PASSIVE_19",
+      "title": "Cộng Hưởng Bộc Phá",
+      "card_type": "PASSIVE",
+      "tag": "POINT_REACTIVE_BUFF",
+      "seed": 42019,
+      "subject_prompt": "cracked chess statue absorbing dark energy and erupting with an amplified bright cyan crystalline power surge aura",
+      "output_path": "assets/sprites/cards/art/passive_19.png"
+    },
+    {
+      "card_id": "passive_20",
+      "db_id": "PASSIVE_20",
+      "title": "Truy Hồn Trục Xuất",
+      "card_type": "PASSIVE",
+      "tag": "RETALIATION_BAN",
+      "seed": 42020,
+      "subject_prompt": "dark enemy chess piece dragged downward into a glowing ice-blue lunar vortex abyss sealed by spectral banishment chains",
+      "output_path": "assets/sprites/cards/art/passive_20.png"
+    }
+  ]
+}
